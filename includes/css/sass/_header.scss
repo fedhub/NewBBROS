@@ -1,0 +1,71 @@
+header{
+  @include size(100%, 15%);
+  .top-header{
+    @include size(100%, 48%);
+  }
+  .logo{
+    float: right;
+    @include size(100px, 100%);
+    @include background-image('https://www.best-biss.com/images/mobile_logo.png');
+  }
+  .bottom-header{
+    @include size(100%, 48%);
+    background-color: red;
+  }
+  .title{
+    float: left;
+    @include size(150px, 100%);
+    background-color: green;
+  }
+  .hamburger{
+    float: left;
+    @include size(50px, 100%);
+    background-color: yellow;
+  }
+  .container{
+    @include size(80%, 73%);
+    margin: 0 auto;
+    background-color: orange;
+  }
+  .line{
+    @include size(100%, 5px);
+    margin-top: 5px;
+    background-color: green;
+    &.rotate-right{
+      transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+    }
+    &.rotate-left{
+      transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+    }
+    &.rotate-right, &.rotate-left{
+      -webkit-transition-property: -webkit-transform;
+      transition-property: transform;
+      -webkit-transition-duration: .75s;
+      transition-duration: .75s;
+    }
+  }
+
+}
+
+// Smartphone vertical
+@include small_portrait(){
+  header{
+    .logo{
+
+    }
+  }
+}
+
+@include small_landscape(){
+  header{
+    background-color: green;
+  }
+}
+
+@include medium_portrait(){
+  header{
+    background-color: blue;
+  }
+}

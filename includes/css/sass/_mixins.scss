@@ -1,0 +1,36 @@
+$small_portrait_max: 414px;
+
+$small_landscape_min: 415px;
+$small_landscape_max: 736px;
+
+$medium_portrait_min: 737px;
+$medium_portrait_max: 1024px;
+
+@mixin small_portrait(){
+  @media only screen and (max-width: $small_portrait_max) {
+    @content;
+  }
+}
+
+@mixin small_landscape(){
+  @media only screen and (min-width: $small_landscape_min) and (max-width: $small_landscape_max) {
+    @content;
+  }
+}
+
+@mixin medium_portrait(){
+  @media only screen and (min-width: $medium_portrait_min) and (max-width: $medium_portrait_max) {
+    @content;
+  }
+}
+
+@mixin size($width, $height){
+  width: $width;
+  height: $height;
+}
+
+@mixin background-image($url){
+  background: url($url) no-repeat;
+  background-size: contain;
+  background-position: center center;
+}
