@@ -1,0 +1,47 @@
+@font-face {
+	font-family: "Flaticon";
+	src: url("flaticon.eot");
+	src: url("flaticon.eot#iefix") format("embedded-opentype"),
+	url("flaticon.woff") format("woff"),
+	url("flaticon.ttf") format("truetype"),
+	url("flaticon.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+	font-family: Flaticon;
+    font-style: normal;
+}
+.flaticon-building120:before {
+	content: "\e000";
+     font-size: 29px;
+     line-height: 130%;
+}
+.flaticon-delete96:before {
+	content: "\e001";
+    font-size: 29px;
+    line-height: 130%;
+}
+.flaticon-hourglass:before {
+	content: "\e002";
+    font-size: 29px;
+    line-height: 138%;
+}
+.flaticon-list19:before {
+	content: "\e003";
+    font-size: 29px;
+    line-height: 130%;
+}
+.flaticon-menu45:before {
+	content: "\e004";
+    font-size: 40px;
+    line-height: 82%;
+    font-weight: bold;
+    color: #002E02;
+}
+.flaticon-shoppingcart14:before {
+	content: "\e005";
+    font-size: 31px;
+    line-height: 130%;
+}

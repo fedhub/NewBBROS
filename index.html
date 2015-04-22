@@ -8,6 +8,7 @@
     <title>Ordering System</title>
     <script>document.write('<base href="' + document.location + '" />');</script>
     <link rel="stylesheet" href="includes/css/stylesheets/style.css" />
+    <link rel="stylesheet" type="text/css" href="includes/css/stylesheets/flaticon.css">
     <script data-require="angular.js@1.0.x" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js" data-semver="1.0.7"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <!--<script type='application/javascript' src='includes/javascript/ftlabs-fastclick-a22efe3/lib/fastclick.js'></script>-->
@@ -15,24 +16,33 @@
 </head>
 <body>
 <section class="wrapper">
-    <header>
+    <section class="mobile-menu-container" id="menu-slide">
+
+    </section>
+    <header ng-controller="header">
         <section class="top-header">
             <section class="logo"></section>
             <section class="hamburger">
-                <section class="container">
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
+                <section class="container" ng-click="slideMenu()">
+                    <i class="flaticon-menu45"></i>
                 </section>
             </section>
-            <section class="title"></section>
+            <section class="title"><p>{{ title }}</p></section>
         </section>
         <section class="bottom-header">
-
+            <nav>
+                <ul>
+                    <li id="main"><a href="#/home" ng-click="setTitle('ראשי')"><i class="flaticon-building120"></i></a></li>
+                    <li id="menu"><a href="#/menu" ng-click="setTitle('תפריט')"><i class="flaticon-list19"></i></a></li>
+                    <li id="cart"><a href="#/cart" ng-click="setTitle('הסל שלי')"><i class="flaticon-shoppingcart14"></i></a></li>
+                    <li id="status"><a href="#/status" ng-click="setTitle('סטטוס הזמנה')"><i class="flaticon-hourglass"></i></a></li>
+                    <li id="about">אודות</li>
+                </ul>
+            </nav>
         </section>
     </header>
     <!--<a href="#/SimpleController">Resolve</a>-->
-    <div ng-view class="ng-view"></div>
+    <div ng-view></div>
 </section>
 </body>
 </html>

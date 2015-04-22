@@ -34,3 +34,9 @@ $medium_portrait_max: 1024px;
   background-size: contain;
   background-position: center center;
 }
+
+@mixin cell-settings(){
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}

@@ -3,34 +3,37 @@ header{
   .top-header{
     @include size(100%, 48%);
   }
+  .bottom-header{
+    @include size(100%, 52%);
+    background-color: $bg-color;
+  }
+  ////////// top header
   .logo{
     float: right;
-    @include size(100px, 100%);
+    @include size(150px, 100%);
     @include background-image('https://www.best-biss.com/images/mobile_logo.png');
-  }
-  .bottom-header{
-    @include size(100%, 48%);
-    background-color: red;
   }
   .title{
     float: left;
-    @include size(150px, 100%);
-    background-color: green;
+    display: table;
+    @include size(120px, 100%);
+    p{
+      @include cell-settings();
+      text-shadow: -2px 1px $bg-color;
+      color: $txt-color;
+      font-weight: bold;
+      font-style: italic;
+      font-size: 18px;
+    }
   }
   .hamburger{
     float: left;
     @include size(50px, 100%);
-    background-color: yellow;
   }
   .container{
-    @include size(80%, 73%);
+    @include size(80%, 90%);
     margin: 0 auto;
-    background-color: orange;
-  }
-  .line{
-    @include size(100%, 5px);
-    margin-top: 5px;
-    background-color: green;
+    overflow: hidden;
     &.rotate-right{
       transform: rotate(360deg);
       -webkit-transform: rotate(360deg);
@@ -42,11 +45,29 @@ header{
     &.rotate-right, &.rotate-left{
       -webkit-transition-property: -webkit-transform;
       transition-property: transform;
-      -webkit-transition-duration: .75s;
-      transition-duration: .75s;
+      -webkit-transition-duration: .40s;
+      transition-duration: .40s;
     }
   }
-
+  ////////// bottom header
+  nav{
+    @include size(100%, 100%);
+  }
+  ul{
+    @include size(100%, 100%);
+    display: table;
+  }
+  li{
+    @include size(20%, 100%);
+    @include cell-settings();
+    color: $txt-color;
+  }
+  a{
+    display: block;
+    text-decoration: none;
+    color: #002E02;
+    @include size(100%, 100%);
+  }
 }
 
 // Smartphone vertical
