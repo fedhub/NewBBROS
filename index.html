@@ -13,11 +13,38 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <!--<script type='application/javascript' src='includes/javascript/ftlabs-fastclick-a22efe3/lib/fastclick.js'></script>-->
     <script src="includes/javascript/app.js"></script>
+    <script src="includes/javascript/header.js"></script>
+    <script src="includes/javascript/forms.js"></script>
+    <script src="includes/javascript/javascript.js"></script>
 </head>
 <body>
 <section class="wrapper">
-    <section class="mobile-menu-container" id="menu-slide">
-
+    <section id="screen-message" class="screen-message"><section class="container"><p></p></section></section>
+    <section id="lightbox" class="lightbox" forms>
+        <section class="container">
+            <section class="close" id="close"><p class="flaticon-close32"></p></section>
+            <section class="title"><p>{{ title }}</p></section>
+            <section class="content">
+                <form class="form" id="sign-up-form" ng-repeat="form_item in form_items">
+                    <section class="form-item" id="{{ form_item.id }}">
+                        <section class="required"><p>{{ form_item.required }}</p></section>
+                        <section class="detail-label"><p>{{ form_item.label }}</p></section>
+                        <section class="detail-input"><input type="text" maxlength="{{ form_item.max_length }}"></section>
+                        <section class="validation"><p></p></section>
+                    </section>
+                </form>
+                <section class="approve" ng-click="form_approved()"><p>אישור</p></section>
+            </section>
+        </section>
+    </section>
+    <section class="mobile-menu-container" id="menu-slide" forms>
+        <section class="connected"><p class="flaticon-network60"></p><p>{{ signed_up }}</p></section>
+        <section class="slide-item" ng-click="form_request('log-in')"><p class="flaticon-login"></p><p>התחבר</p></section>
+        <div class="hr"></div>
+        <section class="slide-item" ng-click="form_request('log-out')"><p class="flaticon-symbol21"></p><p>התנתק</p></section>
+        <div class="hr"></div>
+        <section class="slide-item" ng-click="form_request('sign-up')"><p class="flaticon-add89"></p><p>הרשם</p></section>
+        <div class="hr"></div>
     </section>
     <header ng-controller="header">
         <section class="top-header">

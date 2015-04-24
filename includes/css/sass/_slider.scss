@@ -1,8 +1,6 @@
 .mobile-menu-container {
   display: block;
-  position: fixed;
-  top: 7.5%;
-  left: -75%;
+  @include position(fixed, 7.5%, -75%);
   width: 75%;
   height: 92.5%;
   background: rgba($bg-color, 1);
@@ -12,6 +10,52 @@
   -webkit-backface-visibility: hidden;
   -webkit-perspective: 1000;
   z-index: 1000;
+
+  .connected{
+    @include size(100%, 8%);
+    background-color: $txt-color;
+    box-shadow: 0 2px 40px -5px #FFF;
+    display: table;
+    p{
+      display: table-cell;
+      vertical-align: middle;
+      color: silver;
+    }
+    p:nth-of-type(1){
+      width: 50px;
+      padding-right: 13px;
+    }
+    p:nth-of-type(2){
+      font-size: 15px;
+      font-weight: bold;
+    }
+  }
+
+  .slide-item{
+    @include size(90%, 8%);
+    display: table;
+    margin: 0 auto;
+    p{
+      display: table-cell;
+      vertical-align: middle;
+    }
+    p:nth-of-type(1){
+      width: 50px;
+    }
+  }
+
+  .hr{
+    border: 0;
+    height: 1px;
+    width: 90%;
+    margin: 0 auto;
+    background: $txt-color;
+    background-image: -webkit-linear-gradient(left, $txt-color, $txt-color, $txt-color);
+    background-image:    -moz-linear-gradient(left, $txt-color, $txt-color, $txt-color);
+    background-image:     -ms-linear-gradient(left, $txt-color, $txt-color, $txt-color);
+    background-image:      -o-linear-gradient(left, $txt-color, $txt-color, $txt-color);
+  }
+
 }
 
 .right{

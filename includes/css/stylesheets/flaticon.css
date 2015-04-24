@@ -13,35 +13,63 @@
 	font-family: Flaticon;
     font-style: normal;
 }
+.flaticon-add89:before {
+    content: "\e000";
+    font-size: 30px;
+ }
 .flaticon-building120:before {
-	content: "\e000";
+	content: "\e001";
      font-size: 29px;
      line-height: 130%;
 }
+.flaticon-cancel4:before {
+    content: "\e002";
+    color: red;
+}
+.flaticon-close32:before {
+    content: "\e003";
+    font-size: 30px;
+}
 .flaticon-delete96:before {
-	content: "\e001";
+	content: "\e004";
     font-size: 29px;
     line-height: 130%;
 }
+.flaticon-good1:before {
+    content: "\e005";
+    color: green;
+}
 .flaticon-hourglass:before {
-	content: "\e002";
+	content: "\e006";
     font-size: 29px;
     line-height: 138%;
 }
 .flaticon-list19:before {
-	content: "\e003";
+	content: "\e007";
     font-size: 29px;
     line-height: 130%;
 }
+.flaticon-login:before {
+    content: "\e008";
+    font-size: 30px;
+}
 .flaticon-menu45:before {
-	content: "\e004";
+	content: "\e009";
     font-size: 40px;
     line-height: 82%;
     font-weight: bold;
     color: #002E02;
 }
+.flaticon-network60:before {
+    content: "\e00a";
+    font-size: 20px;
+}
 .flaticon-shoppingcart14:before {
-	content: "\e005";
+	content: "\e00b";
     font-size: 31px;
     line-height: 130%;
+}
+.flaticon-symbol21:before {
+    content: "\e00c";
+    font-size: 30px;
 }

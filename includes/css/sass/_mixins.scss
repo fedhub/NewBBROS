@@ -40,3 +40,9 @@ $medium_portrait_max: 1024px;
   text-align: center;
   vertical-align: middle;
 }
+
+@mixin position($type, $top, $left){
+  position: $type;
+  top: $top;
+  left: $left;
+}
