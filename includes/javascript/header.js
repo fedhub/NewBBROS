@@ -1,4 +1,6 @@
-var app = angular.module('myapp.header', []);
+var app = angular.module('myapp.header', [
+    'myapp.services'
+]);
 
 app.controller('header', function($scope){
 

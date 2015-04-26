@@ -13,8 +13,10 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <!--<script type='application/javascript' src='includes/javascript/ftlabs-fastclick-a22efe3/lib/fastclick.js'></script>-->
     <script src="includes/javascript/app.js"></script>
+    <script src="includes/javascript/services.js"></script>
     <script src="includes/javascript/header.js"></script>
     <script src="includes/javascript/forms.js"></script>
+    <script src="includes/javascript/menu.js"></script>
     <script src="includes/javascript/javascript.js"></script>
 </head>
 <body>
@@ -60,7 +62,7 @@
             <nav>
                 <ul>
                     <li id="main"><a href="#/home" ng-click="setTitle('ראשי')"><i class="flaticon-building120"></i></a></li>
-                    <li id="menu"><a href="#/menu" ng-click="setTitle('תפריט')"><i class="flaticon-list19"></i></a></li>
+                    <li id="menu"><a href="#/menu-types" ng-click="setTitle('תפריט')"><i class="flaticon-list19"></i></a></li>
                     <li id="cart"><a href="#/cart" ng-click="setTitle('הסל שלי')"><i class="flaticon-shoppingcart14"></i></a></li>
                     <li id="status"><a href="#/status" ng-click="setTitle('סטטוס הזמנה')"><i class="flaticon-hourglass"></i></a></li>
                     <li id="about">אודות</li>
@@ -68,8 +70,7 @@
             </nav>
         </section>
     </header>
-    <!--<a href="#/SimpleController">Resolve</a>-->
-    <div ng-view></div>
+    <div ng-view style="width: 100%; height: 85%;"></div>
 </section>
 </body>
 </html>

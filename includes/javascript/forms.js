@@ -1,18 +1,32 @@
 var app = angular.module('myapp.forms', [
-    'myapp.factory'
+    'myapp.services'
 ]);
 
-app.directive('forms', function(){
+app.directive('forms', ['authentication', 'message', function(authentication, message){
 
     // GLOBALS
     var $lightbox = $('#lightbox'), $first_name='', $last_name='', $phone_number='', $email='',
-        $street='', $house_number='', $floor='', $enter='', $screen_message = $('#screen-message');
+        $street='', $house_number='', $floor='', $enter='';
 
     return {
         controller: function($scope) {
             $scope.signed_up = 'לא מחובר';
             $scope.form_request = function(form_type){
-                form_request($scope, form_type);
+                if(form_type == 'log-out'){
+                    if(authentication.isConnected()){
+                        message.greetings('לא מחובר');
+                        authentication.setConnected(false);
+                        message.showMessage('ההתנתקות הושלמה');
+                    }
+                    else message.showMessage('אינך מחובר');
+                }
+                else if(authentication.isConnected()){
+                    var msg = '';
+                    if(form_type == 'sign-up') msg = 'עליך להתנתק מהערכת לפני ביצוע הרשמה';
+                    if(form_type == 'log-in') msg = 'הינך מחובר למערכת, אם ברצונך להתחבר כמשתמש אחר עליך להתנתק ראשית';
+                    message.showMessage(msg);
+                }
+                else form_request($scope, form_type);
                 $scope.form_approved = function(){
                     form_approved(form_type);
                 };
@@ -30,15 +44,9 @@ app.directive('forms', function(){
 
     function form_approved(form_type){
         set_globals(form_type);
-        $screen_message = $('#screen-message');
         var error = error_msg(form_type);
-        if(error.length > 0){
-            $screen_message.find('p').html(error);
-            $screen_message.fadeIn().delay(2000).fadeOut();
-        }
-        else{
-            ajax_handler(form_type);
-        }
+        if(error.length > 0) message.showMessage(error);
+        else ajax_handler(form_type);
     }
 
     function ajax_handler(form_type){
@@ -58,32 +66,19 @@ app.directive('forms', function(){
     function ajax_response(res, form_type){
         if(form_type == 'sign-up') {
             if (res) {
-                $screen_message.find('p').html('ההרשמה בוצעה בהצלחה');
-                $screen_message.fadeIn().delay(2000).fadeOut(function () {
-                    $lightbox.fadeOut();
-                });
-                $('.mobile-menu-container .connected p:nth-child(2)').html('שלום ' + $first_name);
+                authentication.setConnected(true);
+                message.msgCloseLightbox('ההרשמה בוצעה בהצלחה');
+                message.greetings('שלום ' + $first_name);
             }
-            else {
-                $screen_message.find('p').html('מספר הטלפון שהוזן כבר רשום במערכת');
-                $screen_message.fadeIn().delay(2000).fadeOut();
-            }
+            else message.showMessage('מספר הטלפון שהוזן כבר רשום במערכת');
         }
         if(form_type == 'log-in'){
-            if(res == 'phone-not-exist'){
-                $screen_message.find('p').html('מספר הטלפון שהוזן אינו רשום במערכת');
-                $screen_message.fadeIn().delay(2000).fadeOut();
-            }
-            if(res == 'name-not-match'){
-                $screen_message.find('p').html('ייתכן והשם הפרטי שהוזן לא הוזן כראוי מאחר ולא נמצאה התאמה למספר הטלפון, אנא נסה שוב');
-                $screen_message.fadeIn().delay(2000).fadeOut();
-            }
+            if(res == 'phone-not-exist') message.showMessage('מספר הטלפון שהוזן אינו רשום במערכת');
+            if(res == 'name-not-match') message.showMessage('ייתכן והשם הפרטי שהוזן לא הוזן כראוי מאחר ולא נמצאה התאמה למספר הטלפון, אנא נסה שוב');
             if(res == 'success'){
-                $screen_message.find('p').html('ההתחברות הושלמה');
-                $screen_message.fadeIn().delay(2000).fadeOut(function () {
-                    $lightbox.fadeOut();
-                });
-                $('.mobile-menu-container .connected p:nth-child(2)').html('שלום ' + $first_name);
+                authentication.setConnected(true);
+                message.msgCloseLightbox('ההתחברות הושלמה');
+                message.greetings('שלום ' + $first_name);
             }
         }
     }
@@ -174,4 +169,4 @@ app.directive('forms', function(){
         return customer_details;
     }
 
-});
+}]);

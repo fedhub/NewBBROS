@@ -1,0 +1,27 @@
+.menu-types-wrapper{
+  width: 100%;
+  min-height: 100%;
+
+  .food-types-container{
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+  }
+  .container{
+    @include size(48%, 150px);
+    box-shadow: 0px 0px 8px -2px green;
+    border: solid 1px green;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 0 2px;
+    overflow: hidden;
+    p{
+      text-align: center;
+      text-shadow: -1px 1px $bg-color;
+      color: $txt-color;
+      font-size: 16px;
+    }
+  }
+}
