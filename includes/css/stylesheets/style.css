@@ -420,64 +420,71 @@ header a {
 }
 /* line 11, ../sass/_menu-items.scss */
 .menu-items-wrapper .container {
-  width: 100%;
+  width: 99%;
   height: 100px;
-  box-shadow: 0px 0px 8px -2px green;
   display: table;
   overflow: hidden;
+  margin: 2px auto;
+  box-shadow: 0px 0px 5px -2px green;
+  border: solid 1px green;
 }
-/* line 17, ../sass/_menu-items.scss */
+/* line 18, ../sass/_menu-items.scss */
+.menu-items-wrapper .container:nth-of-type(1) {
+  margin-top: 0;
+}
+/* line 22, ../sass/_menu-items.scss */
 .menu-items-wrapper .right-cont {
   display: table-cell;
   width: 30%;
   height: 100%;
 }
-/* line 21, ../sass/_menu-items.scss */
+/* line 26, ../sass/_menu-items.scss */
 .menu-items-wrapper .center-cont {
   display: table-cell;
   width: 55%;
   height: 100%;
 }
-/* line 26, ../sass/_menu-items.scss */
+/* line 31, ../sass/_menu-items.scss */
 .menu-items-wrapper .left-cont {
   display: table-cell;
   width: 15%;
   height: 100%;
 }
-/* line 30, ../sass/_menu-items.scss */
+/* line 35, ../sass/_menu-items.scss */
 .menu-items-wrapper p {
   display: table-cell;
   vertical-align: middle;
   color: #002E02;
+  padding-right: 5px;
 }
-/* line 35, ../sass/_menu-items.scss */
+/* line 41, ../sass/_menu-items.scss */
 .menu-items-wrapper .title {
   width: 100%;
   height: 25%;
   display: table;
 }
-/* line 38, ../sass/_menu-items.scss */
+/* line 44, ../sass/_menu-items.scss */
 .menu-items-wrapper .title p {
   font-size: 15px;
   font-weight: bold;
 }
-/* line 43, ../sass/_menu-items.scss */
+/* line 49, ../sass/_menu-items.scss */
 .menu-items-wrapper .description {
   width: 100%;
   height: 75%;
   display: table;
 }
-/* line 46, ../sass/_menu-items.scss */
+/* line 52, ../sass/_menu-items.scss */
 .menu-items-wrapper .description p {
   font-size: 13px;
 }
-/* line 50, ../sass/_menu-items.scss */
+/* line 56, ../sass/_menu-items.scss */
 .menu-items-wrapper .price {
   display: table;
   width: 100%;
   height: 100%;
 }
-/* line 53, ../sass/_menu-items.scss */
+/* line 59, ../sass/_menu-items.scss */
 .menu-items-wrapper .price p {
   display: table-cell;
   text-align: center;
@@ -485,4 +492,89 @@ header a {
   font-weight: bold;
   font-size: 12px;
   color: brown;
+}
+
+/* line 1, ../sass/_menu-additions.scss */
+.menu-additions-wrapper {
+  width: 100%;
+  min-height: 100%;
+}
+/* line 4, ../sass/_menu-additions.scss */
+.menu-additions-wrapper .additions-type-container {
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+}
+/* line 11, ../sass/_menu-additions.scss */
+.menu-additions-wrapper .title {
+  width: 100%;
+  height: 30px;
+  background-color: #97A778;
+  margin-bottom: 2px;
+  display: table;
+}
+/* line 16, ../sass/_menu-additions.scss */
+.menu-additions-wrapper .title p {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: right;
+  color: #002E02;
+  font-weight: bold;
+  padding-right: 5px;
+}
+/* line 25, ../sass/_menu-additions.scss */
+.menu-additions-wrapper .container {
+  width: 30%;
+  height: 150px;
+  box-shadow: 0px 0px 8px -2px green;
+  border: solid 1px green;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 0 3px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+/* line 34, ../sass/_menu-additions.scss */
+.menu-additions-wrapper .container p {
+  text-align: center;
+  text-shadow: -1px 1px #97A778;
+  color: #002E02;
+  font-size: 16px;
+}
+/* line 41, ../sass/_menu-additions.scss */
+.menu-additions-wrapper .header {
+  width: 100%;
+  height: 40%;
+}
+/* line 44, ../sass/_menu-additions.scss */
+.menu-additions-wrapper .image {
+  width: 100%;
+  height: 60%;
+  background-color: brown;
+}
+/* line 48, ../sass/_menu-additions.scss */
+.menu-additions-wrapper .top {
+  width: 100%;
+  height: 40%;
+}
+/* line 51, ../sass/_menu-additions.scss */
+.menu-additions-wrapper .bottom {
+  width: 100%;
+  height: 60%;
+}
+/* line 54, ../sass/_menu-additions.scss */
+.menu-additions-wrapper .item-title {
+  width: 60%;
+  height: 100%;
+  background-color: green;
+  float: right;
+}
+/* line 59, ../sass/_menu-additions.scss */
+.menu-additions-wrapper .price {
+  width: 20%;
+  height: 100%;
+  background-color: blue;
+  float: right;
 }

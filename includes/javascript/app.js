@@ -24,6 +24,11 @@ app.config(['$routeProvider', function($routeProvider){
             controller: 'menu-items',
             resolve: { resolvedVal: function(){ return; }}}
         )
+        .when('/menu-additions/:menu_type_id/:menu_item_id',{
+            templateUrl: 'partials/menu/menu-additions.html',
+            controller: 'menu-additions',
+            resolve: { resolvedVal: function(){ return; }}}
+         )
         .when('/cart',{
             templateUrl: 'partials/cart.html',
             resolve: { resolvedVal: function(){ return; }}}

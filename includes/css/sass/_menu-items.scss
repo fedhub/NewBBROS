@@ -9,10 +9,15 @@
     padding-bottom: 5px;
   }
   .container{
-    @include size(100%, 100px);
-    box-shadow: 0px 0px 8px -2px green;
+    @include size(99%, 100px);
     display: table;
     overflow: hidden;
+    margin: 2px auto;
+    box-shadow: 0px 0px 5px -2px green;
+    border: solid 1px green;
+    &:nth-of-type(1){
+      margin-top: 0;
+    }
   }
   .right-cont{
     display: table-cell;
@@ -31,6 +36,7 @@
     display: table-cell;
     vertical-align: middle;
     color: $txt-color;
+    padding-right: 5px;
   }
   .title{
     @include size(100%, 25%);
@@ -58,10 +64,3 @@
     }
   }
 }
-
-//    p{
-//      text-align: center;
-//      text-shadow: -1px 1px $bg-color;
-//      color: $txt-color;
-//      font-size: 16px;
-//    }

@@ -56,10 +56,6 @@ app.service('menu', function(){
         return menu_types;
     }
 
-    this.set_menu_types = function(types){
-        menu_types = types;
-    }
-
 });
 
 
