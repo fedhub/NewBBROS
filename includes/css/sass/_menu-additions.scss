@@ -23,42 +23,76 @@
     }
   }
   .container{
-    @include size(30%, 150px);
+    @include size(32%, 150px);
     box-shadow: 0px 0px 8px -2px green;
     border: solid 1px green;
     border-radius: 5px;
     display: inline-block;
-    margin: 0 3px;
+    margin: 0 1px;
     margin-top: 10px;
     overflow: hidden;
-    p{
-      text-align: center;
-      text-shadow: -1px 1px $bg-color;
-      color: $txt-color;
-      font-size: 16px;
-    }
   }
   .header{
     @include size(100%, 40%);
   }
   .image{
     @include size(100%, 60%);
-    background-color: brown;
   }
   .top{
     @include size(100%, 40%);
+    background-color: #E0E0E0;
   }
-  .bottom{
+  .description{
     @include size(100%, 60%);
+    display: table;
+    p{
+      @include cell-settings();
+      font-size: 11px;
+      padding-right: 2px;
+      padding-left: 2px;
+    }
   }
   .item-title{
-    @include size(60%, 100%);
-    background-color: green;
+    @include size(70%, 100%);
     float: right;
+    display: table;
+    p{
+      @include cell-settings();
+      font-size: 11px;
+      font-weight: bold;
+      padding-right: 2px;
+      padding-left: 2px;
+    }
   }
   .price{
-    @include size(20%, 100%);
-    background-color: blue;
+    @include size(30%, 100%);
     float: right;
+    display: table;
+    p{
+      @include cell-settings();
+      font-size: 11px;
+      font-weight: bold;
+      color: brown;
+    }
+  }
+  .selected{
+    display: none;
+    @include size(28px, 29px);
+    float: left;
+    p{
+      text-align: left;
+      font-size: 25px;
+    }
+  }
+  .approve {
+    @include size(70px, 25px);
+    background-color: green;
+    margin: 10px auto;
+    box-shadow: 0px 0px 8px -2px #000;
+    display: table;
+    p{
+      @include cell-settings();
+      color: #FFF;
+    }
   }
 }

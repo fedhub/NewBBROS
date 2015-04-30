@@ -526,55 +526,105 @@ header a {
 }
 /* line 25, ../sass/_menu-additions.scss */
 .menu-additions-wrapper .container {
-  width: 30%;
+  width: 32%;
   height: 150px;
   box-shadow: 0px 0px 8px -2px green;
   border: solid 1px green;
   border-radius: 5px;
   display: inline-block;
-  margin: 0 3px;
+  margin: 0 1px;
   margin-top: 10px;
   overflow: hidden;
 }
-/* line 34, ../sass/_menu-additions.scss */
-.menu-additions-wrapper .container p {
-  text-align: center;
-  text-shadow: -1px 1px #97A778;
-  color: #002E02;
-  font-size: 16px;
-}
-/* line 41, ../sass/_menu-additions.scss */
+/* line 35, ../sass/_menu-additions.scss */
 .menu-additions-wrapper .header {
   width: 100%;
   height: 40%;
 }
-/* line 44, ../sass/_menu-additions.scss */
+/* line 38, ../sass/_menu-additions.scss */
 .menu-additions-wrapper .image {
   width: 100%;
   height: 60%;
-  background-color: brown;
 }
-/* line 48, ../sass/_menu-additions.scss */
+/* line 41, ../sass/_menu-additions.scss */
 .menu-additions-wrapper .top {
   width: 100%;
   height: 40%;
+  background-color: #E0E0E0;
 }
-/* line 51, ../sass/_menu-additions.scss */
-.menu-additions-wrapper .bottom {
+/* line 45, ../sass/_menu-additions.scss */
+.menu-additions-wrapper .description {
   width: 100%;
   height: 60%;
+  display: table;
 }
-/* line 54, ../sass/_menu-additions.scss */
+/* line 48, ../sass/_menu-additions.scss */
+.menu-additions-wrapper .description p {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 11px;
+  padding-right: 2px;
+  padding-left: 2px;
+}
+/* line 55, ../sass/_menu-additions.scss */
 .menu-additions-wrapper .item-title {
-  width: 60%;
+  width: 70%;
   height: 100%;
-  background-color: green;
   float: right;
+  display: table;
 }
 /* line 59, ../sass/_menu-additions.scss */
+.menu-additions-wrapper .item-title p {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 11px;
+  font-weight: bold;
+  padding-right: 2px;
+  padding-left: 2px;
+}
+/* line 67, ../sass/_menu-additions.scss */
 .menu-additions-wrapper .price {
-  width: 20%;
+  width: 30%;
   height: 100%;
-  background-color: blue;
   float: right;
+  display: table;
+}
+/* line 71, ../sass/_menu-additions.scss */
+.menu-additions-wrapper .price p {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 11px;
+  font-weight: bold;
+  color: brown;
+}
+/* line 78, ../sass/_menu-additions.scss */
+.menu-additions-wrapper .selected {
+  display: none;
+  width: 28px;
+  height: 29px;
+  float: left;
+}
+/* line 82, ../sass/_menu-additions.scss */
+.menu-additions-wrapper .selected p {
+  text-align: left;
+  font-size: 25px;
+}
+/* line 87, ../sass/_menu-additions.scss */
+.menu-additions-wrapper .approve {
+  width: 70px;
+  height: 25px;
+  background-color: green;
+  margin: 10px auto;
+  box-shadow: 0px 0px 8px -2px #000;
+  display: table;
+}
+/* line 93, ../sass/_menu-additions.scss */
+.menu-additions-wrapper .approve p {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  color: #FFF;
 }

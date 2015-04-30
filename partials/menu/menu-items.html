@@ -1,6 +1,6 @@
 <section class="menu-items-wrapper">
     <section class="food-items-container">
-        <a href="#/menu-additions/:menu_type_id={{ menu_item.food_type_id }}/:menu_item_id={{ menu_item.id }}" ng-repeat="menu_item in menu_items">
+        <a href="#/menu-additions/:menu_type_id={{ menu_item.food_type_id }}/:menu_item_id={{ menu_item.id }}" ng-click="selected(menu_item)" ng-repeat="menu_item in menu_items">
             <section class="container">
                 <section class="right-cont"></section>
                 <section class="center-cont">
