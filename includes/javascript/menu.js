@@ -103,14 +103,31 @@ app.controller('menu-additions', ['$scope', '$routeParams', 'message', 'cart', f
 
     $scope.approve = function(additions){
 
-        var $tot_visible = $('.menu-additions-wrapper .selected').filter(':visible');
+        var $tot_visible;// = $('.menu-additions-wrapper .selected').filter(':visible');
         var type_id;
+        var items_id = [];
         var item_id;
+        var msg = '';
 
         $.each($('.additions-type-container'), function(){
             type_id = $(this).attr('id');
-            console.log(type_id);
+            $tot_visible = $(this).find('.selected').filter(':visible');
+            for(var i = 0; i < additions.length; i++){
+                if(type_id == additions[i].id ){
+                    if(additions[i].selection_type == 'required_exact' && $tot_visible != additions[i].selections_amount){
+                        msg += 'עליך לבחור בדיוק ';
+                        msg += additions[i].selections_amount + ' ';
+                        msg += 'פריטים מ - ';
+                        msg += '"'+additions[i].name+'"<br><br>';
+                    }
+                    break;
+                }
+            }
         });
+        if(msg.length > 0){
+            message.showMessage(msg);
+            msg = '';
+        }
 
         //$.each($tot_visible, function(){
         //    item_id = $(this).parent().parent().attr('id');
