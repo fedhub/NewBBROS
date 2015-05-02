@@ -50,14 +50,23 @@ app.service('message', function(){
 // Cart
 app.service('cart', function(){
 
-    //var my_cart = [];
-    //var total_price = 0;
+    var my_cart = [];
     var food_item = {};
     var additions = [];
+    var total_price = 0;
+    var lock = true;
 
-    //this.resetCart = function(){
-    //    my_cart = [];
-    //};
+    this.getSize = function(){
+        return my_cart.length;
+    };
+
+    this.setLock = function(state){
+        lock = state;
+    };
+
+    this.getLock = function(){
+        return lock;
+    };
 
     this.setAdditions = function(adds){
         additions = [];
@@ -73,52 +82,60 @@ app.service('cart', function(){
         food_item = new foodItem(item);
     };
 
-    this.printFoodItem = function(){
-        console.log(food_item.id);
-        console.log(food_item.name);
-        console.log(food_item.price);
-        console.log(food_item.description);
-    }
-
     function foodItem(item){
         this.id = item.id;
         this.name = item.name;
         this.description = item.description;
         this.price = item.price;
+        this.total_price = 0;
         this.addition_types = [];
     }
 
-    //this.getTmpFoodItem = function(){
-    //    return tmp_food_item;
-    //};
-    //
-    //this.addFoodItem = function(new_food_item){
-    //    var food_item = new foodItem(new_food_item);
-    //    my_cart.push(food_item);
-    //};
-    //
-    //this.addAdditionType = function(name){
-    //    var addition_type = new additionType(name);
-    //    my_cart[my_cart.length-1].addition_types.push(addition_type);
-    //};
-    //
-    //this.addAdditionItem = function(new_addition_item){
-    //    var addition_item = new additionItem(new_addition_item);
-    //    var length = my_cart[my_cart.length-1].addition_types.length;
-    //    my_cart[my_cart.length-1].addition_types[length-1].push(addition_item);
-    //};
-    //
-    //function additionType(){
-    //    this.name = name;
-    //    this.items = [];
-    //}
-    //
-    //function additionItem(new_addition_item){
-    //    this.id = new_addition_item.addition_item_id;
-    //    this.name = new_addition_item.addition_item_name;
-    //    this.description = new_addition_item.description;
-    //    this.price = new_addition_item.price;
-    //}
+    this.addToCart = function(adds){
+        food_item.addition_types = adds;
+        my_cart.push(food_item);
+    };
+
+    this.calculatePrice = function(){
+        var last_item = my_cart.length - 1;
+        my_cart[last_item].total_price += my_cart[last_item].price;
+        for(var j = 0; j < my_cart[last_item].addition_types.length; j++){
+            for(var k = 0; k < my_cart[last_item].addition_types[j].addition_items.length; k++){
+                my_cart[last_item].total_price += my_cart[last_item].addition_types[j].addition_items[k].price;
+            }
+        }
+        total_price += my_cart[last_item].total_price;
+    };
+
+    this.print = function(){
+        for(var i = 0; i < my_cart.length; i++){
+            console.log(my_cart[i].name);
+            for(var j = 0; j < my_cart[i].addition_types.length; j++){
+                console.log(my_cart[i].addition_types[j].name);
+                for(var k = 0; k < my_cart[i].addition_types[j].addition_items.length; k++){
+                    console.log(my_cart[i].addition_types[j].addition_items[k].name);
+                }
+            }
+        }
+    };
+
+    this.deleteItem = function(item_id){
+        for(var i = 0; i < my_cart.length; i++){
+            if(my_cart[i].id == item_id){
+                total_price -= my_cart[i].total_price;
+                my_cart.splice(i,1);
+                break;
+            }
+        }
+    };
+
+    this.getTotalPrice = function(){
+        return total_price;
+    };
+
+    this.getMyCart = function(){
+        return my_cart;
+    };
 
 });
 

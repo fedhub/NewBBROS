@@ -1,10 +1,72 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-    cart page
-</body>
-</html>
+<section class="cart-wrapper">
+
+    <section id="cart-item-info" class="lightbox" data="item">
+        <section class="container">
+            <section class="close" ng-click="close_info()"><p class="flaticon-close32"></p></section>
+            <section class="title"><p>{{ item.name }} - {{ item.price }} &#8362;</p></section>
+            <section class="content" id="item-info">
+                <section class="component">
+                    <section class="comp-title"><p>תיאור</p></section>
+                    <section class="comp-info">{{ item.description }}</section>
+                </section>
+                <section class="component" ng-repeat="type in item.addition_types">
+                    <section class="comp-title"><p>{{ type.name  }}</p></section>
+                    <section class="comp-info" ng-repeat="addition_item in type.addition_items">{{ addition_item.name }} - <span style="color: brown;">{{ addition_item.price }} &#8362;</span></section>
+                </section>
+            </section>
+            <footer class="item-info-footer"><p>סה"כ: {{ item.total_price }}  &#8362;</p></footer>
+        </section>
+    </section>
+
+    <section id="delete-item" class="lightbox" data="del_item">
+        <section class="container" id="del-cont">
+            <section class="close" ng-click="close_delete_window()"><p class="flaticon-close32"></p></section>
+            <section class="title"><p>מחיקה מהסל</p></section>
+            <section class="content" id="item-delete">
+                <p>האם אתה בטוח שברצונך למחוק את {{ del_item.name }} מהסל שלך?</p>
+            </section>
+            <section class="approve" id="del-approval" ng-click="deletion_approved(del_item)"><p>אישור</p></section>
+        </section>
+    </section>
+
+    <section id="order-type" class="lightbox">
+        <section class="container" id="order-type-cont">
+            <section class="close" ng-click="close_order_type()"><p class="flaticon-close32"></p></section>
+            <section class="title"><p>בחירת סוג הזמנה</p></section>
+            <section class="content">
+                <section class="order-type-selection">
+                    <section class="icon-cont"><p class="flaticon-free6"></p></section>
+                    <section class="type-cont"></section>
+                </section>
+                <section class="order-type-selection">
+                    <section class="icon-cont"><p class="flaticon-box37"></p></section>
+                    <section class="type-cont"></section>
+                </section>
+                <section class="order-type-selection">
+                    <section class="icon-cont"><p class="flaticon-two200"></p></section>
+                    <section class="type-cont"></section>
+                </section>
+            </section>
+        </section>
+    </section>
+
+    <section class="items-container">
+        <section class="cart-item-container" ng-click="info(item)" ng-repeat="item in cart_items">
+            <section class="title"><p>{{ item.name }}</p></section>
+            <section class="info"><p class="flaticon-info28"></p></section>
+            <section class="delete-item" ng-click="delete_item(item); $event.stopPropagation()"><p class="flaticon-delete96"></p></section>
+            <section class="item-total-price"><p>{{ item.total_price }} &#8362;</p></section>
+        </section>
+    </section>
+
+    <footer class="cart-footer">
+        <section class="order-type-btn" ng-click="order_type()"><p class="flaticon-cutlery6"></p><p class="text">סוג הזמנה</p></section>
+        <section class="order-time-btn" ng-click="order_time()"><p class="flaticon-logistics2"></p><p class="text">שעת הזמנה</p></section>
+        <section class="payment-method-btn" ng-click="payment_method()"><p class="flaticon-money132"></p><p class="text">אמצעי תשלום</p></section>
+        <section class="cart-approve-cont">
+            <section class="tot-price"><p>{{ total_price }} &#8362;</p></section>
+            <section class="approve" id="cart-approve"><p>המשך</p></section>
+        </section>
+    </footer>
+
+</section>

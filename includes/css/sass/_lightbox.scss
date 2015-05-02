@@ -11,6 +11,7 @@
     box-shadow: 0px 0px 8px -2px #000;
     border: 1px solid #B6B6B6;
     margin-top: 20%;
+    position: relative;
   }
   .close{
     @include size(28px, 30px);
@@ -37,17 +38,17 @@
   .content{
     @include size(100%, 307px);
     float: right;
-    .approve {
-      @include size(70px, 25px);
-      background-color: green;
-      margin: 10px auto;
-      box-shadow: 0px 0px 8px -2px #000;
-      display: table;
-      p{
-        @include cell-settings();
-        color: #FFF;
-      }
-    }
+//    .approve {
+//      @include size(70px, 25px);
+//      background-color: green;
+//      margin: 10px auto;
+//      box-shadow: 0px 0px 8px -2px #000;
+//      display: table;
+//      p{
+//        @include cell-settings();
+//        color: #FFF;
+//      }
+//    }
   }
   .form{
     width: 90%;
@@ -87,6 +88,21 @@
         @include cell-settings();
       }
     }
+  }
+  .indirect{
+    display: none;
+  }
+}
+
+.approve {
+  @include size(70px, 25px);
+  background-color: green;
+  margin: 10px auto;
+  box-shadow: 0px 0px 8px -2px #000;
+  display: table;
+  p{
+    @include cell-settings();
+    color: #FFF;
   }
 }
 

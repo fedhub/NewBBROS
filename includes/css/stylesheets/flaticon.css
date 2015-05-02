@@ -17,59 +17,87 @@
     content: "\e000";
     font-size: 30px;
  }
+.flaticon-box37:before {
+    content: "\e001";
+    font-size: 60px;
+    color: #333;
+}
 .flaticon-building120:before {
-	content: "\e001";
+	content: "\e002";
      font-size: 29px;
      line-height: 130%;
 }
 .flaticon-cancel4:before {
-    content: "\e002";
+    content: "\e003";
     color: red;
 }
 .flaticon-close32:before {
-    content: "\e003";
+    content: "\e004";
     font-size: 30px;
 }
+.flaticon-cutlery6:before {
+    content: "\e005";
+    font-size: 42px;
+}
 .flaticon-delete96:before {
-	content: "\e004";
-    font-size: 29px;
-    line-height: 130%;
+	content: "\e006";
+}
+.flaticon-free6:before {
+    content: "\e007";
+    font-size: 60px;
+    color: #333;
 }
 .flaticon-good1:before {
-    content: "\e005";
+    content: "\e008";
     color: green;
 }
 .flaticon-hourglass:before {
-	content: "\e006";
+	content: "\e009";
     font-size: 29px;
     line-height: 138%;
 }
+.flaticon-info28:before {
+    content: "\e00a";
+}
 .flaticon-list19:before {
-	content: "\e007";
+	content: "\e00b";
     font-size: 29px;
     line-height: 130%;
 }
 .flaticon-login:before {
-    content: "\e008";
+    content: "\e00c";
     font-size: 30px;
 }
+.flaticon-logistics2:before {
+    content: "\e00d";
+    font-size: 42px;
+}
 .flaticon-menu45:before {
-	content: "\e009";
+	content: "\e00e";
     font-size: 40px;
     line-height: 82%;
     font-weight: bold;
     color: #002E02;
 }
+.flaticon-money132:before {
+    content: "\e00f";
+    font-size: 42px;
+}
 .flaticon-network60:before {
-    content: "\e00a";
+    content: "\e010";
     font-size: 20px;
 }
 .flaticon-shoppingcart14:before {
-	content: "\e00b";
+	content: "\e011";
     font-size: 31px;
     line-height: 130%;
 }
 .flaticon-symbol21:before {
-    content: "\e00c";
+    content: "\e012";
     font-size: 30px;
+}
+.flaticon-two200:before {
+    content: "\e013";
+    font-size: 60px;
+    color: #333;
 }

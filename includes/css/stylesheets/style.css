@@ -118,20 +118,44 @@ header a {
   color: #002E02;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 @media only screen and (min-width: 415px) and (max-width: 736px) {
-  /* line 83, ../sass/_header.scss */
+  /* line 84, ../sass/_header.scss */
   header {
     background-color: green;
   }
 }
 @media only screen and (min-width: 737px) and (max-width: 1024px) {
-  /* line 89, ../sass/_header.scss */
+  /* line 90, ../sass/_header.scss */
   header {
     background-color: blue;
   }
 }
+/* line 95, ../sass/_header.scss */
+.cart-size {
+  display: none;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: 3px;
+  left: 8px;
+  border-radius: 100px;
+  border: solid 1px ghostwhite;
+  background-color: #FFA500;
+  box-shadow: 0px 0px 8px -2px #000;
+}
+/* line 105, ../sass/_header.scss */
+.cart-size p {
+  line-height: 16px;
+  padding-right: 2px;
+  font-size: 11px;
+  text-align: center;
+  font-weight: bold;
+  color: #002E02;
+}
+
 /* line 1, ../sass/_slider.scss */
 .mobile-menu-container {
   display: block;
@@ -228,27 +252,28 @@ header a {
   box-shadow: 0px 0px 8px -2px #000;
   border: 1px solid #B6B6B6;
   margin-top: 20%;
+  position: relative;
 }
-/* line 15, ../sass/_lightbox.scss */
+/* line 16, ../sass/_lightbox.scss */
 .lightbox .close {
   width: 28px;
   height: 30px;
   display: table;
   float: right;
 }
-/* line 19, ../sass/_lightbox.scss */
+/* line 20, ../sass/_lightbox.scss */
 .lightbox .close p {
   display: table-cell;
   vertical-align: middle;
 }
-/* line 24, ../sass/_lightbox.scss */
+/* line 25, ../sass/_lightbox.scss */
 .lightbox .title {
   float: right;
   display: table;
   width: 220px;
   height: 33px;
 }
-/* line 28, ../sass/_lightbox.scss */
+/* line 29, ../sass/_lightbox.scss */
 .lightbox .title p {
   display: table-cell;
   text-align: center;
@@ -259,14 +284,79 @@ header a {
   font-style: italic;
   font-size: 18px;
 }
-/* line 37, ../sass/_lightbox.scss */
+/* line 38, ../sass/_lightbox.scss */
 .lightbox .content {
   width: 100%;
   height: 307px;
   float: right;
 }
-/* line 40, ../sass/_lightbox.scss */
-.lightbox .content .approve {
+/* line 53, ../sass/_lightbox.scss */
+.lightbox .form {
+  width: 90%;
+  margin: 0 auto;
+}
+/* line 56, ../sass/_lightbox.scss */
+.lightbox .form .form-item {
+  width: 100%;
+  height: 28px;
+}
+/* line 58, ../sass/_lightbox.scss */
+.lightbox .form .form-item section {
+  float: right;
+  display: table;
+}
+/* line 63, ../sass/_lightbox.scss */
+.lightbox .form .required {
+  width: 4%;
+  height: 100%;
+}
+/* line 65, ../sass/_lightbox.scss */
+.lightbox .form .required p {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+/* line 69, ../sass/_lightbox.scss */
+.lightbox .form .detail-label {
+  width: 32%;
+  height: 100%;
+}
+/* line 71, ../sass/_lightbox.scss */
+.lightbox .form .detail-label p {
+  font-size: 14px;
+  display: table-cell;
+  vertical-align: middle;
+}
+/* line 77, ../sass/_lightbox.scss */
+.lightbox .form .detail-input {
+  width: 56%;
+  height: 100%;
+}
+/* line 79, ../sass/_lightbox.scss */
+.lightbox .form .detail-input input {
+  width: 97%;
+  height: 90%;
+  margin-top: 2px;
+}
+/* line 84, ../sass/_lightbox.scss */
+.lightbox .form .validation {
+  width: 8%;
+  height: 100%;
+}
+/* line 86, ../sass/_lightbox.scss */
+.lightbox .form .validation p {
+  font-size: 14px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+/* line 92, ../sass/_lightbox.scss */
+.lightbox .indirect {
+  display: none;
+}
+
+/* line 97, ../sass/_lightbox.scss */
+.approve {
   width: 70px;
   height: 25px;
   background-color: green;
@@ -274,72 +364,12 @@ header a {
   box-shadow: 0px 0px 8px -2px #000;
   display: table;
 }
-/* line 46, ../sass/_lightbox.scss */
-.lightbox .content .approve p {
+/* line 103, ../sass/_lightbox.scss */
+.approve p {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
   color: #FFF;
-}
-/* line 52, ../sass/_lightbox.scss */
-.lightbox .form {
-  width: 90%;
-  margin: 0 auto;
-}
-/* line 55, ../sass/_lightbox.scss */
-.lightbox .form .form-item {
-  width: 100%;
-  height: 28px;
-}
-/* line 57, ../sass/_lightbox.scss */
-.lightbox .form .form-item section {
-  float: right;
-  display: table;
-}
-/* line 62, ../sass/_lightbox.scss */
-.lightbox .form .required {
-  width: 4%;
-  height: 100%;
-}
-/* line 64, ../sass/_lightbox.scss */
-.lightbox .form .required p {
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-}
-/* line 68, ../sass/_lightbox.scss */
-.lightbox .form .detail-label {
-  width: 32%;
-  height: 100%;
-}
-/* line 70, ../sass/_lightbox.scss */
-.lightbox .form .detail-label p {
-  font-size: 14px;
-  display: table-cell;
-  vertical-align: middle;
-}
-/* line 76, ../sass/_lightbox.scss */
-.lightbox .form .detail-input {
-  width: 56%;
-  height: 100%;
-}
-/* line 78, ../sass/_lightbox.scss */
-.lightbox .form .detail-input input {
-  width: 97%;
-  height: 90%;
-  margin-top: 2px;
-}
-/* line 83, ../sass/_lightbox.scss */
-.lightbox .form .validation {
-  width: 8%;
-  height: 100%;
-}
-/* line 85, ../sass/_lightbox.scss */
-.lightbox .form .validation p {
-  font-size: 14px;
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
 }
 
 /* line 1, ../sass/_screen-message.scss */
@@ -613,7 +643,7 @@ header a {
   font-size: 25px;
 }
 /* line 87, ../sass/_menu-additions.scss */
-.menu-additions-wrapper .approve {
+.menu-additions-wrapper .approve-menu {
   width: 70px;
   height: 25px;
   background-color: green;
@@ -622,9 +652,241 @@ header a {
   display: table;
 }
 /* line 93, ../sass/_menu-additions.scss */
-.menu-additions-wrapper .approve p {
+.menu-additions-wrapper .approve-menu p {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
   color: #FFF;
+}
+
+/* line 1, ../sass/_cart.scss */
+.cart-wrapper {
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+}
+/* line 5, ../sass/_cart.scss */
+.cart-wrapper .items-container {
+  width: 100%;
+  height: 335px;
+  overflow: auto;
+}
+/* line 9, ../sass/_cart.scss */
+.cart-wrapper .cart-item-container {
+  width: 97%;
+  width: 97%;
+  height: 40px;
+  margin: 10px auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: silver;
+  border: 1px solid gray;
+  border-radius: 5px;
+  box-shadow: 0px 0px 8px -2px #000;
+}
+/* line 19, ../sass/_cart.scss */
+.cart-wrapper .cart-item-container .title {
+  width: 160px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+/* line 24, ../sass/_cart.scss */
+.cart-wrapper .cart-item-container .title p {
+  padding-right: 5px;
+  text-shadow: -2px 1px #97A778;
+  color: #002E02;
+  font-size: 22px;
+}
+/* line 32, ../sass/_cart.scss */
+.cart-wrapper .info {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 35px;
+}
+/* line 36, ../sass/_cart.scss */
+.cart-wrapper .info p {
+  text-shadow: -2px 1px #97A778;
+}
+/* line 40, ../sass/_cart.scss */
+.cart-wrapper .delete-item {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 35px;
+}
+/* line 44, ../sass/_cart.scss */
+.cart-wrapper .delete-item p {
+  text-shadow: -2px 1px #97A778;
+}
+/* line 48, ../sass/_cart.scss */
+.cart-wrapper .item-total-price {
+  width: 70px;
+  height: 100%;
+  display: table;
+  float: left;
+}
+/* line 52, ../sass/_cart.scss */
+.cart-wrapper .item-total-price p {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  text-shadow: -2px 1px #97A778;
+  color: #002E02;
+  font-size: 22px;
+}
+/* line 59, ../sass/_cart.scss */
+.cart-wrapper #item-info {
+  height: 270px;
+  overflow: auto;
+}
+/* line 63, ../sass/_cart.scss */
+.cart-wrapper .component {
+  width: 90%;
+  margin: 15px auto;
+  padding: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: relative;
+  border: solid 1px #002E02;
+}
+/* line 72, ../sass/_cart.scss */
+.cart-wrapper .comp-title {
+  position: absolute;
+  top: -12px;
+  background-color: #FFF;
+  padding-right: 2px;
+  padding-left: 2px;
+}
+/* line 78, ../sass/_cart.scss */
+.cart-wrapper .comp-title p {
+  color: #002E02;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: bold;
+}
+/* line 85, ../sass/_cart.scss */
+.cart-wrapper .comp-info {
+  font-size: 14px;
+  color: #002E02;
+  display: inline-block;
+  padding-right: 5px;
+}
+/* line 91, ../sass/_cart.scss */
+.cart-wrapper .item-info-footer {
+  width: 100px;
+  height: 30px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: table;
+}
+/* line 97, ../sass/_cart.scss */
+.cart-wrapper .item-info-footer p {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  color: #002E02;
+  font-weight: bold;
+  text-shadow: -2px 1px #97A778;
+}
+/* line 104, ../sass/_cart.scss */
+.cart-wrapper .cart-footer {
+  background-color: silver;
+  width: 100%;
+  height: 65px;
+  position: fixed;
+  bottom: 0;
+  box-shadow: 0px 0px 8px -2px #000;
+}
+/* line 110, ../sass/_cart.scss */
+.cart-wrapper .cart-footer section {
+  float: right;
+  margin-right: 5px;
+}
+/* line 115, ../sass/_cart.scss */
+.cart-wrapper .order-type-btn,
+.cart-wrapper .order-time-btn,
+.cart-wrapper .payment-method-btn {
+  width: 70px;
+  height: 100%;
+  box-shadow: 0px 0px 1px 0px #000;
+  display: table;
+  text-align: center;
+}
+/* line 122, ../sass/_cart.scss */
+.cart-wrapper .order-type-btn p.text,
+.cart-wrapper .order-time-btn p.text,
+.cart-wrapper .payment-method-btn p.text {
+  font-size: 12px;
+  font-weight: bold;
+}
+/* line 127, ../sass/_cart.scss */
+.cart-wrapper .cart-approve-cont {
+  width: 85px;
+  height: 100%;
+}
+/* line 130, ../sass/_cart.scss */
+.cart-wrapper .tot-price {
+  width: 90%;
+  height: 50%;
+  display: table;
+}
+/* line 133, ../sass/_cart.scss */
+.cart-wrapper .tot-price p {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  text-shadow: -2px 1px #97A778;
+  color: #002E02;
+  font-size: 22px;
+}
+
+/* line 142, ../sass/_cart.scss */
+.order-type-selection {
+  width: 85%;
+  height: 85px;
+  margin: 10px auto;
+  box-shadow: 0px 0px 1px 0px #000;
+}
+/* line 146, ../sass/_cart.scss */
+.order-type-selection .icon-cont,
+.order-type-selection .type-cont {
+  display: table;
+}
+/* line 149, ../sass/_cart.scss */
+.order-type-selection .icon-cont p,
+.order-type-selection .type-cont p {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* line 155, ../sass/_cart.scss */
+#cart-approve {
+  width: 90%;
+  margin: 2px auto;
+  margin-right: 5px;
+}
+
+/* line 161, ../sass/_cart.scss */
+#del-cont {
+  height: 200px;
+}
+
+/* line 165, ../sass/_cart.scss */
+#item-delete {
+  height: 120px;
+  display: table;
+  margin: 0 auto;
+  width: 80%;
+  float: none;
+}
+/* line 171, ../sass/_cart.scss */
+#item-delete p {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  color: #002E02;
+  font-size: 18px;
+  font-weight: bold;
 }

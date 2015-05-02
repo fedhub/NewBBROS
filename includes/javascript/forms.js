@@ -1,5 +1,6 @@
 var app = angular.module('myapp.forms', [
-    'myapp.services'
+    'myapp.services',
+    'myapp.menu'
 ]);
 
 app.directive('forms', ['authentication', 'message', function(authentication, message){
@@ -26,7 +27,7 @@ app.directive('forms', ['authentication', 'message', function(authentication, me
                     if(form_type == 'log-in') msg = 'הינך מחובר למערכת, אם ברצונך להתחבר כמשתמש אחר עליך להתנתק ראשית';
                     message.showMessage(msg);
                 }
-                else form_request($scope, form_type);
+                else form_req($scope, form_type);
                 $scope.form_approved = function(){
                     form_approved(form_type);
                 };
@@ -34,12 +35,16 @@ app.directive('forms', ['authentication', 'message', function(authentication, me
         }
     };
 
-    function form_request($scope, form_type){
+    function form_req($scope, form_type){
+        $('.indirect').css('display','none');
         $lightbox.fadeIn();
         if(form_type == 'sign-up') $scope.title = 'הרשמה';
         if(form_type == 'log-in') $scope.title = 'התחברות';
         if(form_type == 'log-out') $scope.title = 'התנתקות';
         $scope.form_items = form_items(form_type);
+        if(form_type == 'log-in'){
+            $('.indirect').toggle();
+        }
     }
 
     function form_approved(form_type){

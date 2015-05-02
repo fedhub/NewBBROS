@@ -2,7 +2,8 @@ var app = angular.module('myapp', [
     'myapp.header',
     'myapp.forms',
     'myapp.menu',
-    'myapp.services'
+    'myapp.services',
+    'myapp.cart'
 ]);
 
 var base_url = 'http://localhost:3000';
@@ -31,6 +32,7 @@ app.config(['$routeProvider', function($routeProvider){
          )
         .when('/cart',{
             templateUrl: 'partials/cart.html',
+            controller: 'cart',
             resolve: { resolvedVal: function(){ return; }}}
          )
         .when('/status',{
