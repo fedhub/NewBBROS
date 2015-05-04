@@ -3,7 +3,7 @@ var app = angular.module('myapp.forms', [
     'myapp.menu'
 ]);
 
-app.directive('forms', ['authentication', 'message', function(authentication, message){
+app.directive('forms', ['authentication', 'message', 'customer', function(authentication, message, customer){
 
     // GLOBALS
     var $lightbox = $('#lightbox'), $first_name='', $last_name='', $phone_number='', $email='',
@@ -16,8 +16,8 @@ app.directive('forms', ['authentication', 'message', function(authentication, me
                 if(form_type == 'log-out'){
                     if(authentication.isConnected()){
                         message.greetings('לא מחובר');
-                        authentication.setConnected(false);
                         message.showMessage('ההתנתקות הושלמה');
+                        setTimeout(function(){ location.reload(); window.location = "#/home";}, (message.getDelay()+1000));
                     }
                     else message.showMessage('אינך מחובר');
                 }
@@ -71,6 +71,7 @@ app.directive('forms', ['authentication', 'message', function(authentication, me
     function ajax_response(res, form_type){
         if(form_type == 'sign-up') {
             if (res) {
+                customer.setDetails($first_name,$last_name,$phone_number,$email,$street,$house_number,$floor,$enter);
                 authentication.setConnected(true);
                 message.msgCloseLightbox('ההרשמה בוצעה בהצלחה');
                 message.greetings('שלום ' + $first_name);
@@ -79,8 +80,9 @@ app.directive('forms', ['authentication', 'message', function(authentication, me
         }
         if(form_type == 'log-in'){
             if(res == 'phone-not-exist') message.showMessage('מספר הטלפון שהוזן אינו רשום במערכת');
-            if(res == 'name-not-match') message.showMessage('ייתכן והשם הפרטי שהוזן לא הוזן כראוי מאחר ולא נמצאה התאמה למספר הטלפון, אנא נסה שוב');
-            if(res == 'success'){
+            else if(res == 'name-not-match') message.showMessage('ייתכן והשם הפרטי שהוזן לא הוזן כראוי מאחר ולא נמצאה התאמה למספר הטלפון, אנא נסה שוב');
+            else{
+                customer.setDetails(res.first_name,res.last_name,res.phone_number,res.email,res.street,res.house_number,res.floor,res.enter);
                 authentication.setConnected(true);
                 message.msgCloseLightbox('ההתחברות הושלמה');
                 message.greetings('שלום ' + $first_name);

@@ -8,7 +8,7 @@ app.service('authentication', function(){
 
     this.setConnected = function(state){
         connected = state;
-    }
+    };
 
     this.isConnected = function(){
         return connected;
@@ -16,6 +16,36 @@ app.service('authentication', function(){
 
     this.getConnectedType = function(){
         return connected_type;
+    }
+
+});
+
+app.service('customer', function(){
+
+    var details = {
+        first_name: '',
+        last_name: '',
+        phone_number: '',
+        email: '',
+        street: '',
+        house_number: '',
+        floor: '',
+        enter: ''
+    };
+
+    this.setDetails = function(first_name, last_name, phone_number, email, street, house_number, floor, enter){
+        details.first_name = first_name;
+        details.last_name = last_name;
+        details.phone_number = phone_number;
+        details.email = email;
+        details.street = street;
+        details.house_number = house_number;
+        details.floor = floor;
+        details.enter = enter;
+    };
+
+    this.getDetails = function(){
+        return details;
     }
 
 });
@@ -43,7 +73,11 @@ app.service('message', function(){
 
     this.greetings = function(msg){
         $slider_title.html(msg);
-    }
+    };
+
+    this.getDelay = function(){
+        return delay;
+    };
 
 });
 
@@ -136,6 +170,83 @@ app.service('cart', function(){
     this.getMyCart = function(){
         return my_cart;
     };
+
+});
+
+app.service('order_details', function(){
+
+    var order_type = '';
+    var payment_method = '';
+    var order_time = '';
+
+    this.setOrderType = function(type){
+        order_type = type;
+    };
+
+    this.setPaymentMethod = function(method){
+        payment_method = method;
+    };
+
+    this.setOrderTime = function(time){
+        order_time = time;
+    };
+
+    this.getPaymentMethod = function(){
+        return payment_method;
+    };
+
+    this.getOrderType = function(){
+        return order_type;
+    };
+
+    this.getOrderTime = function(){
+        return order_time;
+    };
+
+});
+
+app.service('date', function(){
+
+    var curr_date = new Date();
+    var day, month, year;
+    var hour, minutes, seconds;
+
+    this.getDay = function(){
+        return Date.getDate();
+    };
+
+    this.getMonth = function(){
+        return (curr_date.getMonth() + 1);
+    };
+
+    this.getYear = function(){
+        return curr_date.getFullYear()
+    };
+
+    this.getHour = function(){
+        return curr_date.getHours();
+    };
+
+    this.getMinutes = function(){
+        return  curr_date.getMinutes();
+    };
+
+    this.getSeconds = function(){
+        return curr_date.getSeconds();
+    };
+
+    this.getFullDate = function(){
+        return curr_date.getDate()+'.'+(curr_date.getMonth()+1)+'.'+curr_date.getFullYear();
+    };
+
+    this.getDefaultTime = function(){
+        return curr_date.getHours()+':'+checkTime(curr_date.getMinutes())+':'+checkTime(curr_date.getSeconds());
+    };
+
+    function checkTime(i) {
+        if (i < 10) {i = "0" + i}  // add zero in front of numbers < 10
+        return i;
+    }
 
 });
 

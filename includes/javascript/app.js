@@ -3,7 +3,8 @@ var app = angular.module('myapp', [
     'myapp.forms',
     'myapp.menu',
     'myapp.services',
-    'myapp.cart'
+    'myapp.cart',
+    'myapp.order-approve'
 ]);
 
 var base_url = 'http://localhost:3000';
@@ -29,12 +30,12 @@ app.config(['$routeProvider', function($routeProvider){
             templateUrl: 'partials/menu/menu-additions.html',
             controller: 'menu-additions',
             resolve: { resolvedVal: function(){ return; }}}
-         )
+        )
         .when('/cart',{
             templateUrl: 'partials/cart.html',
             controller: 'cart',
             resolve: { resolvedVal: function(){ return; }}}
-         )
+        )
         .when('/status',{
             templateUrl: 'partials/status.html',
             resolve: { resolvedVal: function(){ return; }}}

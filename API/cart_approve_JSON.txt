@@ -1,0 +1,40 @@
+function print(){
+            console.log('Order-type: ' + order_type);
+            console.log('Payment-method: ' + payment_method);
+            console.log('Order-time: ' + order_time);
+            console.log('Date: ' + curr_date);
+            console.log('Customer-details: ');
+            console.log('                  first_name   : ' + customer_details.first_name);
+            console.log('                  last_name    : ' + customer_details.last_name);
+            console.log('                  phone_number : ' + customer_details.phone_number);
+            console.log('                  email        : ' + customer_details.email);
+            console.log('                  street       : ' + customer_details.street);
+            console.log('                  house_number : ' + customer_details.house_number);
+            console.log('                  floor        : ' + customer_details.floor);
+            console.log('                  enter        : ' + customer_details.enter);
+            console.log('Cart-total-price: ' + total_price);
+            console.log('My-cart: ');
+            for(var i = 0; i < my_cart.length; i++){
+                console.log('    id             : ' + my_cart[i].id);
+                console.log('    name           : ' + my_cart[i].name);
+                console.log('    description    : ' + my_cart[i].description);
+                console.log('    price          : ' + my_cart[i].price);
+                console.log('    total_price    : ' + my_cart[i].total_price);
+                console.log('    addition_types : ');
+                for(var j = 0; j < my_cart[i].addition_types.length; j++){
+                    console.log('          id                : ' + my_cart[i].addition_types[j].id);
+                    console.log('          name              : ' + my_cart[i].addition_types[j].name);
+                    console.log('          description       : ' + my_cart[i].addition_types[j].description);
+                    console.log('          selection_type    : ' + my_cart[i].addition_types[j].selection_type);
+                    console.log('          selections_amount : ' + my_cart[i].addition_types[j].selections_amount);
+                    console.log('          addition_items    : ');
+                    for(var k = 0; k < my_cart[i].addition_types[j].addition_items.length; k++){
+                        console.log('                id          : ' + my_cart[i].addition_types[j].addition_items[k].id);
+                        console.log('                name        : ' + my_cart[i].addition_types[j].addition_items[k].name);
+                        console.log('                description : ' + my_cart[i].addition_types[j].addition_items[k].description);
+                        console.log('                image       : ' + my_cart[i].addition_types[j].addition_items[k].image);
+                        console.log('                price       : ' + my_cart[i].addition_types[j].addition_items[k].price);
+                    }
+                }
+            }
+}

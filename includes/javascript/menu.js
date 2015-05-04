@@ -134,7 +134,7 @@ function updateCart(cart, additions){
                 }
                 var temp = additions[i];
                 temp.addition_items = items;
-                cart_item_additions.push(temp);
+                if(items.length != 0) cart_item_additions.push(temp);
                 break;
             }
         }

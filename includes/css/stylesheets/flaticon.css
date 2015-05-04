@@ -35,69 +35,79 @@
     content: "\e004";
     font-size: 30px;
 }
-.flaticon-cutlery6:before {
+.flaticon-credit31:before {
     content: "\e005";
+    font-size: 60px;
+    color: #333;
+}
+.flaticon-currency19:before {
+    content: "\e006";
+    font-size: 60px;
+    color: #333;
+}
+.flaticon-cutlery6:before {
+    content: "\e007";
     font-size: 42px;
 }
 .flaticon-delete96:before {
-	content: "\e006";
+	content: "\e008";
 }
 .flaticon-free6:before {
-    content: "\e007";
+    content: "\e009";
     font-size: 60px;
     color: #333;
 }
 .flaticon-good1:before {
-    content: "\e008";
+    content: "\e00a";
     color: green;
 }
 .flaticon-hourglass:before {
-	content: "\e009";
+	content: "\e00b";
     font-size: 29px;
     line-height: 138%;
 }
 .flaticon-info28:before {
-    content: "\e00a";
+    content: "\e00c";
 }
 .flaticon-list19:before {
-	content: "\e00b";
+	content: "\e00d";
     font-size: 29px;
     line-height: 130%;
 }
 .flaticon-login:before {
-    content: "\e00c";
+    content: "\e00e";
     font-size: 30px;
 }
 .flaticon-logistics2:before {
-    content: "\e00d";
+    content: "\e00f";
     font-size: 42px;
 }
 .flaticon-menu45:before {
-	content: "\e00e";
+	content: "\e010";
     font-size: 40px;
     line-height: 82%;
     font-weight: bold;
     color: #002E02;
 }
 .flaticon-money132:before {
-    content: "\e00f";
+    content: "\e011";
     font-size: 42px;
 }
 .flaticon-network60:before {
-    content: "\e010";
+    content: "\e012";
     font-size: 20px;
 }
 .flaticon-shoppingcart14:before {
-	content: "\e011";
+	content: "\e013";
     font-size: 31px;
     line-height: 130%;
 }
 .flaticon-symbol21:before {
-    content: "\e012";
+    content: "\e014";
     font-size: 30px;
 }
 .flaticon-two200:before {
-    content: "\e013";
+    content: "\e015";
     font-size: 60px;
     color: #333;
 }

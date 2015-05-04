@@ -34,18 +34,41 @@
             <section class="close" ng-click="close_order_type()"><p class="flaticon-close32"></p></section>
             <section class="title"><p>בחירת סוג הזמנה</p></section>
             <section class="content">
-                <section class="order-type-selection">
-                    <section class="icon-cont"><p class="flaticon-free6"></p></section>
-                    <section class="type-cont"></section>
+                <section class="selection-cont" ng-click="order_type_selected(order_type.id)" ng-repeat="order_type in order_types">
+                    <section class="icon-cont"><p class="{{order_type.class}}"></p></section>
+                    <section class="type-cont"><p>{{order_type.text}}</p></section>
                 </section>
-                <section class="order-type-selection">
-                    <section class="icon-cont"><p class="flaticon-box37"></p></section>
-                    <section class="type-cont"></section>
+            </section>
+        </section>
+    </section>
+
+    <section id="payment-method" class="lightbox">
+        <section class="container" id="payment-method-cont">
+            <section class="close" ng-click="close_payment_method()"><p class="flaticon-close32"></p></section>
+            <section class="title"><p>בחירת אמצעי תשלום</p></section>
+            <section class="content">
+                <section class="selection-cont" ng-click="payment_method_selected(payment_method.id)" ng-repeat="payment_method in payment_methods">
+                    <section class="icon-cont"><p class="{{payment_method.class}}"></p></section>
+                    <section class="type-cont"><p>{{payment_method.text}}</p></section>
                 </section>
-                <section class="order-type-selection">
-                    <section class="icon-cont"><p class="flaticon-two200"></p></section>
-                    <section class="type-cont"></section>
+            </section>
+        </section>
+    </section>
+    <section id="order-time" class="lightbox">
+        <section class="container" id="order-time-cont">
+            <section class="close" ng-click="close_order_time()"><p class="flaticon-close32"></p></section>
+            <section class="title"><p>בחירת שעת הזמנה</p></section>
+            <section class="content">
+                <section class="time-cont">
+                    <select id="minutes">
+                        <option ng-repeat="minute in minutes" value="{{minute}}">{{ minute }}</option>
+                    </select>
+                    :
+                    <select id="hours" ng-change="checkHour(hour)" ng-model="hour">
+                        <option ng-repeat="hour in hours" value="{{hour}}">{{ hour }}</option>
+                    </select>
                 </section>
+                <section class="approve" id="time-approval" ng-click="order_time_selected()"><p>אישור</p></section>
             </section>
         </section>
     </section>
@@ -65,7 +88,7 @@
         <section class="payment-method-btn" ng-click="payment_method()"><p class="flaticon-money132"></p><p class="text">אמצעי תשלום</p></section>
         <section class="cart-approve-cont">
             <section class="tot-price"><p>{{ total_price }} &#8362;</p></section>
-            <section class="approve" id="cart-approve"><p>המשך</p></section>
+            <section class="approve" id="cart-approve" ng-controller="order-approve" ng-click="cart_approved()"><p>המשך</p></section>
         </section>
     </footer>
 

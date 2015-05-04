@@ -841,39 +841,59 @@ header a {
   font-size: 22px;
 }
 
-/* line 142, ../sass/_cart.scss */
-.order-type-selection {
+/* line 141, ../sass/_cart.scss */
+.selection-cont {
   width: 85%;
   height: 85px;
   margin: 10px auto;
   box-shadow: 0px 0px 1px 0px #000;
 }
-/* line 146, ../sass/_cart.scss */
-.order-type-selection .icon-cont,
-.order-type-selection .type-cont {
+/* line 145, ../sass/_cart.scss */
+.selection-cont .icon-cont,
+.selection-cont .type-cont {
+  width: 50%;
+  height: 100%;
   display: table;
+  float: right;
 }
-/* line 149, ../sass/_cart.scss */
-.order-type-selection .icon-cont p,
-.order-type-selection .type-cont p {
+/* line 150, ../sass/_cart.scss */
+.selection-cont .icon-cont p,
+.selection-cont .type-cont p {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
+  color: #002E02;
+  font-size: 18px;
 }
 
-/* line 155, ../sass/_cart.scss */
+/* line 157, ../sass/_cart.scss */
+.time-cont {
+  width: 160px;
+  margin: 40px auto;
+  font-weight: bold;
+  font-size: 20px;
+  color: #002E02;
+}
+/* line 163, ../sass/_cart.scss */
+.time-cont select {
+  width: 70px;
+  height: 30px;
+  font-size: 20px;
+}
+
+/* line 169, ../sass/_cart.scss */
 #cart-approve {
   width: 90%;
   margin: 2px auto;
   margin-right: 5px;
 }
 
-/* line 161, ../sass/_cart.scss */
+/* line 174, ../sass/_cart.scss */
 #del-cont {
   height: 200px;
 }
 
-/* line 165, ../sass/_cart.scss */
+/* line 177, ../sass/_cart.scss */
 #item-delete {
   height: 120px;
   display: table;
@@ -881,7 +901,7 @@ header a {
   width: 80%;
   float: none;
 }
-/* line 171, ../sass/_cart.scss */
+/* line 183, ../sass/_cart.scss */
 #item-delete p {
   display: table-cell;
   text-align: center;
