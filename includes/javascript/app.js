@@ -1,5 +1,7 @@
 var app = angular.module('myapp', [
     'myapp.header',
+    'myapp.home',
+    'myapp.last-orders',
     'myapp.forms',
     'myapp.menu',
     'myapp.services',
@@ -14,6 +16,12 @@ app.config(['$routeProvider', function($routeProvider){
     $routeProvider
         .when('/home',{
             templateUrl: 'partials/home.html',
+            controller: 'home',
+            resolve: { resolvedVal: function(){ return; }}}
+        )
+        .when('/last-orders',{
+            templateUrl: 'partials/orders/last-orders.html',
+            controller: 'last-orders',
             resolve: { resolvedVal: function(){ return; }}}
         )
         .when('/menu-types',{

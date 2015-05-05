@@ -18,6 +18,99 @@ html, body {
   height: 100%;
 }
 
+/* line 1, ../sass/_home.scss */
+.home-wrapper {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+/* line 4, ../sass/_home.scss */
+.home-wrapper .suggested-container {
+  width: 97%;
+  height: 60%;
+  margin: 0 auto;
+  text-align: center;
+}
+/* line 9, ../sass/_home.scss */
+.home-wrapper .suggested-box {
+  width: 40%;
+  height: 90%;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 5px;
+  margin-top: 15px;
+  box-shadow: 0px 0px 1px 0px #000;
+}
+/* line 17, ../sass/_home.scss */
+.home-wrapper .options-cont {
+  width: 97%;
+  height: 40%;
+  margin: 0 auto;
+  text-align: center;
+}
+/* line 22, ../sass/_home.scss */
+.home-wrapper .option-box {
+  width: 27%;
+  height: 70%;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 1px;
+  margin-top: 25px;
+  box-shadow: 0px 0px 1px 0px #000;
+}
+
+/* line 1, ../sass/_last-orders.scss */
+.last-orders-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+/* line 4, ../sass/_last-orders.scss */
+.last-orders-wrapper .order-container {
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px 5px;
+  background-color: grey;
+  box-shadow: 0px 0px 1px 0px #000;
+}
+/* line 11, ../sass/_last-orders.scss */
+.last-orders-wrapper .cart-item {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+  background-color: silver;
+}
+/* line 16, ../sass/_last-orders.scss */
+.last-orders-wrapper .title {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  width: 70%;
+  height: 100%;
+}
+/* line 22, ../sass/_last-orders.scss */
+.last-orders-wrapper .title p {
+  line-height: 40px;
+  padding-right: 5px;
+  text-shadow: -2px 1px #97A778;
+  color: #002E02;
+  font-size: 22px;
+}
+/* line 30, ../sass/_last-orders.scss */
+.last-orders-wrapper .info {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  width: 25%;
+  height: 100%;
+}
+/* line 36, ../sass/_last-orders.scss */
+.last-orders-wrapper .info p {
+  line-height: 40px;
+  text-shadow: -2px 1px #97A778;
+  font-size: 22px;
+  text-align: left;
+}
+
 /* line 1, ../sass/_header.scss */
 header {
   width: 100%;
@@ -674,7 +767,6 @@ header a {
 /* line 9, ../sass/_cart.scss */
 .cart-wrapper .cart-item-container {
   width: 97%;
-  width: 97%;
   height: 40px;
   margin: 10px auto;
   padding-top: 10px;
@@ -684,48 +776,48 @@ header a {
   border-radius: 5px;
   box-shadow: 0px 0px 8px -2px #000;
 }
-/* line 19, ../sass/_cart.scss */
+/* line 18, ../sass/_cart.scss */
 .cart-wrapper .cart-item-container .title {
   width: 160px;
   display: inline-block;
   vertical-align: middle;
   line-height: normal;
 }
-/* line 24, ../sass/_cart.scss */
+/* line 23, ../sass/_cart.scss */
 .cart-wrapper .cart-item-container .title p {
   padding-right: 5px;
   text-shadow: -2px 1px #97A778;
   color: #002E02;
   font-size: 22px;
 }
-/* line 32, ../sass/_cart.scss */
+/* line 31, ../sass/_cart.scss */
 .cart-wrapper .info {
   display: inline-block;
   vertical-align: middle;
   font-size: 35px;
 }
-/* line 36, ../sass/_cart.scss */
+/* line 35, ../sass/_cart.scss */
 .cart-wrapper .info p {
   text-shadow: -2px 1px #97A778;
 }
-/* line 40, ../sass/_cart.scss */
+/* line 39, ../sass/_cart.scss */
 .cart-wrapper .delete-item {
   display: inline-block;
   vertical-align: middle;
   font-size: 35px;
 }
-/* line 44, ../sass/_cart.scss */
+/* line 43, ../sass/_cart.scss */
 .cart-wrapper .delete-item p {
   text-shadow: -2px 1px #97A778;
 }
-/* line 48, ../sass/_cart.scss */
+/* line 47, ../sass/_cart.scss */
 .cart-wrapper .item-total-price {
   width: 70px;
   height: 100%;
   display: table;
   float: left;
 }
-/* line 52, ../sass/_cart.scss */
+/* line 51, ../sass/_cart.scss */
 .cart-wrapper .item-total-price p {
   display: table-cell;
   text-align: center;
@@ -734,62 +826,12 @@ header a {
   color: #002E02;
   font-size: 22px;
 }
-/* line 59, ../sass/_cart.scss */
+/* line 58, ../sass/_cart.scss */
 .cart-wrapper #item-info {
   height: 270px;
   overflow: auto;
 }
-/* line 63, ../sass/_cart.scss */
-.cart-wrapper .component {
-  width: 90%;
-  margin: 15px auto;
-  padding: 5px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  position: relative;
-  border: solid 1px #002E02;
-}
-/* line 72, ../sass/_cart.scss */
-.cart-wrapper .comp-title {
-  position: absolute;
-  top: -12px;
-  background-color: #FFF;
-  padding-right: 2px;
-  padding-left: 2px;
-}
-/* line 78, ../sass/_cart.scss */
-.cart-wrapper .comp-title p {
-  color: #002E02;
-  font-size: 18px;
-  font-style: italic;
-  font-weight: bold;
-}
-/* line 85, ../sass/_cart.scss */
-.cart-wrapper .comp-info {
-  font-size: 14px;
-  color: #002E02;
-  display: inline-block;
-  padding-right: 5px;
-}
-/* line 91, ../sass/_cart.scss */
-.cart-wrapper .item-info-footer {
-  width: 100px;
-  height: 30px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  display: table;
-}
-/* line 97, ../sass/_cart.scss */
-.cart-wrapper .item-info-footer p {
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-  color: #002E02;
-  font-weight: bold;
-  text-shadow: -2px 1px #97A778;
-}
-/* line 104, ../sass/_cart.scss */
+/* line 103, ../sass/_cart.scss */
 .cart-wrapper .cart-footer {
   background-color: silver;
   width: 100%;
@@ -798,12 +840,12 @@ header a {
   bottom: 0;
   box-shadow: 0px 0px 8px -2px #000;
 }
-/* line 110, ../sass/_cart.scss */
+/* line 109, ../sass/_cart.scss */
 .cart-wrapper .cart-footer section {
   float: right;
   margin-right: 5px;
 }
-/* line 115, ../sass/_cart.scss */
+/* line 114, ../sass/_cart.scss */
 .cart-wrapper .order-type-btn,
 .cart-wrapper .order-time-btn,
 .cart-wrapper .payment-method-btn {
@@ -813,25 +855,25 @@ header a {
   display: table;
   text-align: center;
 }
-/* line 122, ../sass/_cart.scss */
+/* line 121, ../sass/_cart.scss */
 .cart-wrapper .order-type-btn p.text,
 .cart-wrapper .order-time-btn p.text,
 .cart-wrapper .payment-method-btn p.text {
   font-size: 12px;
   font-weight: bold;
 }
-/* line 127, ../sass/_cart.scss */
+/* line 126, ../sass/_cart.scss */
 .cart-wrapper .cart-approve-cont {
   width: 85px;
   height: 100%;
 }
-/* line 130, ../sass/_cart.scss */
+/* line 129, ../sass/_cart.scss */
 .cart-wrapper .tot-price {
   width: 90%;
   height: 50%;
   display: table;
 }
-/* line 133, ../sass/_cart.scss */
+/* line 132, ../sass/_cart.scss */
 .cart-wrapper .tot-price p {
   display: table-cell;
   text-align: center;
@@ -841,14 +883,14 @@ header a {
   font-size: 22px;
 }
 
-/* line 141, ../sass/_cart.scss */
+/* line 140, ../sass/_cart.scss */
 .selection-cont {
   width: 85%;
   height: 85px;
   margin: 10px auto;
   box-shadow: 0px 0px 1px 0px #000;
 }
-/* line 145, ../sass/_cart.scss */
+/* line 144, ../sass/_cart.scss */
 .selection-cont .icon-cont,
 .selection-cont .type-cont {
   width: 50%;
@@ -856,7 +898,7 @@ header a {
   display: table;
   float: right;
 }
-/* line 150, ../sass/_cart.scss */
+/* line 149, ../sass/_cart.scss */
 .selection-cont .icon-cont p,
 .selection-cont .type-cont p {
   display: table-cell;
@@ -866,7 +908,7 @@ header a {
   font-size: 18px;
 }
 
-/* line 157, ../sass/_cart.scss */
+/* line 156, ../sass/_cart.scss */
 .time-cont {
   width: 160px;
   margin: 40px auto;
@@ -874,26 +916,26 @@ header a {
   font-size: 20px;
   color: #002E02;
 }
-/* line 163, ../sass/_cart.scss */
+/* line 162, ../sass/_cart.scss */
 .time-cont select {
   width: 70px;
   height: 30px;
   font-size: 20px;
 }
 
-/* line 169, ../sass/_cart.scss */
+/* line 168, ../sass/_cart.scss */
 #cart-approve {
   width: 90%;
   margin: 2px auto;
   margin-right: 5px;
 }
 
-/* line 174, ../sass/_cart.scss */
+/* line 173, ../sass/_cart.scss */
 #del-cont {
   height: 200px;
 }
 
-/* line 177, ../sass/_cart.scss */
+/* line 176, ../sass/_cart.scss */
 #item-delete {
   height: 120px;
   display: table;
@@ -901,7 +943,7 @@ header a {
   width: 80%;
   float: none;
 }
-/* line 183, ../sass/_cart.scss */
+/* line 182, ../sass/_cart.scss */
 #item-delete p {
   display: table-cell;
   text-align: center;
@@ -909,4 +951,58 @@ header a {
   color: #002E02;
   font-size: 18px;
   font-weight: bold;
+}
+
+/* line 190, ../sass/_cart.scss */
+.component {
+  width: 90%;
+  margin: 15px auto;
+  padding: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: relative;
+  border: solid 1px #002E02;
+}
+
+/* line 199, ../sass/_cart.scss */
+.comp-title {
+  position: absolute;
+  top: -12px;
+  background-color: #FFF;
+  padding-right: 2px;
+  padding-left: 2px;
+}
+/* line 205, ../sass/_cart.scss */
+.comp-title p {
+  color: #002E02;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: bold;
+}
+
+/* line 212, ../sass/_cart.scss */
+.comp-info {
+  font-size: 14px;
+  color: #002E02;
+  display: inline-block;
+  padding-right: 5px;
+}
+
+/* line 218, ../sass/_cart.scss */
+.item-info-footer {
+  width: 100px;
+  height: 30px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: table;
+}
+/* line 224, ../sass/_cart.scss */
+.item-info-footer p {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  color: #002E02;
+  font-weight: bold;
+  text-shadow: -2px 1px #97A778;
 }

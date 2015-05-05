@@ -4,7 +4,7 @@ var app = angular.module('myapp.order-approve', [
 
 app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', 'date', 'customer', function($scope, message, order_details, cart, date, customer){
 
-    var order_details_message = check_order_details();
+    var order_details_message;
     var order_type = '';
     var payment_method = '';
     var order_time = '';
@@ -13,6 +13,7 @@ app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', '
 
     $scope.cart_approved = function(){
 
+        order_details_message = check_order_details();
         if(cart.getSize() == 0) message.showMessage('עליך להוסיף פריט לסל על מנת להמשיך');
         else if(order_details_message.length != 0) message.showMessage(order_details_message);
         else{
@@ -22,13 +23,14 @@ app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', '
     };
 
     function send_ajax(order_info){
-        var url = base_url + '';
+        var url = base_url + '/make-order';
         $.ajax({
             url: url,
             type: 'POST',
             data: {data: order_info}
-        }).done(function(){
-
+        }).done(function(res){
+            if(res) console.log('true');
+            else console.log('false');
         });
 
     }

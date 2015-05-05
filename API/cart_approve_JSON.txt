@@ -2,7 +2,7 @@ function print(){
             console.log('Order-type: ' + order_type);
             console.log('Payment-method: ' + payment_method);
             console.log('Order-time: ' + order_time);
-            console.log('Date: ' + curr_date);
+            console.log('Date: ' + order_date);
             console.log('Customer-details: ');
             console.log('                  first_name   : ' + customer_details.first_name);
             console.log('                  last_name    : ' + customer_details.last_name);

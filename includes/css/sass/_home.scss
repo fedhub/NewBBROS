@@ -1,0 +1,32 @@
+.home-wrapper{
+  @include size(100%, 100%);
+  min-height: 100%;
+  .suggested-container{
+    @include size(97%, 60%);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .suggested-box{
+    @include size(40%, 90%);
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px;
+    margin-top: 15px;
+    box-shadow: 0px 0px 1px 0px #000;
+  }
+  .options-cont{
+    @include size(97%, 40%);
+    margin: 0 auto;
+    text-align: center;
+  }
+  .option-box{
+    @include size(27%, 70%);
+    display: inline-block;
+    vertical-align: middle;
+    margin: 1px;
+    margin-top: 25px;
+    box-shadow: 0px 0px 1px 0px #000;
+  }
+}
+
+

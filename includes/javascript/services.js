@@ -240,7 +240,7 @@ app.service('date', function(){
     };
 
     this.getDefaultTime = function(){
-        return curr_date.getHours()+':'+checkTime(curr_date.getMinutes())+':'+checkTime(curr_date.getSeconds());
+        return curr_date.getHours()+':'+checkTime(curr_date.getMinutes());
     };
 
     function checkTime(i) {
