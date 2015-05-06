@@ -2,7 +2,7 @@ var app = angular.module('myapp.last-orders', [
     'myapp.services'
 ]);
 
-app.controller('last-orders', ['$scope', 'customer', function($scope, customer){
+app.controller('last-orders', ['$scope', 'customer', 'cart', function($scope, customer, cart){
 
     var customer_details = customer.getDetails();
     var url = base_url + '/last-orders&phone_number='+customer_details.phone_number;
@@ -27,6 +27,16 @@ app.controller('last-orders', ['$scope', 'customer', function($scope, customer){
 
     $scope.close_info = function(){
         $info_lightbox.fadeOut();
+    };
+
+    $scope.add_to_cart = function(order_info){
+        var tot_price = 0;
+        for(var i = 0; i < order_info.my_cart.length; i++){
+            tot_price += order_info.my_cart[i].total_price;
+            cart.addFromLastOrders(order_info.my_cart[i]);
+        }
+        cart.setTotalPrice(tot_price);
+        window.location = '#/cart';
     };
 
 }]);

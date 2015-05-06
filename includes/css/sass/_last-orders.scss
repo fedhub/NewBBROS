@@ -10,7 +10,7 @@
   }
   .cart-item{
     @include size(100%, 40px);
-    margin-bottom: 10px;
+    margin-bottom: 1px;
     background-color: silver;
   }
   .title{
@@ -38,6 +38,49 @@
       text-shadow: -2px 1px $bg-color;
       font-size: 22px;
       text-align: left;
+    }
+  }
+  .labels-cont{
+    margin-top: 10px;
+    @include size(100%, 48px);
+  }
+  .add-to-cart{
+    @include size(42px,42px);
+    border: solid 3px #333;
+    border-radius: 100px;
+    display: inline-block;
+    vertical-align: middle;
+    p{
+      line-height: 42px;
+      padding-right: 7px;
+      padding-top: 1px;
+      font-size: 30px;
+    }
+  }
+  .order-date{
+    @include size(100px,42px);
+    border: solid 3px #333;
+    border-radius: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    p{
+      font-size: 22px;
+      line-height: 42px;
+      text-align: center;
+      color: #333;
+    }
+  }
+  .order-time{
+    @include size(100px,42px);
+    border: solid 3px #333;
+    border-radius: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    p{
+      font-size: 22px;
+      line-height: 42px;
+      text-align: center;
+      color: #333;
     }
   }
 }

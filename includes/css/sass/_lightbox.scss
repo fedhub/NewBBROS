@@ -76,7 +76,7 @@
     }
     .detail-input{
       @include size(56%, 100%);
-      input{
+      input, textarea{
         @include size(97%, 90%);
         margin-top: 2px;
       }

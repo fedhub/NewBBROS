@@ -76,7 +76,7 @@ html, body {
 .last-orders-wrapper .cart-item {
   width: 100%;
   height: 40px;
-  margin-bottom: 10px;
+  margin-bottom: 1px;
   background-color: silver;
 }
 /* line 16, ../sass/_last-orders.scss */
@@ -109,6 +109,228 @@ html, body {
   text-shadow: -2px 1px #97A778;
   font-size: 22px;
   text-align: left;
+}
+/* line 43, ../sass/_last-orders.scss */
+.last-orders-wrapper .labels-cont {
+  margin-top: 10px;
+  width: 100%;
+  height: 48px;
+}
+/* line 47, ../sass/_last-orders.scss */
+.last-orders-wrapper .add-to-cart {
+  width: 42px;
+  height: 42px;
+  border: solid 3px #333;
+  border-radius: 100px;
+  display: inline-block;
+  vertical-align: middle;
+}
+/* line 53, ../sass/_last-orders.scss */
+.last-orders-wrapper .add-to-cart p {
+  line-height: 42px;
+  padding-right: 7px;
+  padding-top: 1px;
+  font-size: 30px;
+}
+/* line 60, ../sass/_last-orders.scss */
+.last-orders-wrapper .order-date {
+  width: 100px;
+  height: 42px;
+  border: solid 3px #333;
+  border-radius: 20px;
+  display: inline-block;
+  vertical-align: middle;
+}
+/* line 66, ../sass/_last-orders.scss */
+.last-orders-wrapper .order-date p {
+  font-size: 22px;
+  line-height: 42px;
+  text-align: center;
+  color: #333;
+}
+/* line 73, ../sass/_last-orders.scss */
+.last-orders-wrapper .order-time {
+  width: 100px;
+  height: 42px;
+  border: solid 3px #333;
+  border-radius: 20px;
+  display: inline-block;
+  vertical-align: middle;
+}
+/* line 79, ../sass/_last-orders.scss */
+.last-orders-wrapper .order-time p {
+  font-size: 22px;
+  line-height: 42px;
+  text-align: center;
+  color: #333;
+}
+
+/* line 1, ../sass/_orders-library.scss */
+.orders-library-wrapper {
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  text-align: center;
+  background: rgba(151, 167, 120, 0.2);
+}
+/* line 13, ../sass/_orders-library.scss */
+.orders-library-wrapper .library-cont {
+  display: inline-block;
+  width: 155px;
+  margin-top: 5px;
+  height: 130px;
+  line-height: 130px;
+  text-shadow: -1px -1px 5px #222;
+  position: relative;
+}
+/* line 22, ../sass/_orders-library.scss */
+.orders-library-wrapper .name-cont {
+  height: 35px;
+  width: 87%;
+  margin: 0 auto;
+  background: rgba(51, 51, 51, 0.2);
+  position: absolute;
+  bottom: 13px;
+  right: 10px;
+  line-height: 35px;
+}
+/* line 31, ../sass/_orders-library.scss */
+.orders-library-wrapper .name-cont p {
+  font-size: 16px;
+  position: relative;
+  font-weight: bold;
+  vertical-align: middle;
+  color: rgba(51, 51, 51, 0.9);
+  text-shadow: none;
+}
+/* line 40, ../sass/_orders-library.scss */
+.orders-library-wrapper .adjust {
+  height: 120px;
+  line-height: 120px;
+}
+/* line 44, ../sass/_orders-library.scss */
+.orders-library-wrapper .options-cont {
+  width: 131px;
+  height: 43px;
+  position: absolute;
+  top: 35px;
+  right: 12px;
+  display: table;
+}
+/* line 52, ../sass/_orders-library.scss */
+.orders-library-wrapper .creation-date {
+  width: 47px;
+  height: 18px;
+  line-height: 18px;
+  position: absolute;
+  top: 13px;
+  right: 12px;
+}
+/* line 59, ../sass/_orders-library.scss */
+.orders-library-wrapper .creation-date p {
+  font-size: 11px;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: none;
+}
+/* line 67, ../sass/_orders-library.scss */
+.orders-library-wrapper .option {
+  display: table-cell;
+  border-radius: 100px;
+  line-height: 43px;
+  background: rgba(51, 51, 51, 0.2);
+}
+/* line 72, ../sass/_orders-library.scss */
+.orders-library-wrapper .option p {
+  vertical-align: middle;
+  text-align: center;
+  text-shadow: none;
+  font-size: 22px;
+}
+
+/* line 1, ../sass/_library.scss */
+.library-wrapper {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  background: rgba(151, 167, 120, 0.2);
+}
+/* line 6, ../sass/_library.scss */
+.library-wrapper .folder-header {
+  width: 50%;
+  height: 8%;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  border: 5px solid rgba(51, 51, 51, 0.9);
+  border-bottom: 0;
+  background-color: #C3C6BE;
+  top: 5px;
+  right: 5px;
+  z-index: 50;
+  margin-right: 3px;
+  margin-top: 5px;
+  display: table;
+}
+/* line 19, ../sass/_library.scss */
+.library-wrapper .folder-header p {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 18px;
+  font-weight: bold;
+}
+/* line 25, ../sass/_library.scss */
+.library-wrapper .folder-wrapper {
+  width: 95%;
+  height: 87%;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: 5px solid rgba(51, 51, 51, 0.9);
+  right: 5px;
+  box-shadow: 0px 0px 8px -2px green;
+  background: rgba(51, 51, 51, 0.2);
+  margin: 0 auto;
+}
+/* line 36, ../sass/_library.scss */
+.library-wrapper .details-cont {
+  width: 100%;
+  height: 15%;
+  background: rgba(0, 0, 0, 0.3);
+  display: table;
+}
+/* line 41, ../sass/_library.scss */
+.library-wrapper .description-cont {
+  width: 70%;
+  height: 100%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+/* line 48, ../sass/_library.scss */
+.library-wrapper .date-cont {
+  width: 30%;
+  height: 100%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+/* line 51, ../sass/_library.scss */
+.library-wrapper .date-cont p {
+  line-height: 26px;
+  font-size: 20px;
+}
+/* line 56, ../sass/_library.scss */
+.library-wrapper .creation-date {
+  width: 100%;
+  height: 50%;
+}
+/* line 59, ../sass/_library.scss */
+.library-wrapper .creation-time {
+  width: 100%;
+  height: 50%;
 }
 
 /* line 1, ../sass/_header.scss */
@@ -426,7 +648,7 @@ header a {
   height: 100%;
 }
 /* line 79, ../sass/_lightbox.scss */
-.lightbox .form .detail-input input {
+.lightbox .form .detail-input input, .lightbox .form .detail-input textarea {
   width: 97%;
   height: 90%;
   margin-top: 2px;

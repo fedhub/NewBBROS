@@ -2,6 +2,8 @@ var app = angular.module('myapp', [
     'myapp.header',
     'myapp.home',
     'myapp.last-orders',
+    'myapp.orders-library',
+    'myapp.library',
     'myapp.forms',
     'myapp.menu',
     'myapp.services',
@@ -22,6 +24,16 @@ app.config(['$routeProvider', function($routeProvider){
         .when('/last-orders',{
             templateUrl: 'partials/orders/last-orders.html',
             controller: 'last-orders',
+            resolve: { resolvedVal: function(){ return; }}}
+        )
+        .when('/orders-library',{
+            templateUrl: 'partials/orders/orders-library.html',
+            controller: 'orders-library',
+            resolve: { resolvedVal: function(){ return; }}}
+        )
+        .when('/library',{
+            templateUrl: 'partials/orders/library.html',
+            controller: 'library',
             resolve: { resolvedVal: function(){ return; }}}
         )
         .when('/menu-types',{

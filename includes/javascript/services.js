@@ -20,6 +20,38 @@ app.service('authentication', function(){
 
 });
 
+app.service('library', function(){
+
+    var is_new_library = false;
+    var new_library_name = '';
+    var new_library_description = '';
+
+    this.getIsNewLibrary = function(){
+        return is_new_library;
+    };
+
+    this.setIsNewLibrary = function(state){
+        is_new_library = state;
+    };
+
+    this.getNewLibraryName = function(){
+        return new_library_name;
+    };
+
+    this.setNewLibraryName = function(name){
+        new_library_name = name;
+    };
+
+    this.getNewLibraryDescription = function(){
+        return new_library_description;
+    };
+
+    this.setNewLibraryDescription = function(description){
+        new_library_description = description;
+    };
+
+});
+
 app.service('customer', function(){
 
     var details = {
@@ -130,6 +162,10 @@ app.service('cart', function(){
         my_cart.push(food_item);
     };
 
+    this.addFromLastOrders = function(last_order){
+        my_cart.push(last_order);
+    };
+
     this.calculatePrice = function(){
         var last_item = my_cart.length - 1;
         my_cart[last_item].total_price += my_cart[last_item].price;
@@ -161,6 +197,10 @@ app.service('cart', function(){
                 break;
             }
         }
+    };
+
+    this.setTotalPrice = function(price){
+        total_price += price;
     };
 
     this.getTotalPrice = function(){
