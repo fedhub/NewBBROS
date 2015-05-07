@@ -121,21 +121,24 @@
     content: "\e017";
     font-size: 20px;
 }
-.flaticon-shopping100:before {
+.flaticon-plus25:before {
     content: "\e018";
+}
+.flaticon-shopping100:before {
+    content: "\e019";
     color: #333;
 }
 .flaticon-shoppingcart14:before {
-	content: "\e019";
+	content: "\e01a";
     font-size: 31px;
     line-height: 130%;
 }
 .flaticon-symbol21:before {
-    content: "\e01a";
+    content: "\e01b";
     font-size: 30px;
 }
 .flaticon-two200:before {
-    content: "\e01b";
+    content: "\e01c";
     font-size: 60px;
     color: #333;
 }

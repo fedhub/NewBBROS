@@ -8,6 +8,14 @@
                 <section class="creation-time"><p>{{ time }}</p></section>
             </section>
         </section>
+        <section class="add-to-library" ng-click="add_to_library()"><p class="flaticon-plus25"></p></section>
+        <section class="library-item" ng-repeat="item in library">
+            <section class="name-cont"><p>{{ item.name }}</p></section>
+            <section class="add-to-cart-cont"><p class="flaticon-shopping100"></p></section>
+            <section class="info-cont"><p class="flaticon-info28"></p></section>
+            <section class="delete-cont"><p class="flaticon-delete96"></p></section>
+            <section class="price-cont"><p>{{item.total_price}} &#8362;</p></section>
+        </section>
     </section>
 </section>
 

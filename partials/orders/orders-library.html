@@ -25,14 +25,14 @@
     </section>
 
 
-    <section class="library-cont flaticon-file7" ng-click="enter_library()">
-        <section class="creation-date"><p>06.05.15</p></section>
+    <section class="library-cont flaticon-file7" ng-click="enter_library(library)" ng-repeat="library in libraries">
+        <section class="creation-date"><p>{{ library.creation_date }}</p></section>
         <section class="options-cont">
             <section class="option" ng-click="add_to_cart(); $event.stopPropagation();"><p class="flaticon-shopping100"></p></section>
             <section class="option" ng-click="edit_library_details(); $event.stopPropagation();"><p class="flaticon-edit45"></p></section>
             <section class="option" ng-click="delete_library(); $event.stopPropagation();"><p class="flaticon-delete96"></p></section>
         </section>
-        <section class="name-cont"><p>אחרי אימון</p></section>
+        <section class="name-cont"><p>{{ library.lib_name }}</p></section>
     </section>
 
     <section class="library-cont flaticon-folder15 adjust" ng-click="add_library()"></section>

@@ -60,7 +60,7 @@ app.controller('menu-items', ['$scope', '$routeParams', 'message', 'cart', funct
 
 }]);
 
-app.controller('menu-additions', ['$scope', '$routeParams', 'message', 'cart', 'authentication', function($scope, $routeParams, message, cart, authentication){
+app.controller('menu-additions', ['$scope', '$routeParams', 'message', 'cart', 'library', 'authentication', 'date', 'customer', function($scope, $routeParams, message, cart, library, authentication, date, customer){
 
     var type_id = $routeParams.menu_type_id;
     var item_id = $routeParams.menu_item_id;
@@ -107,13 +107,13 @@ app.controller('menu-additions', ['$scope', '$routeParams', 'message', 'cart', '
             message.showMessage(msg);
         else{
             if(!authentication.isConnected()) $scope.form_request('log-in');
-            else updateCart(cart, additions);
+            else updateCart(cart, additions, library, date, customer, message);
         }
     }
 
 }]);
 
-function updateCart(cart, additions){
+function updateCart(cart, additions, library, date, customer, message){
     var cart_item_additions = [];
     $.each( $('.additions-type-container'), function(){
         var type_id = $(this).attr('id');
@@ -141,7 +141,34 @@ function updateCart(cart, additions){
     });
     cart.addToCart(cart_item_additions);
     cart.setLock(false);
-    window.location = '#/cart';
+    if(library.getIsLibrary()){
+        library_item_ajax(cart, library, date, customer, message);
+    }
+    else window.location = '#/cart';
+}
+
+function library_item_ajax(cart, library, date, customer, message){
+    cart.calculatePrice();
+    var library_item_info = {
+        library_id: library.getLibraryID(),
+        creation_date: date.getFullDate(),
+        creation_time: date.getDefaultTime(),
+        phone_number: customer.getPhoneNumber(),
+        item_json: JSON.stringify(cart.getMyCart())
+    };
+    var url = base_url + '/add-library-item';
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {data: JSON.stringify(library_item_info)}
+    }).done(function(res){
+        if(!res) message.showMessage('הייתה בעיה בהוספת הפריט אל ספריית ההזמנות, אנא נסה שוב מאוחר יותר');
+        else{
+            library.setIsLibrary(false);
+            cart.resetCart();
+            window.location = '#/library';
+        }
+    });
 }
 
 function getAdditions(menu_additions){

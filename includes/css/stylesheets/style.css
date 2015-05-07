@@ -332,6 +332,76 @@ html, body {
   width: 100%;
   height: 50%;
 }
+/* line 62, ../sass/_library.scss */
+.library-wrapper .add-to-library {
+  width: 90%;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.3);
+  margin: 10px auto;
+  border-radius: 5px;
+  box-shadow: 0px 0px 1px 0px #000;
+  display: table;
+}
+/* line 69, ../sass/_library.scss */
+.library-wrapper .add-to-library p {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 25px;
+  color: #333;
+}
+/* line 75, ../sass/_library.scss */
+.library-wrapper .library-item {
+  width: 90%;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.3);
+  margin: 10px auto;
+  border-radius: 5px;
+  box-shadow: 0px 0px 1px 0px #000;
+  display: table;
+}
+/* line 82, ../sass/_library.scss */
+.library-wrapper .library-item section {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+/* line 85, ../sass/_library.scss */
+.library-wrapper .library-item p {
+  font-size: 15px;
+  color: #333;
+}
+/* line 90, ../sass/_library.scss */
+.library-wrapper .name-cont {
+  width: 45%;
+}
+/* line 92, ../sass/_library.scss */
+.library-wrapper .name-cont p {
+  font-size: 15px;
+  font-weight: bold;
+}
+/* line 97, ../sass/_library.scss */
+.library-wrapper .add-to-cart-cont {
+  width: 10%;
+}
+/* line 100, ../sass/_library.scss */
+.library-wrapper .info-cont {
+  width: 10%;
+}
+/* line 103, ../sass/_library.scss */
+.library-wrapper .delete-cont {
+  width: 10%;
+}
+/* line 106, ../sass/_library.scss */
+.library-wrapper .price-cont {
+  width: 15%;
+}
+/* line 109, ../sass/_library.scss */
+.library-wrapper .add-to-cart-cont p,
+.library-wrapper .info-cont p,
+.library-wrapper .delete-cont p {
+  font-size: 22px;
+}
 
 /* line 1, ../sass/_header.scss */
 header {

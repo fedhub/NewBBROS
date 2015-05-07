@@ -22,32 +22,26 @@ app.service('authentication', function(){
 
 app.service('library', function(){
 
-    var is_new_library = false;
-    var new_library_name = '';
-    var new_library_description = '';
+    var library;
+    var is_library = false;
 
-    this.getIsNewLibrary = function(){
-        return is_new_library;
+    this.setLibrary = function(lib){
+        library = lib;
     };
 
-    this.setIsNewLibrary = function(state){
-        is_new_library = state;
+    this.getLibrary = function(){
+        return library;
+    };
+    this.getLibraryID = function(){
+        return library.id;
     };
 
-    this.getNewLibraryName = function(){
-        return new_library_name;
+    this.setIsLibrary = function(state){
+        is_library = state;
     };
 
-    this.setNewLibraryName = function(name){
-        new_library_name = name;
-    };
-
-    this.getNewLibraryDescription = function(){
-        return new_library_description;
-    };
-
-    this.setNewLibraryDescription = function(description){
-        new_library_description = description;
+    this.getIsLibrary = function(){
+        return is_library;
     };
 
 });
@@ -78,7 +72,11 @@ app.service('customer', function(){
 
     this.getDetails = function(){
         return details;
-    }
+    };
+
+    this.getPhoneNumber = function(){
+        return details.phone_number;
+    };
 
 });
 
@@ -114,13 +112,17 @@ app.service('message', function(){
 });
 
 // Cart
-app.service('cart', function(){
+app.service('cart', ['library', function(library){
 
     var my_cart = [];
     var food_item = {};
     var additions = [];
     var total_price = 0;
     var lock = true;
+
+    this.resetCart = function(){
+        my_cart = [];
+    };
 
     this.getSize = function(){
         return my_cart.length;
@@ -174,7 +176,7 @@ app.service('cart', function(){
                 my_cart[last_item].total_price += my_cart[last_item].addition_types[j].addition_items[k].price;
             }
         }
-        total_price += my_cart[last_item].total_price;
+        if(!library.getIsLibrary()) total_price += my_cart[last_item].total_price;
     };
 
     this.print = function(){
@@ -211,7 +213,7 @@ app.service('cart', function(){
         return my_cart;
     };
 
-});
+}]);
 
 app.service('order_details', function(){
 
