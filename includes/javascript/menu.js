@@ -140,21 +140,26 @@ function updateCart(cart, additions, library, date, customer, message){
         }
     });
     cart.addToCart(cart_item_additions);
-    cart.setLock(false);
     if(library.getIsLibrary()){
+        var tmp_cart = cart.getMyCart();
+        cart.setLibraryItem(tmp_cart[tmp_cart.length - 1]);
+        cart.removeLibraryItem();
         library_item_ajax(cart, library, date, customer, message);
     }
-    else window.location = '#/cart';
+    else{
+        cart.setLock(false);
+        window.location = '#/cart';
+    }
 }
 
 function library_item_ajax(cart, library, date, customer, message){
-    cart.calculatePrice();
+    cart.calLibItemTotPrice();
     var library_item_info = {
         library_id: library.getLibraryID(),
         creation_date: date.getFullDate(),
         creation_time: date.getDefaultTime(),
         phone_number: customer.getPhoneNumber(),
-        item_json: JSON.stringify(cart.getMyCart())
+        item_json: JSON.stringify(cart.getLibraryItem())
     };
     var url = base_url + '/add-library-item';
     $.ajax({
@@ -165,7 +170,6 @@ function library_item_ajax(cart, library, date, customer, message){
         if(!res) message.showMessage('הייתה בעיה בהוספת הפריט אל ספריית ההזמנות, אנא נסה שוב מאוחר יותר');
         else{
             library.setIsLibrary(false);
-            cart.resetCart();
             window.location = '#/library';
         }
     });

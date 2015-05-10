@@ -1,9 +1,9 @@
 <section class="orders-library-wrapper">
 
-    <section id="add_library" class="lightbox">
+    <section id="add_library" class="lightbox" data="form_action">
         <section class="container" id="add_library_cont">
-            <section class="close" ng-click="close_add_library()"><p class="flaticon-close32"></p></section>
-            <section class="title"><p>יצירת ספריה חדשה</p></section>
+            <section class="close" ng-click="close_library_details()"><p class="flaticon-close32"></p></section>
+            <section class="title"><p>{{ title }}</p></section>
             <section class="content">
                 <form class="form" id="new_library_form">
                     <section class="form-item" id="library_name">
@@ -19,8 +19,19 @@
                         <section class="validation"><p></p></section>
                     </section>
                 </form>
-                <section class="approve" id="library_approval" ng-click="approve_library()"><p>אישור</p></section>
+                <section class="approve" id="library_approval" ng-click="approve_library_details(form_action)"><p>אישור</p></section>
             </section>
+        </section>
+    </section>
+
+    <section id="delete-item" class="lightbox" data="library">
+        <section class="container" id="del-cont">
+            <section class="close" ng-click="close_delete_window()"><p class="flaticon-close32"></p></section>
+            <section class="title"><p>מחיקת ספרייה</p></section>
+            <section class="content" id="item-delete">
+                <p>מחיקת הספרייה תגרור מחיקת כל הפריטים שבספרייה גם כן, האם לבצע את המחיקה?</p>
+            </section>
+            <section class="approve" id="del-approval" ng-click="deletion_approved(library)"><p>אישור</p></section>
         </section>
     </section>
 
@@ -28,9 +39,9 @@
     <section class="library-cont flaticon-file7" ng-click="enter_library(library)" ng-repeat="library in libraries">
         <section class="creation-date"><p>{{ library.creation_date }}</p></section>
         <section class="options-cont">
-            <section class="option" ng-click="add_to_cart(); $event.stopPropagation();"><p class="flaticon-shopping100"></p></section>
-            <section class="option" ng-click="edit_library_details(); $event.stopPropagation();"><p class="flaticon-edit45"></p></section>
-            <section class="option" ng-click="delete_library(); $event.stopPropagation();"><p class="flaticon-delete96"></p></section>
+            <section class="option" ng-click="add_to_cart(library); $event.stopPropagation();"><p class="flaticon-shopping100"></p></section>
+            <section class="option" ng-click="edit_library_details(library); $event.stopPropagation();"><p class="flaticon-edit45"></p></section>
+            <section class="option" ng-click="delete_library(library); $event.stopPropagation();"><p class="flaticon-delete96"></p></section>
         </section>
         <section class="name-cont"><p>{{ library.lib_name }}</p></section>
     </section>

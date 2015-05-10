@@ -2,21 +2,45 @@ var app = angular.module('myapp.library', [
     'myapp.services'
 ]);
 
-app.controller('library', ['$scope', '$routeParams', 'library', 'cart', 'message', 'date', function($scope, $routeParams, library, cart, message, date){
+app.controller('library', ['$scope', '$routeParams', 'library', 'cart', 'message', 'date', 'customer', function($scope, $routeParams, library, cart, message, date, customer){
 
-
-    //if(cart.getSize() > 0){
-    //    console.log('cart length: ' + cart.getSize());
-    //    print(cart.getMyCart());
-    //}
+    var $info_lightbox = $('#cart-item-info');
+    var $delete_lightbox = $('#delete-item');
 
     library.setIsLibrary(false);
     var lib = library.getLibrary();
+
     library_items_ajax($scope, message, lib);
 
     $scope.add_to_library = function(){
         library.setIsLibrary(true);
         window.location = '#/menu-types';
+    };
+    $scope.info = function(item){
+        $info_lightbox.fadeIn();
+        $scope.item = item;
+    };
+    $scope.close_info = function(){
+        $info_lightbox.fadeOut();
+    };
+    $scope.add_item_to_cart = function(item){
+        cart.add(item);
+        cart.updateTotalPrice(item.total_price);
+        window.location = '#/cart';
+    };
+    $scope.delete_item = function(item_id){
+        $delete_lightbox.fadeIn();
+        $scope.item_id = item_id;
+    };
+    $scope.deletion_approved = function(item_id){
+        var lib = library.getLibrary();
+        var lib_id = lib.id;
+        var phone_number = customer.getPhoneNumber();
+        delete_item_ajax($scope, item_id, lib_id, phone_number, message);
+        $delete_lightbox.fadeOut();
+    };
+    $scope.close_delete_window = function(){
+        $delete_lightbox.fadeOut();
     };
 
 }]);
@@ -45,11 +69,43 @@ function library_items_ajax($scope, message, lib){
                 var lib_items = [];
                 for(var i = 0; i < res.length; i++){
                     res[i].item_json = JSON.parse(res[i].item_json);
-                    lib_items.push(res[i].item_json[0]);
+                    lib_items.push(res[i]);
                 }
                 $scope.library = lib_items;
             }
             $scope.$apply();
+        }
+    });
+}
+
+function delete_item_ajax($scope, item_id, lib_id, phone_number, message){
+    var url = base_url + '/delete-from-library';
+    var info = {
+        id: item_id,
+        library_id: lib_id,
+        phone_number: phone_number
+    };
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {data: JSON.stringify(info)}
+    }).done(function(res){
+        if(res == false) message.showMessage('הייתה בעיה במחיקת הפריט מהספרייה, אנא נסה שוב מאוחר יותר');
+        else{
+            if(res != 'empty'){
+                var lib_items = [];
+                for(var i = 0; i < res.length; i++){
+                    res[i].item_json = JSON.parse(res[i].item_json);
+                    lib_items.push(res[i]);
+                }
+                $scope.library = lib_items;
+                $scope.$apply();
+            }
+            else {
+                $scope.library = [];
+                $scope.$apply();
+            }
+
         }
     });
 }

@@ -33,7 +33,7 @@ app.controller('last-orders', ['$scope', 'customer', 'cart', function($scope, cu
         var tot_price = 0;
         for(var i = 0; i < order_info.my_cart.length; i++){
             tot_price += order_info.my_cart[i].total_price;
-            cart.addFromLastOrders(order_info.my_cart[i]);
+            cart.add(order_info.my_cart[i]);
         }
         cart.setTotalPrice(tot_price);
         window.location = '#/cart';

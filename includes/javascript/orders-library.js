@@ -4,18 +4,39 @@ var app = angular.module('myapp.orders-library', [
 
 app.controller('orders-library', ['$scope', 'cart', 'message', 'library', 'date', 'customer', function($scope, cart, message, library, date, customer){
 
-    var $add_library_lightbox = $('#add_library');
+    var $library_details_lightbox = $('#add_library');
+    var $delete_lightbox = $('#delete-item');
+
+    var tmp_lib_name = '';
+    var tmp_lib_desc = '';
+    var lib_id;
 
     get_libraries_ajax($scope, message, customer.getPhoneNumber());
 
-    $scope.add_to_cart = function(){
-        alert('add to cart');
+    $scope.add_to_cart = function(lib){
+        add_to_cart_ajax(lib, message, cart);
     };
-    $scope.edit_library_details = function(){
-        alert('edit cart details');
+    $scope.edit_library_details = function(lib){
+        $scope.title = 'עריכת פרטי הספרייה';
+        $scope.form_action = 'library-details';
+        $('.orders-library-wrapper input').val(lib.lib_name);
+        $('.orders-library-wrapper textarea').val(lib.lib_description);
+        tmp_lib_name = lib.lib_name;
+        tmp_lib_desc = lib.lib_description;
+        lib_id = lib.id;
+        $library_details_lightbox.fadeIn();
     };
-    $scope.delete_library = function(){
-        alert('delete from cart');
+    $scope.delete_library = function(lib){
+        $delete_lightbox.fadeIn();
+        $scope.library = lib;
+    };
+    $scope.deletion_approved = function(lib){
+        var phone_number = customer.getPhoneNumber();
+        delete_library_ajax($scope, lib, phone_number, message);
+        $delete_lightbox.fadeOut();
+    };
+    $scope.close_delete_window = function(){
+        $delete_lightbox.fadeOut();
     };
 
     $scope.enter_library = function(lib){
@@ -25,23 +46,42 @@ app.controller('orders-library', ['$scope', 'cart', 'message', 'library', 'date'
 
     // open the new library lightbox
     $scope.add_library = function(){
-        $add_library_lightbox.fadeIn();
+        $('.orders-library-wrapper input').val('');
+        $('.orders-library-wrapper textarea').val('');
+        $scope.title = 'הוספת ספרייה חדשה';
+        $scope.form_action = 'add-library';
+        $library_details_lightbox.fadeIn();
     };
 
     // close the new library lightbox
-    $scope.close_add_library = function(){
-        $add_library_lightbox.fadeOut();
+    $scope.close_library_details = function(){
+        $library_details_lightbox.fadeOut();
     };
 
     // clicks ok to add the new library
-    $scope.approve_library = function(){
-        var $lib_name = $('#library_name input').val();
-        var $lib_description = $('#library_description textarea').val();
-        if($lib_name.length == 0) message.showMessage('עליך לתת שם לספריה');
-        else{
-            var lib_details = new_lib_json(customer.getPhoneNumber(), $lib_name, $lib_description, date.getFullDate(), date.getDefaultTime());
-            new_lib_ajax($scope, lib_details, message);
-            $add_library_lightbox.fadeOut();
+    $scope.approve_library_details = function(form_action){
+        if(form_action == 'add-library'){
+            var $lib_name = $('#library_name input').val();
+            var $lib_description = $('#library_description textarea').val();
+            if($lib_name.length == 0) message.showMessage('עליך לתת שם לספריה');
+            else{
+                var lib_details = new_lib_json(customer.getPhoneNumber(), $lib_name, $lib_description, date.getFullDate(), date.getDefaultTime());
+                new_lib_ajax($scope, lib_details, message);
+                $library_details_lightbox.fadeOut();
+            }
+        }
+        if(form_action == 'library-details'){
+            var new_lib_name = $('.orders-library-wrapper input').val();
+            var new_lib_desc = $('.orders-library-wrapper textarea').val();
+
+            console.log(new_lib_name);
+            console.log(new_lib_desc);
+
+            if(new_lib_desc == tmp_lib_desc && new_lib_name == tmp_lib_name) message.showMessage('לא התבצעו שינויים');
+            else{
+                edit_library_ajax(lib_id, customer.getPhoneNumber(), new_lib_name, new_lib_desc, message, $scope);
+                $library_details_lightbox.fadeOut();
+            }
         }
     };
 
@@ -84,4 +124,73 @@ function new_lib_json(phone_number, lib_name, lib_desc, date, time){
         creation_date: date,
         creation_time: time
     }
+}
+
+function add_to_cart_ajax(lib, message, cart){
+    var url = base_url + '/library-items&library_id='+lib.id;
+    $.ajax({
+        url: url,
+        type: 'POST'
+    }).done(function(res){
+        if(res == false) message.showMessage('הייתה בעיה בהוספת הפריטים לסל, אנא נסה שוב מאוחר יותר');
+        else{
+            // API -- response from library_items (mobile_order_functions.js)
+            //var library_item_info = {
+            //    library_id: library.getLibraryID(),
+            //    creation_date: date.getFullDate(),
+            //    creation_time: date.getDefaultTime(),
+            //    phone_number: customer.getPhoneNumber(),
+            //    item_json: JSON.stringify(cart.getMyCart()) // 1 sized array
+            //};
+            if(res != 'empty'){
+                for(var i = 0; i < res.length; i++){
+                    res[i].item_json = JSON.parse(res[i].item_json);
+                    cart.updateTotalPrice(res[i].item_json.total_price);
+                    cart.add(res[i].item_json);
+                }
+                window.location = '#/cart';
+            }
+        }
+    });
+}
+
+function edit_library_ajax(lib_id, phone_num, name, desc, message, $scope){
+    var url = base_url + '/update-library';
+    var lib_data = {
+        lib_id: lib_id,
+        phone_number: phone_num,
+        lib_name: name,
+        lib_description: desc
+    };
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {data: JSON.stringify(lib_data)}
+    }).done(function(res){
+        if(res == false) message.showMessage('הייתה בעיה בעדכון פרטי הספרייה, אנא נסה שוב מאוחר יותר');
+        else{
+            $scope.libraries = res;
+            $scope.$apply();
+        }
+    });
+}
+
+function delete_library_ajax($scope, lib, phone_number, message){
+    var url = base_url + '/delete-library';
+    var info = {
+        lib_id: lib.id,
+        phone_number: phone_number
+    };
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {data: JSON.stringify(info)}
+    }).done(function(res){
+        if(res == false) message.showMessage('הייתה בעיה עם מחיקת הספרייה, אנא נסה שוב מאוחר יותר');
+        else{
+            if(res != 'empty') $scope.libraries = res;
+            else $scope.libraries = [];
+            $scope.$apply();
+        }
+    });
 }

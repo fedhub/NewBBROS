@@ -117,6 +117,7 @@ app.service('cart', ['library', function(library){
     var my_cart = [];
     var food_item = {};
     var additions = [];
+    var library_item;
     var total_price = 0;
     var lock = true;
 
@@ -164,8 +165,13 @@ app.service('cart', ['library', function(library){
         my_cart.push(food_item);
     };
 
-    this.addFromLastOrders = function(last_order){
-        my_cart.push(last_order);
+    this.add = function(item){
+        my_cart.push(item);
+    };
+
+    // when inside library and adding item to cart
+    this.updateTotalPrice = function(price){
+        total_price += price;
     };
 
     this.calculatePrice = function(){
@@ -177,6 +183,15 @@ app.service('cart', ['library', function(library){
             }
         }
         if(!library.getIsLibrary()) total_price += my_cart[last_item].total_price;
+    };
+
+    this.calLibItemTotPrice = function(){
+        library_item.total_price += library_item.price;
+        for(var j = 0; j < library_item.addition_types.length; j++){
+            for(var k = 0; k < library_item.addition_types[j].addition_items.length; k++){
+                library_item.total_price += library_item.addition_types[j].addition_items[k].price;
+            }
+        }
     };
 
     this.print = function(){
@@ -199,6 +214,18 @@ app.service('cart', ['library', function(library){
                 break;
             }
         }
+    };
+
+    this.setLibraryItem = function(item){
+        library_item = item;
+    };
+
+    this.getLibraryItem = function(){
+        return library_item;
+    };
+
+    this.removeLibraryItem = function(){
+        my_cart.splice((my_cart.length-1), 1);
     };
 
     this.setTotalPrice = function(price){
