@@ -4,10 +4,14 @@ $(document).ready(function(){
         $('#lightbox').fadeOut();
     });
 
+    $('#close-type').click(function(){
+        $('#customer-type').fadeOut();
+    });
+
     // INPUT CHECKS
 
     // first-name, last-name, email, street, house-number, floor, enter
-    $('.wrapper').on('keyup', '#first-name input, #last-name input, #email input, #street, #house-number, #floor, #enter', function(event){
+    $('.wrapper').on('keyup', '#first-name input, #last-name input, #email input, #street, #house-number, #floor, #enter, #password', function(event){
         var regex;
         var id = $(event.target).parent().parent().attr('id');
         var $val = $('#'+id+' input').val();
@@ -25,6 +29,7 @@ $(document).ready(function(){
             if($val.length == 2) regex = /^[1-4][1-9]/;
         }
         if(id == 'enter') regex = /^[a-iA-I0-9א-ט\s]+$/;
+        if(id == 'password') regex = /^[a-zA-Zא-ת0-9@$*&!^%#]+$/;
         if(regex.test($val)) validation($p, true);
         else validation($p, false);
     });

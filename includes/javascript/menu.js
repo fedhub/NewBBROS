@@ -83,7 +83,6 @@ app.controller('menu-additions', ['$scope', '$routeParams', 'message', 'cart', '
             $scope.additions = additions;
             $scope.$apply();
             $.each( $('.menu-additions-wrapper').find('.image'), function(i) {
-                //alert(menu_items[i].image_name);
                 $(this).css({
                     "background": "url('"+base_url+'/images/'+menu_additions[i].image+"') no-repeat",
                     "background-size": "contain",

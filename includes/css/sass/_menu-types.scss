@@ -22,6 +22,8 @@
       text-shadow: -1px 1px $bg-color;
       color: $txt-color;
       font-size: 16px;
+      background-color: rgba(green, 0.2);
+      box-shadow: 2px 25px 50px 0px rgba(green, 0.5);
     }
   }
 }

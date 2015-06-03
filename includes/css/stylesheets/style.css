@@ -418,24 +418,25 @@ header .bottom-header {
   width: 100%;
   height: 52%;
   background-color: #97A778;
+  box-shadow: 0 0 1px 1px rgba(51, 51, 51, 0.9);
 }
-/* line 11, ../sass/_header.scss */
+/* line 12, ../sass/_header.scss */
 header .logo {
   float: right;
   width: 150px;
   height: 100%;
-  background: url("http://www.best-biss.com/images/mobile_logo.png") no-repeat;
+  background: url("http://localhost:3000/images/mobile_logo.png") no-repeat;
   background-size: contain;
   background-position: center center;
 }
-/* line 16, ../sass/_header.scss */
+/* line 17, ../sass/_header.scss */
 header .title {
   float: left;
   display: table;
   width: 120px;
   height: 100%;
 }
-/* line 20, ../sass/_header.scss */
+/* line 21, ../sass/_header.scss */
 header .title p {
   display: table-cell;
   text-align: center;
@@ -446,48 +447,48 @@ header .title p {
   font-style: italic;
   font-size: 18px;
 }
-/* line 29, ../sass/_header.scss */
+/* line 30, ../sass/_header.scss */
 header .hamburger {
   float: left;
   width: 50px;
   height: 100%;
 }
-/* line 33, ../sass/_header.scss */
+/* line 34, ../sass/_header.scss */
 header .container {
   width: 80%;
   height: 90%;
   margin: 0 auto;
   overflow: hidden;
 }
-/* line 37, ../sass/_header.scss */
+/* line 38, ../sass/_header.scss */
 header .container.rotate-right {
   transform: rotate(360deg);
   -webkit-transform: rotate(360deg);
 }
-/* line 41, ../sass/_header.scss */
+/* line 42, ../sass/_header.scss */
 header .container.rotate-left {
   transform: rotate(0deg);
   -webkit-transform: rotate(0deg);
 }
-/* line 45, ../sass/_header.scss */
+/* line 46, ../sass/_header.scss */
 header .container.rotate-right, header .container.rotate-left {
   -webkit-transition-property: -webkit-transform;
   transition-property: transform;
   -webkit-transition-duration: .40s;
   transition-duration: .40s;
 }
-/* line 53, ../sass/_header.scss */
+/* line 54, ../sass/_header.scss */
 header nav {
   width: 100%;
   height: 100%;
 }
-/* line 56, ../sass/_header.scss */
+/* line 57, ../sass/_header.scss */
 header ul {
   width: 100%;
   height: 100%;
   display: table;
 }
-/* line 60, ../sass/_header.scss */
+/* line 61, ../sass/_header.scss */
 header li {
   width: 20%;
   height: 100%;
@@ -496,7 +497,7 @@ header li {
   vertical-align: middle;
   color: #002E02;
 }
-/* line 65, ../sass/_header.scss */
+/* line 66, ../sass/_header.scss */
 header a {
   display: block;
   text-decoration: none;
@@ -507,18 +508,18 @@ header a {
 }
 
 @media only screen and (min-width: 415px) and (max-width: 736px) {
-  /* line 84, ../sass/_header.scss */
+  /* line 85, ../sass/_header.scss */
   header {
     background-color: green;
   }
 }
 @media only screen and (min-width: 737px) and (max-width: 1024px) {
-  /* line 90, ../sass/_header.scss */
+  /* line 91, ../sass/_header.scss */
   header {
     background-color: blue;
   }
 }
-/* line 95, ../sass/_header.scss */
+/* line 96, ../sass/_header.scss */
 .cart-size {
   display: none;
   width: 15px;
@@ -531,7 +532,7 @@ header a {
   background-color: #FFA500;
   box-shadow: 0px 0px 8px -2px #000;
 }
-/* line 105, ../sass/_header.scss */
+/* line 106, ../sass/_header.scss */
 .cart-size p {
   line-height: 16px;
   padding-right: 2px;
@@ -644,21 +645,25 @@ header a {
   width: 28px;
   height: 30px;
   display: table;
-  float: right;
+  position: absolute;
+  top: -15px;
+  right: -14px;
+  background-color: white;
+  border-radius: 100px;
 }
-/* line 20, ../sass/_lightbox.scss */
+/* line 24, ../sass/_lightbox.scss */
 .lightbox .close p {
   display: table-cell;
   vertical-align: middle;
 }
-/* line 25, ../sass/_lightbox.scss */
+/* line 29, ../sass/_lightbox.scss */
 .lightbox .title {
   float: right;
   display: table;
-  width: 220px;
+  width: 100%;
   height: 33px;
 }
-/* line 29, ../sass/_lightbox.scss */
+/* line 33, ../sass/_lightbox.scss */
 .lightbox .title p {
   display: table-cell;
   text-align: center;
@@ -669,78 +674,78 @@ header a {
   font-style: italic;
   font-size: 18px;
 }
-/* line 38, ../sass/_lightbox.scss */
+/* line 42, ../sass/_lightbox.scss */
 .lightbox .content {
   width: 100%;
   height: 307px;
   float: right;
 }
-/* line 53, ../sass/_lightbox.scss */
+/* line 57, ../sass/_lightbox.scss */
 .lightbox .form {
   width: 90%;
   margin: 0 auto;
 }
-/* line 56, ../sass/_lightbox.scss */
+/* line 60, ../sass/_lightbox.scss */
 .lightbox .form .form-item {
   width: 100%;
   height: 28px;
 }
-/* line 58, ../sass/_lightbox.scss */
+/* line 62, ../sass/_lightbox.scss */
 .lightbox .form .form-item section {
   float: right;
   display: table;
 }
-/* line 63, ../sass/_lightbox.scss */
+/* line 67, ../sass/_lightbox.scss */
 .lightbox .form .required {
   width: 4%;
   height: 100%;
 }
-/* line 65, ../sass/_lightbox.scss */
+/* line 69, ../sass/_lightbox.scss */
 .lightbox .form .required p {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
 }
-/* line 69, ../sass/_lightbox.scss */
+/* line 73, ../sass/_lightbox.scss */
 .lightbox .form .detail-label {
   width: 32%;
   height: 100%;
 }
-/* line 71, ../sass/_lightbox.scss */
+/* line 75, ../sass/_lightbox.scss */
 .lightbox .form .detail-label p {
   font-size: 14px;
   display: table-cell;
   vertical-align: middle;
 }
-/* line 77, ../sass/_lightbox.scss */
+/* line 81, ../sass/_lightbox.scss */
 .lightbox .form .detail-input {
   width: 56%;
   height: 100%;
 }
-/* line 79, ../sass/_lightbox.scss */
+/* line 83, ../sass/_lightbox.scss */
 .lightbox .form .detail-input input, .lightbox .form .detail-input textarea {
   width: 97%;
   height: 90%;
   margin-top: 2px;
 }
-/* line 84, ../sass/_lightbox.scss */
+/* line 88, ../sass/_lightbox.scss */
 .lightbox .form .validation {
   width: 8%;
   height: 100%;
 }
-/* line 86, ../sass/_lightbox.scss */
+/* line 90, ../sass/_lightbox.scss */
 .lightbox .form .validation p {
   font-size: 14px;
   display: table-cell;
   text-align: center;
   vertical-align: middle;
 }
-/* line 92, ../sass/_lightbox.scss */
+/* line 96, ../sass/_lightbox.scss */
 .lightbox .indirect {
   display: none;
 }
 
-/* line 97, ../sass/_lightbox.scss */
+/* line 101, ../sass/_lightbox.scss */
 .approve {
   width: 70px;
   height: 25px;
@@ -749,12 +754,47 @@ header a {
   box-shadow: 0px 0px 8px -2px #000;
   display: table;
 }
-/* line 103, ../sass/_lightbox.scss */
+/* line 107, ../sass/_lightbox.scss */
 .approve p {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
   color: #FFF;
+}
+
+/* line 114, ../sass/_lightbox.scss */
+#customer-type .container {
+  width: 120px;
+  height: 150px;
+  background-color: #FFF;
+  margin: 0 auto;
+  box-shadow: 0px 0px 8px -2px #000;
+  border: 1px solid #B6B6B6;
+  margin-top: 30%;
+  position: relative;
+}
+/* line 123, ../sass/_lightbox.scss */
+#customer-type .type-cont {
+  width: 90%;
+  height: 40%;
+  margin: 10px auto;
+  box-shadow: 0 0 1px 1px rgba(51, 51, 51, 0.5);
+  display: table;
+}
+/* line 128, ../sass/_lightbox.scss */
+#customer-type .type-cont p {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  color: rgba(51, 51, 51, 0.8);
+  font-size: 15px;
+}
+/* line 135, ../sass/_lightbox.scss */
+#customer-type #close-type {
+  position: absolute;
+  top: -25px;
+  right: -20px;
 }
 
 /* line 1, ../sass/_screen-message.scss */
@@ -819,6 +859,8 @@ header a {
   text-shadow: -1px 1px #97A778;
   color: #002E02;
   font-size: 16px;
+  background-color: rgba(0, 128, 0, 0.2);
+  box-shadow: 2px 25px 50px 0px rgba(0, 128, 0, 0.5);
 }
 
 /* line 1, ../sass/_menu-items.scss */

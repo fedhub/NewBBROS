@@ -6,12 +6,13 @@ header{
   .bottom-header{
     @include size(100%, 52%);
     background-color: $bg-color;
+    box-shadow: 0 0 1px 1px rgba(#333, 0.9);
   }
   ////////// top header
   .logo{
     float: right;
     @include size(150px, 100%);
-    @include background-image('http://www.best-biss.com/images/mobile_logo.png');
+    @include background-image('http://localhost:3000/images/mobile_logo.png');
   }
   .title{
     float: left;

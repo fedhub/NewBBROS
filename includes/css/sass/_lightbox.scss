@@ -16,7 +16,11 @@
   .close{
     @include size(28px, 30px);
     display: table;
-    float: right;
+    position: absolute;
+    top: -15px;
+    right: -14px;
+    background-color: rgba(#fff, 1);
+    border-radius: 100px;
     p{
       display: table-cell;
       vertical-align: middle;
@@ -25,7 +29,7 @@
   .title{
     float: right;
     display: table;
-    @include size(220px, 33px);
+    @include size(100%, 33px);
     p{
       @include cell-settings();
       text-shadow: -2px 1px $bg-color;
@@ -103,6 +107,35 @@
   p{
     @include cell-settings();
     color: #FFF;
+  }
+}
+
+#customer-type{
+  .container{
+    @include size(120px, 150px);
+    background-color: #FFF;
+    margin: 0 auto;
+    box-shadow: 0px 0px 8px -2px #000;
+    border: 1px solid #B6B6B6;
+    margin-top: 30%;
+    position: relative;
+  }
+  .type-cont{
+    @include size(90%, 40%);
+    margin: 10px auto;
+    box-shadow: 0 0 1px 1px rgba(#333, 0.5);
+    display: table;
+    p{
+      @include cell-settings();
+      font-weight: bold;
+      color: rgba(#333, 0.8);
+      font-size: 15px;
+    }
+  }
+  #close-type{
+    position: absolute;
+    top: -25px;
+    right: -20px;
   }
 }
 

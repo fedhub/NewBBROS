@@ -4,7 +4,7 @@ var app = angular.module('myapp.services', []);
 app.service('authentication', function(){
 
     var connected = false;
-    var connected_type = '';
+    var customer_type = '';
 
     this.setConnected = function(state){
         connected = state;
@@ -14,8 +14,12 @@ app.service('authentication', function(){
         return connected;
     };
 
-    this.getConnectedType = function(){
-        return connected_type;
+    this.setCustomerType = function(type){
+        customer_type = type;
+    };
+
+    this.getCustomerType = function(){
+        return customer_type;
     }
 
 });
@@ -46,28 +50,23 @@ app.service('library', function(){
 
 });
 
-app.service('customer', function(){
+app.service('customer', ['authentication', function(authentication){
 
-    var details = {
-        first_name: '',
-        last_name: '',
-        phone_number: '',
-        email: '',
-        street: '',
-        house_number: '',
-        floor: '',
-        enter: ''
-    };
+    var details = {};
 
-    this.setDetails = function(first_name, last_name, phone_number, email, street, house_number, floor, enter){
-        details.first_name = first_name;
-        details.last_name = last_name;
-        details.phone_number = phone_number;
-        details.email = email;
-        details.street = street;
-        details.house_number = house_number;
-        details.floor = floor;
-        details.enter = enter;
+    this.setDetails = function(det){
+        details.first_name = det.first_name;
+        details.last_name = det.last_name;
+        details.phone_number = det.phone_number;
+        details.email = det.email;
+        details.street = det.street;
+        details.house_number = det.house_number;
+        details.floor = det.floor;
+        details.enter = det.enter;
+        if(authentication.getCustomerType == 'business'){
+            details.company_code = det.company_code;
+            details.budget = det.budget;
+        }
     };
 
     this.getDetails = function(){
@@ -77,8 +76,7 @@ app.service('customer', function(){
     this.getPhoneNumber = function(){
         return details.phone_number;
     };
-
-});
+}]);
 
 // Messages
 app.service('message', function(){
@@ -276,39 +274,47 @@ app.service('order_details', function(){
 
 app.service('date', function(){
 
-    var curr_date = new Date();
+    var curr_date;
     var day, month, year;
     var hour, minutes, seconds;
 
     this.getDay = function(){
-        return Date.getDate();
+        curr_date = new Date();
+        return curr_date.getDay();
     };
 
     this.getMonth = function(){
+        curr_date = new Date();
         return (curr_date.getMonth() + 1);
     };
 
     this.getYear = function(){
+        curr_date = new Date();
         return curr_date.getFullYear()
     };
 
     this.getHour = function(){
+        curr_date = new Date();
         return curr_date.getHours();
     };
 
     this.getMinutes = function(){
+        curr_date = new Date();
         return  curr_date.getMinutes();
     };
 
     this.getSeconds = function(){
+        curr_date = new Date();
         return curr_date.getSeconds();
     };
 
     this.getFullDate = function(){
+        curr_date = new Date();
         return curr_date.getDate()+'.'+(curr_date.getMonth()+1)+'.'+curr_date.getFullYear();
     };
 
     this.getDefaultTime = function(){
+        curr_date = new Date();
         return curr_date.getHours()+':'+checkTime(curr_date.getMinutes());
     };
 

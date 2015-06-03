@@ -2,7 +2,7 @@ var app = angular.module('myapp.orders-library', [
     'myapp.services'
 ]);
 
-app.controller('orders-library', ['$scope', 'cart', 'message', 'library', 'date', 'customer', function($scope, cart, message, library, date, customer){
+app.controller('orders-library', ['$scope', 'cart', 'message', 'library', 'date', 'customer', 'authentication', function($scope, cart, message, library, date, customer, authentication){
 
     var $library_details_lightbox = $('#add_library');
     var $delete_lightbox = $('#delete-item');
@@ -65,7 +65,7 @@ app.controller('orders-library', ['$scope', 'cart', 'message', 'library', 'date'
             var $lib_description = $('#library_description textarea').val();
             if($lib_name.length == 0) message.showMessage('עליך לתת שם לספריה');
             else{
-                var lib_details = new_lib_json(customer.getPhoneNumber(), $lib_name, $lib_description, date.getFullDate(), date.getDefaultTime());
+                var lib_details = new_lib_json(customer.getPhoneNumber(), $lib_name, $lib_description, date.getFullDate(), date.getDefaultTime(), authentication);
                 new_lib_ajax($scope, lib_details, message);
                 $library_details_lightbox.fadeOut();
             }
@@ -116,13 +116,14 @@ function new_lib_ajax($scope, lib_details, message){
     });
 }
 
-function new_lib_json(phone_number, lib_name, lib_desc, date, time){
+function new_lib_json(phone_number, lib_name, lib_desc, date, time, authentication){
     return {
         phone_number: phone_number,
         lib_name: lib_name,
         lib_description: lib_desc,
         creation_date: date,
-        creation_time: time
+        creation_time: time,
+        customer_type: authentication.getCustomerType()
     }
 }
 

@@ -2,7 +2,7 @@ var app = angular.module('myapp.order-approve', [
     'myapp.services'
 ]);
 
-app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', 'date', 'customer', function($scope, message, order_details, cart, date, customer){
+app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', 'date', 'customer', 'authentication', function($scope, message, order_details, cart, date, customer, authentication){
 
     var order_details_message;
     var order_type = '';
@@ -10,6 +10,7 @@ app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', '
     var order_time = '';
     var curr_date = '';
     var customer_details, my_cart, total_price;
+    var order_hour, order_minutes;
 
     $scope.cart_approved = function(){
 
@@ -39,7 +40,16 @@ app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', '
         order_type = order_details.getOrderType();
         payment_method = order_details.getPaymentMethod();
         order_time = order_details.getOrderTime();
-        if(order_time == '') order_time = date.getDefaultTime();
+        if(order_time == ''){
+            order_time = date.getDefaultTime();
+            order_hour = date.getHour();
+            order_minutes = date.getMinutes();
+        }
+        else{
+            var time_params = order_time.split(':');
+            order_hour = time_params[0];
+            order_minutes = time_params[1];
+        }
         curr_date = date.getFullDate();
         customer_details = JSON.stringify(customer.getDetails());
         total_price = cart.getTotalPrice();
@@ -49,8 +59,11 @@ app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', '
     function get_order_info(){
         return {
             order_type: order_type,
+            customer_type: authentication.getCustomerType(),
             payment_method: payment_method,
             order_time: order_time,
+            order_hour: order_hour,
+            order_minutes: order_minutes,
             order_date: curr_date,
             customer_details: customer_details,
             total_price: total_price,
