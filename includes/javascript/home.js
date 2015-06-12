@@ -16,7 +16,6 @@ app.controller('home', ['$scope', 'authentication', function($scope, authenticat
     $scope.orders_library = function(){
         if(!authentication.isConnected()) $scope.form_request('log-in');
         else window.location = '#/orders-library';
-        //window.location = '#/orders-library';
     };
 
 }]);

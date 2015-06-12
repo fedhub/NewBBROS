@@ -1,13 +1,14 @@
 var app = angular.module('myapp.services', []);
 
 // Authentication
-app.service('authentication', function(){
+app.service('authentication', function($rootScope){
 
     var connected = false;
     var customer_type = '';
 
     this.setConnected = function(state){
         connected = state;
+        if(connected) $rootScope.$broadcast('got-connected');
     };
 
     this.isConnected = function(){
@@ -79,7 +80,7 @@ app.service('customer', ['authentication', function(authentication){
 }]);
 
 // Messages
-app.service('message', function(){
+app.service('message', function($rootScope){
 
     var $screen_message = $('#screen-message');
     var $p = $screen_message.find('p');
@@ -95,7 +96,9 @@ app.service('message', function(){
     this.msgCloseLightbox = function(msg){
         $p.html(msg);
         $screen_message.fadeIn().delay(delay).fadeOut(function(){
-            $lightbox.fadeOut();
+            $lightbox.fadeOut(function(){
+                $rootScope.$broadcast('msg-done');
+            });
         });
     };
 

@@ -7,7 +7,7 @@ app.controller('header', function($scope){
     $scope.title = 'ראשי';
     $scope.setTitle = function(title){
         $scope.title = title;
-    }
+    };
 
     var counter = 1;
     $scope.slideMenu = function(){

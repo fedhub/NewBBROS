@@ -8,7 +8,8 @@ var app = angular.module('myapp', [
     'myapp.menu',
     'myapp.services',
     'myapp.cart',
-    'myapp.order-approve'
+    'myapp.order-approve',
+    'myapp.status'
 ]);
 
 //var base_url = 'http://www.best-biss.com';
@@ -59,6 +60,7 @@ app.config(['$routeProvider', function($routeProvider){
         )
         .when('/status',{
             templateUrl: 'partials/status.html',
+            controller: 'status',
             resolve: { resolvedVal: function(){ return; }}}
         ).otherwise({redirectTo: '/home'});
 

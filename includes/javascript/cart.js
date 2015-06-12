@@ -70,8 +70,7 @@ app.controller('cart', ['$scope', 'message', 'cart', 'order_details', 'date', fu
         order_time_handler($scope, date, ++lock);
     };
     $scope.order_type_selected = function(order_type){
-        order_details.setOrderType(order_type);
-        $order_type_lightbox.fadeOut();
+        order_type_validation(order_type, order_details, $order_type_lightbox, message);
     };
     $scope.payment_method_selected = function(payment_method){
         order_details.setPaymentMethod(payment_method);
@@ -95,6 +94,51 @@ app.controller('cart', ['$scope', 'message', 'cart', 'order_details', 'date', fu
     };
 }]);
 
+function order_type_validation(order_type, order_details, $order_type_lightbox, message){
+    var url = base_url + '/get-order-type-settings';
+    $.ajax({
+        url: url,
+        type: 'POST'
+    }).done(function(res){
+        if(!res.status) message.showMessage(res.msg);
+        else is_order_type_allowed(res.result, order_type, order_details, $order_type_lightbox, message);
+    });
+}
+
+function is_order_type_allowed(res, order_type, order_details, $order_type_lightbox, message){
+    var msg = '';
+    if(order_type == 'delivery'){
+        if(res.delivery_allowed){
+            order_details.setOrderType(order_type);
+            $order_type_lightbox.fadeOut();
+        }
+        else {
+            msg = 'לקוחות יקרים, זמנית לא ניתן לבצע משלוחים, עמכם הסליחה';
+            message.showMessage(msg);
+        }
+    }
+    if(order_type == 'sit'){
+        if(res.sit_allowed){
+            order_details.setOrderType(order_type);
+            $order_type_lightbox.fadeOut();
+        }
+        else {
+            msg = 'לקוחות יקרים, זמנית לא ניתן לבצע הזמנות לשבת, עמכם הסליחה';
+            message.showMessage(msg);
+        }
+    }
+    if(order_type == 'take-away'){
+        if(res.take_away_allowed){
+            order_details.setOrderType(order_type);
+            $order_type_lightbox.fadeOut();
+        }
+        else{
+            msg = 'לקוחות יקרים, זמנית לא ניתן לבצע הזמנות לקחת, עמכם הזליחה';
+            message.showMessage(msg);
+        }
+    }
+}
+
 function round5(x) {
     return Math.ceil(x/5)*5;
 }
@@ -102,6 +146,7 @@ function round5(x) {
 function order_time_handler($scope, date, lock){
     var first_hour_mins = [];
     var rest_hours_mins = [];
+    var close_time = 23;
     var hours = [];
     var start_min = round5(date.getMinutes());
     var i = 0;
@@ -113,11 +158,11 @@ function order_time_handler($scope, date, lock){
     }
     var hour = date.getHour();
     var not_in_range = false;
-    if(hour > 20 || hour < 9) {
+    if(hour > close_time || hour < 9) {
         hour = 9;
         not_in_range = true;
     }
-    for(i = hour; i < 21; i++){
+    for(i = hour; i <= close_time; i++){
         hours.push(checkTime(i));
     }
     if(date.getMinutes() > 55){
