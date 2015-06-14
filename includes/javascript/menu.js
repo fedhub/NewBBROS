@@ -60,7 +60,7 @@ app.controller('menu-items', ['$scope', '$routeParams', 'message', 'cart', funct
 
 }]);
 
-app.controller('menu-additions', ['$scope', '$routeParams', 'message', 'cart', 'library', 'authentication', 'date', 'customer', function($scope, $routeParams, message, cart, library, authentication, date, customer){
+app.controller('menu-additions', ['$scope', '$routeParams', 'message', 'cart', 'library', 'authentication', 'date', 'customer', 'application_settings', function($scope, $routeParams, message, cart, library, authentication, date, customer, application_settings){
 
     var type_id = $routeParams.menu_type_id;
     var item_id = $routeParams.menu_item_id;
@@ -82,6 +82,7 @@ app.controller('menu-additions', ['$scope', '$routeParams', 'message', 'cart', '
             var additions = getAdditions(menu_additions);
             $scope.additions = additions;
             $scope.$apply();
+            $('#approve-menu').css('display', 'table');
             $.each( $('.menu-additions-wrapper').find('.image'), function(i) {
                 $(this).css({
                     "background": "url('"+base_url+'/images/'+menu_additions[i].image+"') no-repeat",
@@ -101,13 +102,29 @@ app.controller('menu-additions', ['$scope', '$routeParams', 'message', 'cart', '
     };
 
     $scope.approve = function(additions){
-        var msg = checkSelections(additions);
-        if(msg.length != 0)
-            message.showMessage(msg);
-        else{
-            if(!authentication.isConnected()) $scope.form_request('log-in');
-            else updateCart(cart, additions, library, date, customer, message);
-        }
+        var url = base_url + '/get-working-hours';
+        $.ajax({
+            url: url,
+            type: 'POST'
+        }).done(function(res){
+            if(!res.status) message.showMessage(res.msg);
+            else{
+                var msg = '';
+                if((!library.getIsLibrary()) && application_settings.store_closed(res.working_time)){
+                    msg = application_settings.get_working_time_msg(res.working_time);
+                    message.showMessage(msg);
+                }
+                else{
+                    msg = checkSelections(additions);
+                    if(msg.length != 0)
+                        message.showMessage(msg);
+                    else{
+                        if(!authentication.isConnected()) $scope.form_request('log-in');
+                        else updateCart(cart, additions, library, date, customer, message);
+                    }
+                }
+            }
+        });
     }
 
 }]);

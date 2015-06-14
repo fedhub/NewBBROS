@@ -47,7 +47,7 @@
                     <section class="form-item" id="{{ form_item.id }}">
                         <section class="required"><p>{{ form_item.required }}</p></section>
                         <section class="detail-label"><p>{{ form_item.label }}</p></section>
-                        <section class="detail-input"><input type="text" maxlength="{{ form_item.max_length }}"></section>
+                        <section class="detail-input"><input type="{{ form_item.type }}" value="{{ form_item.value }}" maxlength="{{ form_item.max_length }}"></section>
                         <section class="validation"><p></p></section>
                     </section>
                 </form>
@@ -63,6 +63,8 @@
         <section class="slide-item" ng-click="form_request('log-out')"><p class="flaticon-symbol21"></p><p>התנתק</p></section>
         <div class="hr"></div>
         <section class="slide-item" ng-click="form_request('sign-up')"><p class="flaticon-add89"></p><p>הרשם</p></section>
+        <div class="hr"></div>
+        <section class="slide-item" ng-click="form_request('update-details')"><p class="flaticon-edit45" id="edit-icon"></p><p>עדכון פרטים אישיים</p></section>
         <div class="hr"></div>
     </section>
     <header ng-controller="header">

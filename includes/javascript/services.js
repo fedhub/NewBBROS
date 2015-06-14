@@ -64,8 +64,10 @@ app.service('customer', ['authentication', function(authentication){
         details.house_number = det.house_number;
         details.floor = det.floor;
         details.enter = det.enter;
-        if(authentication.getCustomerType == 'business'){
+        if(authentication.getCustomerType() == 'business'){
+            details.password = det.password;
             details.company_code = det.company_code;
+            details.company_name = det.company_name;
             details.budget = det.budget;
         }
     };
@@ -74,9 +76,18 @@ app.service('customer', ['authentication', function(authentication){
         return details;
     };
 
+    this.getCustomerName = function(){
+        return details.first_name;
+    };
+
     this.getPhoneNumber = function(){
         return details.phone_number;
     };
+
+    this.getBudget = function(){
+        return details.budget;
+    };
+
 }]);
 
 // Messages
@@ -283,7 +294,7 @@ app.service('date', function(){
 
     this.getDay = function(){
         curr_date = new Date();
-        return curr_date.getDay();
+        return curr_date.getDate();
     };
 
     this.getMonth = function(){
@@ -325,6 +336,39 @@ app.service('date', function(){
         if (i < 10) {i = "0" + i}  // add zero in front of numbers < 10
         return i;
     }
+
+});
+
+app.service('application_settings', function(){
+
+    this.get_working_time_msg = function(working_time){
+        var msg = 'לקוח יקר, החנות סגורה כרגע, שעות הפתיחה של החנות הם בין ';
+        if(working_time.open_hour < 10) msg += '0'+working_time.open_hour;
+        else msg += working_time.open_hour;
+        msg += ':';
+        if(working_time.open_minutes < 10) msg += '0'+working_time.open_minutes;
+        else msg += working_time.open_minutes;
+        msg += ' - ';
+        if(working_time.close_hour < 10) msg += '0'+working_time.close_hour;
+        else msg += working_time.close_hour;
+        msg += ':';
+        if(working_time.close_minutes < 10) msg += '0'+working_time.close_minutes;
+        else msg += working_time.close_minutes;
+        return msg;
+    };
+
+    this.store_closed = function(working_time){
+        var date = new Date();
+        if(date.getHours() < working_time.open_hour) return true;
+        if(date.getHours() == working_time.open_hour){
+            if(date.getMinutes() < working_time.open_minutes) return true;
+        }
+        if(date.getHours() > working_time.close_hour) return true;
+        if(date.getHours() == working_time.close_hour){
+            if(date.getMinutes()  > working_time.close_minutes) return true;
+        }
+        return false;
+    };
 
 });
 

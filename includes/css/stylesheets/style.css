@@ -248,6 +248,10 @@ html, body {
   text-shadow: none;
   font-size: 22px;
 }
+/* line 79, ../sass/_orders-library.scss */
+.orders-library-wrapper #add-library {
+  display: none;
+}
 
 /* line 1, ../sass/_library.scss */
 .library-wrapper {
@@ -588,17 +592,18 @@ header a {
   height: 8%;
   display: table;
   margin: 0 auto;
+  color: #333;
 }
-/* line 38, ../sass/_slider.scss */
+/* line 39, ../sass/_slider.scss */
 .mobile-menu-container .slide-item p {
   display: table-cell;
   vertical-align: middle;
 }
-/* line 42, ../sass/_slider.scss */
+/* line 43, ../sass/_slider.scss */
 .mobile-menu-container .slide-item p:nth-of-type(1) {
   width: 50px;
 }
-/* line 47, ../sass/_slider.scss */
+/* line 48, ../sass/_slider.scss */
 .mobile-menu-container .hr {
   border: 0;
   height: 1px;
@@ -610,8 +615,13 @@ header a {
   background-image: -ms-linear-gradient(left, #002E02, #002E02, #002E02);
   background-image: -o-linear-gradient(left, #002E02, #002E02, #002E02);
 }
+/* line 59, ../sass/_slider.scss */
+.mobile-menu-container #edit-icon {
+  color: #000 !important;
+  font-size: 23px !important;
+}
 
-/* line 61, ../sass/_slider.scss */
+/* line 65, ../sass/_slider.scss */
 .right {
   transform: translate3d(100%, 0, 0);
   /* X, Y, Z */
@@ -1076,7 +1086,7 @@ header a {
   background-color: green;
   margin: 10px auto;
   box-shadow: 0px 0px 8px -2px #000;
-  display: table;
+  display: none;
 }
 /* line 93, ../sass/_menu-additions.scss */
 .menu-additions-wrapper .approve-menu p {

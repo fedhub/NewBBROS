@@ -2,7 +2,7 @@ var app = angular.module('myapp.cart', [
     'myapp.services'
 ]);
 
-app.controller('cart', ['$scope', 'message', 'cart', 'order_details', 'date', function($scope, message, cart, order_details, date){
+app.controller('cart', ['$scope', 'message', 'cart', 'order_details', 'date', 'authentication', function($scope, message, cart, order_details, date, authentication){
 
     var $info_lightbox = $('#cart-item-info');
     var $delete_lightbox = $('#delete-item');
@@ -22,6 +22,7 @@ app.controller('cart', ['$scope', 'message', 'cart', 'order_details', 'date', fu
     else{
         $('.cart-size').css('display','none');
     }
+    if(authentication.getCustomerType() == 'business') $('.payment-method-btn').css('display', 'none');
     $scope.info = function(item){
         $info_lightbox.fadeIn();
         $scope.item = item;
@@ -133,7 +134,7 @@ function is_order_type_allowed(res, order_type, order_details, $order_type_light
             $order_type_lightbox.fadeOut();
         }
         else{
-            msg = 'לקוחות יקרים, זמנית לא ניתן לבצע הזמנות לקחת, עמכם הזליחה';
+            msg = 'לקוחות יקרים, זמנית לא ניתן לבצע הזמנות לקחת, עמכם הסליחה';
             message.showMessage(msg);
         }
     }

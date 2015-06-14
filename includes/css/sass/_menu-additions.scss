@@ -89,7 +89,7 @@
     background-color: green;
     margin: 10px auto;
     box-shadow: 0px 0px 8px -2px #000;
-    display: table;
+    display: none;
     p{
       @include cell-settings();
       color: #FFF;

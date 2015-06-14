@@ -97,6 +97,7 @@ function get_libraries_ajax($scope, message, phone_number){
         else if(res != 'empty'){
             $scope.libraries = res;
             $scope.$apply();
+            $('#add-library').css('display', 'inline-block');
         }
     });
 }

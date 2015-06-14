@@ -2,7 +2,7 @@ var app = angular.module('myapp.order-approve', [
     'myapp.services'
 ]);
 
-app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', 'date', 'customer', 'authentication', function($scope, message, order_details, cart, date, customer, authentication){
+app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', 'date', 'customer', 'authentication', 'application_settings', function($scope, message, order_details, cart, date, customer, authentication, application_settings){
 
     var order_details_message;
     var order_type = '';
@@ -13,14 +13,40 @@ app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', '
     var order_hour, order_minutes;
 
     $scope.cart_approved = function(){
-
-        order_details_message = check_order_details();
-        if(cart.getSize() == 0) message.showMessage('עליך להוסיף פריט לסל על מנת להמשיך');
-        else if(order_details_message.length != 0) message.showMessage(order_details_message);
-        else{
-            init_params();
-            send_ajax(JSON.stringify(get_order_info()));
-        }
+        var url = base_url + '/get-working-hours';
+        $.ajax({
+            url: url,
+            type: 'POST'
+        }).done(function(res){
+            if(!res.status) message.showMessage(res.msg);
+            else{
+                var msg = '';
+                if(application_settings.store_closed(res.working_time)){
+                    msg = application_settings.get_working_time_msg(res.working_time);
+                    message.showMessage(msg);
+                }
+                else{
+                    if(authentication.getCustomerType() == 'business' && cart.getSize() > 0 && cart.getTotalPrice() > customer.getBudget()){
+                        console.log('here');
+                        msg = 'שלום ';
+                        msg += customer.getCustomerName() + ', ';
+                        msg += 'יתרתך הנוכחית: ';
+                        msg += customer.getBudget() + 'ש"ח' + ' ';
+                        msg += 'נמוכה ממחיר ההזמנה, אנא פנה למנהל החברה שלך או למנהל המסעדה על מנת להפקיד לחשבונך, תודה.';
+                        message.showMessage(msg);
+                    }
+                    else{
+                        order_details_message = check_order_details();
+                        if(cart.getSize() == 0) message.showMessage('עליך להוסיף פריט לסל על מנת להמשיך');
+                        else if(order_details_message.length != 0) message.showMessage(order_details_message);
+                        else{
+                            init_params();
+                            send_ajax(JSON.stringify(get_order_info()));
+                        }
+                    }
+                }
+            }
+        });
     };
 
     function send_ajax(order_info){
@@ -30,10 +56,28 @@ app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', '
             type: 'POST',
             data: {data: order_info}
         }).done(function(res){
-            if(res) console.log('true');
+            if(res){
+                if(authentication.getCustomerType() == 'business') update_business_budget();
+                else console.log('true');
+            }
             else console.log('false');
         });
+    }
 
+    function update_business_budget(){
+        var url = base_url + '/decrease-from-budget';
+        var info = {
+            phone_number: customer.getPhoneNumber(),
+            new_budget: customer.getBudget()-cart.getTotalPrice()
+        };
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {data: JSON.stringify(info)}
+        }).done(function(res){
+            if(res) console.log('true-business');
+            else console.log('false');
+        });
     }
 
     function init_params(){
@@ -75,7 +119,7 @@ app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', '
         var msg = '';
         if(order_details.getOrderType() == '')
             msg += 'אנא בחר סוג הזמנה. ';
-        if(order_details.getPaymentMethod() == '')
+        if(authentication.getCustomerType() == 'private' && order_details.getPaymentMethod() == '')
             msg += 'אנא בחר אמצעי תשלום. ';
         return msg;
     }
