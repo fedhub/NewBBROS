@@ -620,8 +620,19 @@ header a {
   color: #000 !important;
   font-size: 23px !important;
 }
+/* line 63, ../sass/_slider.scss */
+.mobile-menu-container .social-cont {
+  width: 50px;
+  margin: 20px auto;
+}
+/* line 67, ../sass/_slider.scss */
+.mobile-menu-container #social-icon {
+  opacity: 0.9;
+  width: 50px;
+  height: 50px;
+}
 
-/* line 65, ../sass/_slider.scss */
+/* line 73, ../sass/_slider.scss */
 .right {
   transform: translate3d(100%, 0, 0);
   /* X, Y, Z */

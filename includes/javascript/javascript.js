@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+    $('.social-cont').click(function(){
+       window.location = 'http://www.facebook.com';
+    });
+
     $('#close').click(function(){
         $('#lightbox').fadeOut();
     });
@@ -16,7 +20,7 @@ $(document).ready(function(){
         var id = $(event.target).parent().parent().attr('id');
         var $val = $('#'+id+' input').val();
         var $p = $('#'+id+' .validation p');
-        if(id == 'first-name' || id == 'last-name') regex = /^[a-zא-תA-Z\s]+$/;
+        if(id == 'first-name' || id == 'last-name') regex = /^['a-zא-תA-Z\s]+$/;
         if(id == 'email') regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
         if(id == 'street') regex = /^[a-zא-תA-Z"\s]+$/;
         if(id == 'house-number'){

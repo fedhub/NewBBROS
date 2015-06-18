@@ -60,6 +60,14 @@
     color: #000 !important;
     font-size: 23px !important;
   }
+  .social-cont{
+    width: 50px;
+    margin: 20px auto;
+  }
+  #social-icon{
+    opacity: 0.9;
+    @include size(50px, 50px);
+  }
 }
 
 .right{

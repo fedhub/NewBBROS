@@ -103,21 +103,35 @@ app.directive('forms', ['authentication', 'message', 'customer', function(authen
             url: url,
             data : {data : JSON.stringify(customer_details)}
         }).done(function(res){
-            if(form_type == 'update-details') alert(res.status);
-            else ajax_response(res, form_type);
+            ajax_response(res, form_type);
         });
     }
 
     function ajax_response(res, form_type){
         if(form_type == 'sign-up') {
             if (res) {
-                customer.setDetails($first_name,$last_name,$phone_number,$email,$street,$house_number,$floor,$enter);
+                customer.setDetails(get_globals(form_type));
                 authentication.setConnected(true);
                 authentication.setCustomerType('private');
                 message.msgCloseLightbox('ההרשמה בוצעה בהצלחה');
                 message.greetings('שלום ' + $first_name);
             }
             else message.showMessage('מספר הטלפון שהוזן כבר רשום במערכת');
+        }
+        if(form_type == 'update-details'){
+            if(res.status){
+                customer.setDetails(get_globals(form_type));
+                message.msgCloseLightbox('עדכון הפרטים האישיים הושלם בהצלחה');
+                if(authentication.getCustomerType() == 'private') message.greetings('שלום ' + $first_name);
+                if(authentication.getCustomerType() == 'business') {
+                    var msg = 'שלום ';
+                    msg += $first_name + ', ';
+                    msg += 'יתרה: ';
+                    msg += customer.getBudget() + ' &#8362;';
+                    message.greetings(msg);
+                }
+            }
+            else message.showMessage(res.msg);
         }
         if(form_type == 'log-in'){
             if(res == 'phone-not-exist') message.showMessage('מספר הטלפון שהוזן אינו רשום במערכת');
@@ -132,11 +146,35 @@ app.directive('forms', ['authentication', 'message', 'customer', function(authen
                     var greeting_msg = 'שלום ';
                     greeting_msg += res.first_name + ', ';
                     greeting_msg += 'יתרה: ';
-                    greeting_msg += res.budget;
+                    greeting_msg += res.budget + ' &#8362;';
                     message.greetings(greeting_msg);
                 }
             }
         }
+    }
+
+    function get_globals(form_type){
+        var json;
+        if(form_type == 'sign-up' || form_type == 'update-details'){
+            json = {
+                first_name: $first_name,
+                last_name: $last_name,
+                phone_number: $phone_number,
+                email: $email,
+                street: $street,
+                house_number: $house_number,
+                floor: $floor,
+                enter: $enter
+            };
+        }
+        if(authentication.getCustomerType() == 'business'){
+            var business_former_details = customer.getDetails();
+            json.password = $password;
+            json.company_code = business_former_details.company_code;
+            json.company_name = business_former_details.company_name;
+            json.budget = business_former_details.budget;
+        }
+        return json;
     }
 
     function set_globals(form_type){
