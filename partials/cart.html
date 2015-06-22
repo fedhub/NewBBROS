@@ -64,7 +64,7 @@
                         <option ng-repeat="minute in minutes" value="{{minute}}">{{ minute }}</option>
                     </select>
                     :
-                    <select id="hours" ng-change="checkHour(hour)" ng-model="hour">
+                    <select id="hours" ng-change="hour_changed(hour)" ng-model="hour">
                         <option ng-repeat="hour in hours" value="{{hour}}">{{ hour }}</option>
                     </select>
                 </section>

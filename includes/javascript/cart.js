@@ -2,7 +2,7 @@ var app = angular.module('myapp.cart', [
     'myapp.services'
 ]);
 
-app.controller('cart', ['$scope', 'message', 'cart', 'order_details', 'date', 'authentication', function($scope, message, cart, order_details, date, authentication){
+app.controller('cart', ['$scope', 'message', 'cart', 'order_details', 'date', 'time_widget', 'authentication', function($scope, message, cart, order_details, date, time_widget, authentication){
 
     var $info_lightbox = $('#cart-item-info');
     var $delete_lightbox = $('#delete-item');
@@ -65,10 +65,9 @@ app.controller('cart', ['$scope', 'message', 'cart', 'order_details', 'date', 'a
         ];
         $payment_method_lightbox.fadeIn();
     };
-    var lock = 0;
     $scope.order_time = function(){
         $order_time_lightbox.fadeIn();
-        order_time_handler($scope, date, ++lock);
+        order_time_handler($scope, date, time_widget, message);
     };
     $scope.order_type_selected = function(order_type){
         order_type_validation(order_type, order_details, $order_type_lightbox, message);
@@ -80,9 +79,10 @@ app.controller('cart', ['$scope', 'message', 'cart', 'order_details', 'date', 'a
     $scope.order_time_selected = function(){
         var hour = $('#hours').val();
         var minute = $('#minutes').val();
+        if(minute.length == 0) minute = '00';
         var due_time = hour+':'+minute;
         order_details.setOrderTime(due_time);
-        $order_time_lightbox.fadeOut();
+        $order_time_lightbox.fadeOut(function(){reset_time_widget($scope);});
     };
     $scope.close_order_type = function(){
         $order_type_lightbox.fadeOut();
@@ -91,9 +91,32 @@ app.controller('cart', ['$scope', 'message', 'cart', 'order_details', 'date', 'a
         $payment_method_lightbox.fadeOut();
     };
     $scope.close_order_time = function(){
-        $order_time_lightbox.fadeOut();
+        $order_time_lightbox.fadeOut(function(){reset_time_widget($scope);});
+    };
+    $scope.hour_changed = function(hour){
+        parseInt(hour);
+        if(hour == time_widget.get_work_hours().open_hour) $scope.minutes = time_widget.get_first_hour_mins();
+        else if(hour == time_widget.get_work_hours().close_hour){
+            $scope.minutes = time_widget.get_last_hour_mins();
+            $('#minutes').val('00');
+        }
+        else{
+            $scope.minutes = time_widget.get_rest_hours_mins();
+            $('#minutes').val('00');
+        }
+        if(time_widget.get_hours_length() >= 2 && date.getHour() == hour && date.getHour() != time_widget.get_work_hours().open_hour && time_widget.is_now_open()){
+            if(date.getMinutes() <= 55) $scope.minutes = time_widget.get_curr_hour_mins();
+            else $scope.minutes = time_widget.get_rest_hours_mins();
+        }
     };
 }]);
+
+function reset_time_widget($scope){
+    $scope.minutes = [];
+    $scope.hours = [];
+    $('.time-cont').css('display', 'none');
+    $('#time-approval').css('display', 'none');
+}
 
 function order_type_validation(order_type, order_details, $order_type_lightbox, message){
     var url = base_url + '/get-order-type-settings';
@@ -140,56 +163,34 @@ function is_order_type_allowed(res, order_type, order_details, $order_type_light
     }
 }
 
-function round5(x) {
-    return Math.ceil(x/5)*5;
-}
+function order_time_handler($scope, date, time_widget, message){
 
-function order_time_handler($scope, date, lock){
-    var first_hour_mins = [];
-    var rest_hours_mins = [];
-    var close_time = 23;
-    var hours = [];
-    var start_min = round5(date.getMinutes());
-    var i = 0;
-    for(i = start_min; i <= 55; i+=5){
-        first_hour_mins.push(checkTime(i));
-    }
-    for(i = 0; i <= 55; i+=5){
-        rest_hours_mins.push(checkTime(i));
-    }
-    var hour = date.getHour();
-    var not_in_range = false;
-    if(hour > close_time || hour < 9) {
-        hour = 9;
-        not_in_range = true;
-    }
-    for(i = hour; i <= close_time; i++){
-        hours.push(checkTime(i));
-    }
-    if(date.getMinutes() > 55){
-        hours.splice(0,1);
-        $scope.minutes = rest_hours_mins;
-    }
-    else{
-        if(not_in_range) $scope.minutes = rest_hours_mins;
-        else $scope.minutes = first_hour_mins;
-    }
-    $scope.hours = hours;
-    if(lock == 1){
-        $('#hours option:nth-last-of-type(1)').remove();
-    }
-    $scope.checkHour = function(selected){
-        if(selected == date.getHour()){
-            $scope.minutes = first_hour_mins;
-        }
+    var url = base_url + '/get-working-hours';
+    $.ajax({
+        url: url,
+        type: 'POST'
+    }).done(function(res){
+        if(!res.status) message.showMessage(res.msg);
         else{
-            $scope.minutes = rest_hours_mins;
-            $('#minutes').val('0');
+            time_widget.set_time_widget(res.working_time);
+            // now it's the closing hour
+            $scope.hours = time_widget.get_hours();
+            if(time_widget.get_hours_length() == 1) $scope.minutes = time_widget.get_curr_hour_mins();
+            // more then one hour open store left
+            if(time_widget.get_hours_length() >= 2){
+                if(date.getHour() == res.working_time.open_hour) $scope.minutes = time_widget.get_first_hour_mins();
+                else {
+                    if(time_widget.is_now_open() && date.getMinutes() <= 55) $scope.minutes = time_widget.get_curr_hour_mins();
+                    else if(time_widget.is_now_open() && date.getMinutes() > 55) $scope.minutes = time_widget.get_rest_hours_mins();
+                    else $scope.minutes = time_widget.get_first_hour_mins();
+                }
+            }
+            $scope.$apply();
+            $('.time-cont').css('display', 'block');
+            $('#time-approval').css('display', 'table');
+            if($('#hours option:selected').text().length == 0) {
+                $('#hours option').eq(0).remove();
+            }
         }
-    };
-}
-
-function checkTime(i) {
-    if (i < 10) {i = "0" + i}  // add zero in front of numbers < 10
-    return i;
+    });
 }

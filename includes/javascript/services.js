@@ -329,15 +329,117 @@ app.service('date', function(){
 
     this.getDefaultTime = function(){
         curr_date = new Date();
-        return curr_date.getHours()+':'+checkTime(curr_date.getMinutes());
+        return curr_date.getHours()+':'+add_zero_before(curr_date.getMinutes());
     };
 
-    function checkTime(i) {
+    function add_zero_before(i) {
         if (i < 10) {i = "0" + i}  // add zero in front of numbers < 10
         return i;
     }
 
 });
+
+app.service('time_widget', ['date', function(date){
+
+    var first_hour_mins = [], last_hour_mins = [], rest_hours_mins = [], hours = [];
+    var work_hours = {};
+    var now_open = false;
+
+    this.set_time_widget = function(working_time){
+        work_hours = working_time;
+        var curr_hour = date.getHour();
+        var curr_mins = date.getMinutes();
+        // if we are out of the working time range
+        if(curr_hour > working_time.close_hour || curr_hour < working_time.open_hour
+            || (curr_hour == working_time.open_hour && curr_mins < working_time.open_minutes)
+            || (curr_hour == working_time.close_hour && curr_mins > working_time.close_minutes)){
+            if(working_time.close_minutes == 0) hours = get_hours(working_time.open_hour, (working_time.close_hour-1));
+            if(working_time.close_minutes != 0) hours = get_hours(working_time.open_hour, working_time.close_hour);
+            first_hour_mins = get_mins(working_time.open_minutes, 55);
+            rest_hours_mins = get_mins(0, 55);
+            last_hour_mins = get_mins(0, working_time.close_minutes);
+        }
+        // if we are within the working time range
+        if((curr_hour < working_time.close_hour && curr_hour > working_time.open_hour)
+            || (curr_hour == working_time.open_hour && curr_mins >= working_time.open_minutes)
+            || (curr_hour == working_time.close_hour && curr_mins <= working_time.close_minutes)){
+            if(working_time.close_minutes == 0) hours = get_hours(curr_hour, (working_time.close_hour-1));
+            if(working_time.close_minutes != 0) hours = get_hours(curr_hour, working_time.close_hour);
+            first_hour_mins = get_mins(round5(curr_mins), 55);
+            rest_hours_mins = get_mins(0, 55);
+            last_hour_mins = get_mins(0, working_time.close_minutes);
+            if(curr_hour == working_time.close_hour && curr_mins <= working_time.close_minutes){
+                last_hour_mins = get_mins(round5(curr_mins), working_time.close_minutes);
+            }
+            if(curr_mins > 55){
+                if(working_time.close_minutes == 0) hours = get_hours((curr_hour + 1), (working_time.close_hour-1));
+                if(working_time.close_minutes != 0) hours = get_hours((curr_hour + 1), working_time.close_hour);
+                first_hour_mins = get_mins(0, 55);
+                rest_hours_mins = get_mins(0, 55);
+                last_hour_mins = get_mins(0, working_time.close_minutes);
+            }
+            now_open = true;
+        }
+    };
+
+    this.get_curr_hour_mins = function(){
+        return get_mins(round5(date.getMinutes()), 55);
+    };
+
+    this.get_first_hour_mins = function(){
+        return first_hour_mins;
+    };
+
+    this.get_rest_hours_mins = function(){
+        return rest_hours_mins;
+    };
+
+    this.get_last_hour_mins = function(){
+        return last_hour_mins;
+    };
+
+    this. get_hours = function(){
+        return hours;
+    };
+
+    this.get_hours_length = function(){
+        return hours.length;
+    };
+
+    this.get_work_hours = function(){
+        return work_hours;
+    };
+
+    this.is_now_open = function(){
+        return now_open;
+    };
+
+    function round5(x) {
+        return Math.ceil(x/5)*5;
+    }
+
+    function add_zero_before(i) {
+        if (i < 10) {i = "0" + i}  // add zero in front of numbers < 10
+        return i;
+    }
+
+    function get_mins(starting_mins, ending_mins){
+        var mins = [];
+        for(var i = starting_mins; i <= ending_mins; i += 5){
+            mins.push(add_zero_before(i));
+        }
+        return mins;
+    }
+
+    function get_hours(starting_hour, ending_hour){
+        var hours = [];
+        for(var i = starting_hour; i <= ending_hour; i++){
+            hours.push(i);
+        }
+        return hours;
+    }
+
+}]);
 
 app.service('application_settings', function(){
 
