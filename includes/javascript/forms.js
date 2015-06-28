@@ -78,7 +78,7 @@ app.directive('forms', ['authentication', 'message', 'customer', function(authen
     }
 
     function form_approved(form_type){
-        $('.spinner').toggle();
+        $('.spinner').css('display', 'block');
         //alert(form_type + ' ' + authentication.getCustomerType());
         var error = '';
         var compare_error = '';
@@ -88,8 +88,14 @@ app.directive('forms', ['authentication', 'message', 'customer', function(authen
             compare_error = compare_msg();
         }
         else error = error_msg(form_type);
-        if(error.length > 0) message.showMessage(error);
-        else if(compare_error.length > 0) message.showMessage(compare_error);
+        if(error.length > 0){
+            $('.spinner').css('display', 'none');
+            message.showMessage(error);
+        }
+        else if(compare_error.length > 0){
+            $('.spinner').css('display', 'none');
+            message.showMessage(compare_error);
+        }
         else ajax_handler(form_type);
     }
 
@@ -105,7 +111,7 @@ app.directive('forms', ['authentication', 'message', 'customer', function(authen
             data : {data : JSON.stringify(customer_details)}
         }).done(function(res){
             ajax_response(res, form_type);
-            $('.spinner').toggle();
+            $('.spinner').css('display', 'none');
         });
     }
 
@@ -118,7 +124,10 @@ app.directive('forms', ['authentication', 'message', 'customer', function(authen
                 message.msgCloseLightbox('ההרשמה בוצעה בהצלחה');
                 message.greetings('שלום ' + $first_name);
             }
-            else message.showMessage('מספר הטלפון שהוזן כבר רשום במערכת');
+            else{
+                $('.spinner').css('display', 'none');
+                message.showMessage('מספר הטלפון שהוזן כבר רשום במערכת');
+            }
         }
         if(form_type == 'update-details'){
             if(res.status){
@@ -133,12 +142,24 @@ app.directive('forms', ['authentication', 'message', 'customer', function(authen
                     message.greetings(msg);
                 }
             }
-            else message.showMessage(res.msg);
+            else {
+                $('.spinner').css('display', 'none');
+                message.showMessage(res.msg);
+            }
         }
         if(form_type == 'log-in'){
-            if(res == 'phone-not-exist') message.showMessage('מספר הטלפון שהוזן אינו רשום במערכת');
-            else if(res == 'name-not-match') message.showMessage('ייתכן והשם הפרטי שהוזן לא הוזן כראוי מאחר ולא נמצאה התאמה למספר הטלפון, אנא נסה שוב');
-            else if(res == 'password-not-match') message.showMessage('סיסמה שגויה, אנא נסה שוב');
+            if(res == 'phone-not-exist'){
+                $('.spinner').css('display', 'none');
+                message.showMessage('מספר הטלפון שהוזן אינו רשום במערכת');
+            }
+            else if(res == 'name-not-match'){
+                $('.spinner').css('display', 'none');
+                message.showMessage('ייתכן והשם הפרטי שהוזן לא הוזן כראוי מאחר ולא נמצאה התאמה למספר הטלפון, אנא נסה שוב');
+            }
+            else if(res == 'password-not-match'){
+                $('.spinner').css('display', 'none');
+                message.showMessage('סיסמה שגויה, אנא נסה שוב');
+            }
             else{
                 customer.setDetails(res);
                 authentication.setConnected(true);

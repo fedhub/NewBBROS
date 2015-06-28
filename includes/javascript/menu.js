@@ -5,7 +5,7 @@ var app = angular.module('myapp.menu', [
 
 app.controller('menu-types', ['$scope', 'message', function($scope, message){
 
-    $('.spinner').toggle();
+    $('.spinner').css('display', 'block');
     var url = base_url + '/menu-types';
     $.ajax({
         type: 'POST',
@@ -23,15 +23,18 @@ app.controller('menu-types', ['$scope', 'message', function($scope, message){
                 });
             })
         }
-        else message.showMessage('אירעה תקלה בהבאת התפריט, אנא נסה שוב מאוחר יותר');
-        $('.spinner').toggle();
+        else{
+            $('.spinner').css('display', 'none');
+            message.showMessage('אירעה תקלה בהבאת התפריט, אנא נסה שוב מאוחר יותר');
+        }
+        $('.spinner').css('display', 'none');
     });
 
 }]);
 
 app.controller('menu-items', ['$scope', '$routeParams', 'message', 'cart', function($scope, $routeParams, message, cart){
 
-    $('.spinner').toggle();
+    $('.spinner').css('display', 'block');
     var id = $routeParams.menu_type_id;
     id = id.split('=');
     id = id[1];
@@ -53,8 +56,11 @@ app.controller('menu-items', ['$scope', '$routeParams', 'message', 'cart', funct
                 $scope.menu_item_id = menu_items[i].menu_item_id;
             })
         }
-        else message.showMessage('אירעה תקלה בהבאת התפריט, אנא נסה שוב מאוחר יותר');
-        $('.spinner').toggle();
+        else{
+            $('.spinner').css('display', 'none');
+            message.showMessage('אירעה תקלה בהבאת התפריט, אנא נסה שוב מאוחר יותר');
+        }
+        $('.spinner').css('display', 'none');
     });
     $scope.selected = function(menu_item){
         cart.foodItem(menu_item);
@@ -64,7 +70,7 @@ app.controller('menu-items', ['$scope', '$routeParams', 'message', 'cart', funct
 
 app.controller('menu-additions', ['$scope', '$routeParams', 'message', 'cart', 'library', 'authentication', 'date', 'customer', 'application_settings', function($scope, $routeParams, message, cart, library, authentication, date, customer, application_settings){
 
-    $('.spinner').toggle();
+    $('.spinner').css('display', 'block');
     var type_id = $routeParams.menu_type_id;
     var item_id = $routeParams.menu_item_id;
     type_id = type_id.split('=');
@@ -95,8 +101,11 @@ app.controller('menu-additions', ['$scope', '$routeParams', 'message', 'cart', '
             });
             cart.setAdditions(additions);
         }
-        else message.showMessage('אירעה תקלה בהבאת התפריט, אנא נסה שוב מאוחר יותר');
-        $('.spinner').toggle();
+        else{
+            $('.spinner').css('display', 'none');
+            message.showMessage('אירעה תקלה בהבאת התפריט, אנא נסה שוב מאוחר יותר');
+        }
+        $('.spinner').css('display', 'none');
     });
 
     $scope.selected = function(type_id, item_id){
@@ -105,19 +114,25 @@ app.controller('menu-additions', ['$scope', '$routeParams', 'message', 'cart', '
     };
 
     $scope.approve = function(additions){
+        $('.spinner').css('display', 'block');
         var url = base_url + '/get-working-hours';
         $.ajax({
             url: url,
             type: 'POST'
         }).done(function(res){
-            if(!res.status) message.showMessage(res.msg);
+            if(!res.status){
+                $('.spinner').css('display', 'none');
+                message.showMessage(res.msg);
+            }
             else{
                 var msg = '';
                 if((!library.getIsLibrary()) && application_settings.store_closed(res.working_time)){
+                    $('.spinner').css('display', 'none');
                     msg = application_settings.get_working_time_msg(res.working_time);
                     message.showMessage(msg);
                 }
                 else{
+                    $('.spinner').css('display', 'none');
                     msg = checkSelections(additions);
                     if(msg.length != 0)
                         message.showMessage(msg);
@@ -126,6 +141,7 @@ app.controller('menu-additions', ['$scope', '$routeParams', 'message', 'cart', '
                         else updateCart(cart, additions, library, date, customer, message);
                     }
                 }
+                $('.spinner').css('display', 'none');
             }
         });
     }

@@ -108,9 +108,9 @@
 }
 .flaticon-menu45:before {
 	content: "\e015";
-    font-size: 40px;
-    line-height: 82%;
-    font-weight: bold;
+    font-size: 35px;
+    /*line-height: 82%;*/
+    /*font-weight: bold;*/
     color: #002E02;
 }
 .flaticon-money132:before {

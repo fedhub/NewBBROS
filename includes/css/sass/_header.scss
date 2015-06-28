@@ -31,6 +31,8 @@ header{
     vertical-align: middle;
     @include size(15%, 100%);
     .container{
+      //height: 20px;
+      margin-top: 5px;
       text-align: center;
       &.rotate-right{
         transform: rotate(360deg);
@@ -110,8 +112,8 @@ header{
   display: none;
   @include size(15px,15px);
   position: absolute;
-  top: 3px;
-  left: 8px;
+  top: -13px;
+  left: -8px;
   border-radius: 100px;
   border: solid 1px ghostwhite;
   background-color: #FFA500;

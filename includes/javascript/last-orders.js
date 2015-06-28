@@ -3,16 +3,19 @@ var app = angular.module('myapp.last-orders', [
 ]);
 
 app.controller('last-orders', ['$scope', 'customer', 'cart', function($scope, customer, cart){
-
+    $('.spinner').css('display', 'block');
     var url = base_url + '/last-orders&phone_number='+customer.getPhoneNumber();
     var $info_lightbox = $('#cart-item-info');
-
     $.ajax({
         url: url,
         type: 'POST'
     }).done(function(res){ // array of order_json (text)
-        if(res == false) alert('הייתה בעיה בהבאת ההזמנות האחרונות, אנא נסה שוב מאוחר יותר');
+        if(res == false){
+            $('.spinner').css('display', 'none');
+            alert('הייתה בעיה בהבאת ההזמנות האחרונות, אנא נסה שוב מאוחר יותר');
+        }
         else resHandler($scope, res);
+        $('.spinner').css('display', 'none');
     });
 
     $scope.info = function(item){
@@ -46,6 +49,7 @@ function resHandler($scope, res){
     }
     $scope.last_orders = last_orders;
     $scope.$apply();
+    $('.spinner').css('display', 'none');
 }
 
 //function print(order_info){

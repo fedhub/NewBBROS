@@ -50,13 +50,18 @@ function set_status_data(status_level){
 }
 
 function apply_status(phone_number, $scope){
+    $('.spinner').css('display', 'block');
     var url = base_url + '/get-status&phone_number='+phone_number;
     $.ajax({
         url: url,
         type: 'POST'
     }).done(function(res){
-        if(!res.status) alert(res.msg);
+        if(!res.status){
+            $('.spinner').css('display', 'none');
+            alert(res.msg);
+        }
         else{
+            $('.spinner').css('display', 'none');
             var options = get_options();
             var data = get_data(res.status, $scope);
             var ctx = $("#myChart").get(0).getContext("2d");

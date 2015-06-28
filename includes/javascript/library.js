@@ -46,12 +46,17 @@ app.controller('library', ['$scope', '$routeParams', 'library', 'cart', 'message
 }]);
 
 function library_items_ajax($scope, message, lib){
+    $('.library-wrapper').css('display', 'none');
+    $('.spinner').css('display', 'block');
     var url = base_url + '/library-items&library_id='+lib.id;
     $.ajax({
         url: url,
         type: 'POST'
     }).done(function(res){
-        if(res == false) message.showMessage('הייתה בעיה בהבאת הפריטים של הספרייה, אנא נסה שוב מאוחר יותר');
+        if(res == false){
+            $('.spinner').css('display', 'none');
+            message.showMessage('הייתה בעיה בהבאת הפריטים של הספרייה, אנא נסה שוב מאוחר יותר');
+        }
         else{
             $scope.name = lib.lib_name;
             $scope.description = lib.lib_description;
@@ -75,6 +80,8 @@ function library_items_ajax($scope, message, lib){
             }
             $scope.$apply();
         }
+        $('.spinner').css('display', 'none');
+        $('.library-wrapper').css('display', 'block');
     });
 }
 

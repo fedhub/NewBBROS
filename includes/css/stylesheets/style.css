@@ -10,7 +10,7 @@ html, body {
 * {
   margin: 0;
   padding: 0;
-  -webkit-tap-highlight-color: rgba(51, 51, 51, 0.3);
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* line 14, ../sass/_structure.scss */
@@ -192,7 +192,7 @@ html, body {
   margin: 0 auto;
   background: rgba(51, 51, 51, 0.2);
   position: absolute;
-  bottom: 13px;
+  bottom: 16px;
   right: 10px;
   line-height: 35px;
 }
@@ -240,7 +240,7 @@ html, body {
 .orders-library-wrapper .option {
   display: table-cell;
   border-radius: 100px;
-  line-height: 43px;
+  line-height: 45px;
   background: rgba(51, 51, 51, 0.2);
 }
 /* line 76, ../sass/_orders-library.scss */
@@ -248,7 +248,7 @@ html, body {
   vertical-align: middle;
   text-align: center;
   text-shadow: none;
-  font-size: 22px;
+  font-size: 25px;
 }
 /* line 83, ../sass/_orders-library.scss */
 .orders-library-wrapper #add-library {
@@ -258,16 +258,21 @@ html, body {
 
 /* line 1, ../sass/_library.scss */
 .library-wrapper {
+  display: none;
   width: 100%;
   height: 100%;
   min-height: 100%;
   overflow: hidden;
   background: rgba(151, 167, 120, 0.2);
 }
-/* line 6, ../sass/_library.scss */
+/* line 7, ../sass/_library.scss */
 .library-wrapper .folder-header {
   width: 50%;
   height: 8%;
+  -webkit-border-top-right-radius: 8px;
+  -moz-border-top-right-radius: 8px;
+  -webkit-border-top-left-radius: 8px;
+  -moz-border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
   border: 5px solid rgba(51, 51, 51, 0.9);
@@ -280,7 +285,7 @@ html, body {
   margin-top: 5px;
   display: table;
 }
-/* line 19, ../sass/_library.scss */
+/* line 24, ../sass/_library.scss */
 .library-wrapper .folder-header p {
   display: table-cell;
   text-align: center;
@@ -288,12 +293,18 @@ html, body {
   font-size: 18px;
   font-weight: bold;
 }
-/* line 25, ../sass/_library.scss */
+/* line 30, ../sass/_library.scss */
 .library-wrapper .folder-wrapper {
   width: 95%;
   height: 87%;
+  -webkit-border-top-left-radius: 10px;
+  -moz-border-top-left-radius: 10px;
   border-top-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  -moz-border-bottom-right-radius: 10px;
   border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -moz-border-bottom-left-radius: 10px;
   border-bottom-left-radius: 10px;
   border: 5px solid rgba(51, 51, 51, 0.9);
   right: 5px;
@@ -301,14 +312,14 @@ html, body {
   background: rgba(51, 51, 51, 0.2);
   margin: 0 auto;
 }
-/* line 36, ../sass/_library.scss */
+/* line 51, ../sass/_library.scss */
 .library-wrapper .details-cont {
   width: 100%;
   height: 15%;
   background: rgba(0, 0, 0, 0.3);
   display: table;
 }
-/* line 41, ../sass/_library.scss */
+/* line 56, ../sass/_library.scss */
 .library-wrapper .description-cont {
   width: 70%;
   height: 100%;
@@ -316,7 +327,13 @@ html, body {
   text-align: center;
   vertical-align: middle;
 }
-/* line 48, ../sass/_library.scss */
+/* line 59, ../sass/_library.scss */
+.library-wrapper .description-cont p {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: bold;
+}
+/* line 65, ../sass/_library.scss */
 .library-wrapper .date-cont {
   width: 30%;
   height: 100%;
@@ -324,32 +341,34 @@ html, body {
   text-align: center;
   vertical-align: middle;
 }
-/* line 51, ../sass/_library.scss */
+/* line 68, ../sass/_library.scss */
 .library-wrapper .date-cont p {
   line-height: 26px;
   font-size: 20px;
 }
-/* line 56, ../sass/_library.scss */
+/* line 73, ../sass/_library.scss */
 .library-wrapper .creation-date {
   width: 100%;
   height: 50%;
 }
-/* line 59, ../sass/_library.scss */
+/* line 76, ../sass/_library.scss */
 .library-wrapper .creation-time {
   width: 100%;
   height: 50%;
 }
-/* line 62, ../sass/_library.scss */
+/* line 79, ../sass/_library.scss */
 .library-wrapper .add-to-library {
   width: 90%;
   height: 40px;
   background: rgba(0, 0, 0, 0.3);
   margin: 10px auto;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
   box-shadow: 0px 0px 1px 0px #000;
   display: table;
 }
-/* line 69, ../sass/_library.scss */
+/* line 88, ../sass/_library.scss */
 .library-wrapper .add-to-library p {
   display: table-cell;
   text-align: center;
@@ -357,53 +376,55 @@ html, body {
   font-size: 25px;
   color: #333;
 }
-/* line 75, ../sass/_library.scss */
+/* line 94, ../sass/_library.scss */
 .library-wrapper .library-item {
   width: 90%;
   height: 40px;
   background: rgba(0, 0, 0, 0.3);
   margin: 10px auto;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
   box-shadow: 0px 0px 1px 0px #000;
   display: table;
 }
-/* line 82, ../sass/_library.scss */
+/* line 103, ../sass/_library.scss */
 .library-wrapper .library-item section {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
 }
-/* line 85, ../sass/_library.scss */
+/* line 106, ../sass/_library.scss */
 .library-wrapper .library-item p {
   font-size: 15px;
   color: #333;
 }
-/* line 90, ../sass/_library.scss */
+/* line 111, ../sass/_library.scss */
 .library-wrapper .name-cont {
   width: 45%;
 }
-/* line 92, ../sass/_library.scss */
+/* line 113, ../sass/_library.scss */
 .library-wrapper .name-cont p {
   font-size: 15px;
   font-weight: bold;
 }
-/* line 97, ../sass/_library.scss */
+/* line 118, ../sass/_library.scss */
 .library-wrapper .add-to-cart-cont {
   width: 10%;
 }
-/* line 100, ../sass/_library.scss */
+/* line 121, ../sass/_library.scss */
 .library-wrapper .info-cont {
   width: 10%;
 }
-/* line 103, ../sass/_library.scss */
+/* line 124, ../sass/_library.scss */
 .library-wrapper .delete-cont {
   width: 10%;
 }
-/* line 106, ../sass/_library.scss */
+/* line 127, ../sass/_library.scss */
 .library-wrapper .price-cont {
   width: 15%;
 }
-/* line 109, ../sass/_library.scss */
+/* line 130, ../sass/_library.scss */
 .library-wrapper .add-to-cart-cont p,
 .library-wrapper .info-cont p,
 .library-wrapper .delete-cont p {
@@ -457,44 +478,45 @@ header .hamburger {
 }
 /* line 33, ../sass/_header.scss */
 header .hamburger .container {
+  margin-top: 5px;
   text-align: center;
 }
-/* line 35, ../sass/_header.scss */
+/* line 37, ../sass/_header.scss */
 header .hamburger .container.rotate-right {
   transform: rotate(360deg);
   -webkit-transform: rotate(360deg);
 }
-/* line 39, ../sass/_header.scss */
+/* line 41, ../sass/_header.scss */
 header .hamburger .container.rotate-left {
   transform: rotate(0deg);
   -webkit-transform: rotate(0deg);
 }
-/* line 43, ../sass/_header.scss */
+/* line 45, ../sass/_header.scss */
 header .hamburger .container.rotate-right, header .hamburger .container.rotate-left {
   -webkit-transition-property: -webkit-transform;
   transition-property: transform;
   -webkit-transition-duration: .40s;
   transition-duration: .40s;
 }
-/* line 51, ../sass/_header.scss */
+/* line 53, ../sass/_header.scss */
 header .bottom-header {
   width: 100%;
   height: 52%;
   background-color: #97A778;
   box-shadow: 0 0 1px 1px rgba(51, 51, 51, 0.8);
 }
-/* line 56, ../sass/_header.scss */
+/* line 58, ../sass/_header.scss */
 header nav {
   width: 100%;
   height: 100%;
 }
-/* line 59, ../sass/_header.scss */
+/* line 61, ../sass/_header.scss */
 header ul {
   width: 100%;
   height: 100%;
   display: table;
 }
-/* line 63, ../sass/_header.scss */
+/* line 65, ../sass/_header.scss */
 header li {
   width: 20%;
   height: 100%;
@@ -503,7 +525,7 @@ header li {
   vertical-align: middle;
   text-align: center;
 }
-/* line 70, ../sass/_header.scss */
+/* line 72, ../sass/_header.scss */
 header a {
   text-decoration: none;
   color: #002E02;
@@ -511,12 +533,12 @@ header a {
   height: 100%;
   position: relative;
 }
-/* line 75, ../sass/_header.scss */
+/* line 77, ../sass/_header.scss */
 header a i {
   padding-top: 2px;
   font-size: 40px !important;
 }
-/* line 80, ../sass/_header.scss */
+/* line 82, ../sass/_header.scss */
 header .about-icon {
   max-width: 64px;
   max-height: 64px;
@@ -525,31 +547,31 @@ header .about-icon {
 }
 
 @media only screen and (min-width: 415px) and (max-width: 736px) {
-  /* line 98, ../sass/_header.scss */
+  /* line 100, ../sass/_header.scss */
   header {
     background-color: green;
   }
 }
 @media only screen and (min-width: 737px) and (max-width: 1024px) {
-  /* line 104, ../sass/_header.scss */
+  /* line 106, ../sass/_header.scss */
   header {
     background-color: blue;
   }
 }
-/* line 109, ../sass/_header.scss */
+/* line 111, ../sass/_header.scss */
 .cart-size {
   display: none;
   width: 15px;
   height: 15px;
   position: absolute;
-  top: 3px;
-  left: 8px;
+  top: -13px;
+  left: -8px;
   border-radius: 100px;
   border: solid 1px ghostwhite;
   background-color: #FFA500;
   box-shadow: 0px 0px 8px -2px #000;
 }
-/* line 119, ../sass/_header.scss */
+/* line 121, ../sass/_header.scss */
 .cart-size p {
   line-height: 16px;
   padding-right: 2px;
@@ -681,7 +703,7 @@ header .about-icon {
 }
 /* line 7, ../sass/_lightbox.scss */
 .lightbox .container {
-  width: 250px;
+  width: 270px;
   height: 340px;
   background-color: #FFF;
   margin: 0 auto;
@@ -696,28 +718,27 @@ header .about-icon {
 }
 /* line 19, ../sass/_lightbox.scss */
 .lightbox .close {
-  width: 28px;
+  width: 30px;
   height: 30px;
-  display: table;
   position: absolute;
   top: -15px;
   right: -14px;
   background-color: white;
   border-radius: 100px;
 }
-/* line 27, ../sass/_lightbox.scss */
+/* line 26, ../sass/_lightbox.scss */
 .lightbox .close p {
   display: table-cell;
   vertical-align: middle;
 }
-/* line 32, ../sass/_lightbox.scss */
+/* line 31, ../sass/_lightbox.scss */
 .lightbox .title {
   float: right;
   display: table;
   width: 100%;
   height: 33px;
 }
-/* line 36, ../sass/_lightbox.scss */
+/* line 35, ../sass/_lightbox.scss */
 .lightbox .title p {
   display: table-cell;
   text-align: center;
@@ -728,88 +749,93 @@ header .about-icon {
   font-style: italic;
   font-size: 18px;
 }
-/* line 45, ../sass/_lightbox.scss */
+/* line 44, ../sass/_lightbox.scss */
 .lightbox .content {
   width: 100%;
   height: 307px;
   float: right;
 }
-/* line 49, ../sass/_lightbox.scss */
+/* line 48, ../sass/_lightbox.scss */
 .lightbox .form {
   width: 90%;
   margin: 0 auto;
 }
-/* line 52, ../sass/_lightbox.scss */
+/* line 51, ../sass/_lightbox.scss */
 .lightbox .form .form-item {
   width: 100%;
   height: 28px;
 }
-/* line 54, ../sass/_lightbox.scss */
+/* line 53, ../sass/_lightbox.scss */
 .lightbox .form .form-item section {
   float: right;
   display: table;
 }
-/* line 59, ../sass/_lightbox.scss */
+/* line 58, ../sass/_lightbox.scss */
 .lightbox .form .required {
   width: 4%;
   height: 100%;
 }
-/* line 61, ../sass/_lightbox.scss */
+/* line 60, ../sass/_lightbox.scss */
 .lightbox .form .required p {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
 }
-/* line 65, ../sass/_lightbox.scss */
+/* line 64, ../sass/_lightbox.scss */
 .lightbox .form .detail-label {
   width: 32%;
   height: 100%;
 }
-/* line 67, ../sass/_lightbox.scss */
+/* line 66, ../sass/_lightbox.scss */
 .lightbox .form .detail-label p {
   font-size: 14px;
   display: table-cell;
   vertical-align: middle;
 }
-/* line 73, ../sass/_lightbox.scss */
+/* line 72, ../sass/_lightbox.scss */
 .lightbox .form .detail-input {
   width: 56%;
   height: 100%;
 }
-/* line 75, ../sass/_lightbox.scss */
+/* line 74, ../sass/_lightbox.scss */
 .lightbox .form .detail-input input, .lightbox .form .detail-input textarea {
   width: 97%;
   height: 90%;
   border: 1px solid rgba(51, 51, 51, 0.3);
   margin-top: 2px;
 }
-/* line 81, ../sass/_lightbox.scss */
+/* line 80, ../sass/_lightbox.scss */
 .lightbox .form .validation {
   width: 8%;
   height: 100%;
 }
-/* line 83, ../sass/_lightbox.scss */
+/* line 82, ../sass/_lightbox.scss */
 .lightbox .form .validation p {
   font-size: 14px;
   display: table-cell;
   text-align: center;
   vertical-align: middle;
 }
-/* line 89, ../sass/_lightbox.scss */
+/* line 88, ../sass/_lightbox.scss */
 .lightbox .indirect {
+  font-size: 16px;
+  color: blue;
+  text-decoration: underline;
+  margin-top: 10px;
+  text-align: center;
   display: none;
 }
 
-/* line 94, ../sass/_lightbox.scss */
+/* line 98, ../sass/_lightbox.scss */
 .approve {
-  width: 70px;
-  height: 25px;
+  width: 90px;
+  height: 30px;
   background-color: green;
   margin: 10px auto;
   box-shadow: 0px 0px 8px -2px #000;
   display: table;
 }
-/* line 100, ../sass/_lightbox.scss */
+/* line 104, ../sass/_lightbox.scss */
 .approve p {
   display: table-cell;
   text-align: center;
@@ -817,7 +843,7 @@ header .about-icon {
   color: #FFF;
 }
 
-/* line 107, ../sass/_lightbox.scss */
+/* line 111, ../sass/_lightbox.scss */
 #customer-type .container {
   width: 120px;
   height: 150px;
@@ -828,7 +854,7 @@ header .about-icon {
   margin-top: 30%;
   position: relative;
 }
-/* line 116, ../sass/_lightbox.scss */
+/* line 120, ../sass/_lightbox.scss */
 #customer-type .type-cont {
   width: 90%;
   height: 40%;
@@ -836,7 +862,7 @@ header .about-icon {
   box-shadow: 0 0 1px 1px rgba(51, 51, 51, 0.5);
   display: table;
 }
-/* line 121, ../sass/_lightbox.scss */
+/* line 125, ../sass/_lightbox.scss */
 #customer-type .type-cont p {
   display: table-cell;
   text-align: center;
@@ -845,7 +871,7 @@ header .about-icon {
   color: rgba(51, 51, 51, 0.8);
   font-size: 15px;
 }
-/* line 128, ../sass/_lightbox.scss */
+/* line 132, ../sass/_lightbox.scss */
 #customer-type #close-type {
   position: absolute;
   top: -25px;
@@ -873,10 +899,12 @@ header .about-icon {
   padding: 20px 10px 20px 10px;
   box-shadow: 0px 0px 8px -2px #000;
   border: 5px solid rgba(51, 51, 51, 0.8);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
   border-radius: 10px;
   margin-top: 50%;
 }
-/* line 18, ../sass/_screen-message.scss */
+/* line 20, ../sass/_screen-message.scss */
 .screen-message .container p {
   display: table-cell;
   text-align: center;
@@ -1488,6 +1516,6 @@ header .about-icon {
   top: 15%;
   left: 0;
   display: none;
-  background: url("../../images/spiffygif_30x30.gif") no-repeat center center;
+  background: url("../../images/ajax-loader2.gif") no-repeat center center;
   z-index: 15000;
 }

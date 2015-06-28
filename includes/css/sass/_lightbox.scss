@@ -5,7 +5,7 @@
   background-color: rgba(#fff, 0.8);
   z-index: 12000;
   .container{
-    @include size(250px, 340px);
+    @include size(270px, 340px);
     background-color: #FFF;
     margin: 0 auto;
     box-shadow: 0px 0px 8px -2px #000;
@@ -17,8 +17,7 @@
     margin-top: 50% !important;
   }
   .close{
-    @include size(28px, 30px);
-    display: table;
+    @include size(30px, 30px);
     position: absolute;
     top: -15px;
     right: -14px;
@@ -87,12 +86,17 @@
     }
   }
   .indirect{
+    font-size: 16px;
+    color: blue;
+    text-decoration: underline;
+    margin-top: 10px;
+    text-align: center;
     display: none;
   }
 }
 
 .approve {
-  @include size(70px, 25px);
+  @include size(90px, 30px);
   background-color: green;
   margin: 10px auto;
   box-shadow: 0px 0px 8px -2px #000;

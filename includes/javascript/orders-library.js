@@ -4,7 +4,7 @@ var app = angular.module('myapp.orders-library', [
 
 app.controller('orders-library', ['$scope', 'cart', 'message', 'library', 'date', 'customer', 'authentication', function($scope, cart, message, library, date, customer, authentication){
 
-    $('.spinner').toggle();
+    $('.spinner').css('display', 'block');
     var $library_details_lightbox = $('#add_library');
     var $delete_lightbox = $('#delete-item');
     var tmp_lib_name = '';
@@ -91,26 +91,38 @@ function get_libraries_ajax($scope, message, phone_number){
         url: url,
         type: 'POST'
     }).done(function(res){
-        if(res == false) message.showMessage('הייתה בעיה בהבאת הספריות שלך, אנא נסה שוב מאוחר יותר');
+        if(res == false){
+            $('.spinner').css('display', 'none');
+            message.showMessage('הייתה בעיה בהבאת הספריות שלך, אנא נסה שוב מאוחר יותר');
+        }
         else if(res != 'empty'){
+            $('.spinner').css('display', 'none');
             $scope.libraries = res;
             $scope.$apply();
             $('#add-library').css('display', 'inline-block');
         }
-        else if(res == 'empty') $('#add-library').css('display', 'inline-block');
-        $('.spinner').toggle();
+        else if(res == 'empty'){
+            $('.spinner').css('display', 'none');
+            $('#add-library').css('display', 'inline-block');
+        }
+        $('.spinner').css('display', 'none');
     });
 }
 
 function new_lib_ajax($scope, lib_details, message){
+    $('.spinner').css('display', 'block');
     var url = base_url + '/new-library';
     $.ajax({
         url: url,
         type: 'POST',
         data: {data: JSON.stringify(lib_details)}
     }).done(function(res){
-        if(res == false) message.showMessage('הייתה בעיה ביצירת הספריה החדשה, אנא נסה שוב מאוחר יותר');
+        if(res == false){
+            $('.spinner').css('display', 'none');
+            message.showMessage('הייתה בעיה ביצירת הספריה החדשה, אנא נסה שוב מאוחר יותר');
+        }
         else{
+            $('.spinner').css('display', 'none');
             $scope.libraries = res;
             $scope.$apply();
         }
@@ -129,13 +141,18 @@ function new_lib_json(phone_number, lib_name, lib_desc, date, time, authenticati
 }
 
 function add_to_cart_ajax(lib, message, cart){
+    $('.spinner').css('display', 'block');
     var url = base_url + '/library-items&library_id='+lib.id;
     $.ajax({
         url: url,
         type: 'POST'
     }).done(function(res){
-        if(res == false) message.showMessage('הייתה בעיה בהוספת הפריטים לסל, אנא נסה שוב מאוחר יותר');
+        if(res == false){
+            $('.spinner').css('display', 'none');
+            message.showMessage('הייתה בעיה בהוספת הפריטים לסל, אנא נסה שוב מאוחר יותר');
+        }
         else{
+            $('.spinner').css('display', 'none');
             // API -- response from library_items (mobile_order_functions.js)
             //var library_item_info = {
             //    library_id: library.getLibraryID(),
@@ -157,6 +174,7 @@ function add_to_cart_ajax(lib, message, cart){
 }
 
 function edit_library_ajax(lib_id, phone_num, name, desc, message, $scope){
+    $('.spinner').css('display', 'block');
     var url = base_url + '/update-library';
     var lib_data = {
         lib_id: lib_id,
@@ -169,8 +187,12 @@ function edit_library_ajax(lib_id, phone_num, name, desc, message, $scope){
         type: 'POST',
         data: {data: JSON.stringify(lib_data)}
     }).done(function(res){
-        if(res == false) message.showMessage('הייתה בעיה בעדכון פרטי הספרייה, אנא נסה שוב מאוחר יותר');
+        if(res == false){
+            $('.spinner').css('display', 'none');
+            message.showMessage('הייתה בעיה בעדכון פרטי הספרייה, אנא נסה שוב מאוחר יותר');
+        }
         else{
+            $('.spinner').css('display', 'none');
             $scope.libraries = res;
             $scope.$apply();
         }
@@ -178,6 +200,7 @@ function edit_library_ajax(lib_id, phone_num, name, desc, message, $scope){
 }
 
 function delete_library_ajax($scope, lib, phone_number, message){
+    $('.spinner').css('display', 'block');
     var url = base_url + '/delete-library';
     var info = {
         lib_id: lib.id,
@@ -188,8 +211,12 @@ function delete_library_ajax($scope, lib, phone_number, message){
         type: 'POST',
         data: {data: JSON.stringify(info)}
     }).done(function(res){
-        if(res == false) message.showMessage('הייתה בעיה עם מחיקת הספרייה, אנא נסה שוב מאוחר יותר');
+        if(res == false){
+            $('.spinner').css('display', 'none');
+            message.showMessage('הייתה בעיה עם מחיקת הספרייה, אנא נסה שוב מאוחר יותר');
+        }
         else{
+            $('.spinner').css('display', 'none');
             if(res != 'empty') $scope.libraries = res;
             else $scope.libraries = [];
             $scope.$apply();
