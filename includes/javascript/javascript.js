@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+    window.addEventListener("load", function(){
+        FastClick.attach(document.body);
+    }, false);
+
     $('.social-cont').click(function(){
        window.location = 'http://www.facebook.com';
     });

@@ -3,7 +3,7 @@ var app = angular.module('myapp.cart', [
 ]);
 
 app.controller('cart', ['$scope', 'message', 'cart', 'order_details', 'date', 'time_widget', 'authentication', function($scope, message, cart, order_details, date, time_widget, authentication){
-
+    set_size();
     var $info_lightbox = $('#cart-item-info');
     var $delete_lightbox = $('#delete-item');
     var $order_type_lightbox = $('#order-type');
@@ -193,4 +193,11 @@ function order_time_handler($scope, date, time_widget, message){
             }
         }
     });
+}
+
+function set_size(){
+    var header_height = $('header').height();
+    var footer_height = $('.cart-footer').height();
+    var body_height = $('body').height();
+    $('.cart-wrapper .items-container').height(body_height-header_height-footer_height);
 }

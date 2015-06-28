@@ -78,6 +78,7 @@ app.directive('forms', ['authentication', 'message', 'customer', function(authen
     }
 
     function form_approved(form_type){
+        $('.spinner').toggle();
         //alert(form_type + ' ' + authentication.getCustomerType());
         var error = '';
         var compare_error = '';
@@ -104,6 +105,7 @@ app.directive('forms', ['authentication', 'message', 'customer', function(authen
             data : {data : JSON.stringify(customer_details)}
         }).done(function(res){
             ajax_response(res, form_type);
+            $('.spinner').toggle();
         });
     }
 

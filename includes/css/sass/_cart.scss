@@ -73,7 +73,7 @@
   .order-type-btn,
   .order-time-btn,
   .payment-method-btn{
-    @include size(70px,100%);
+    @include size(23%,100%);
     box-shadow: 0px 0px 1px 0px #000;
     display: table;
     text-align: center;
@@ -83,7 +83,7 @@
     }
   }
   .cart-approve-cont{
-    @include size(85px,100%);
+    @include size(23%,100%);
   }
   .tot-price{
     @include size(90%, 50%);

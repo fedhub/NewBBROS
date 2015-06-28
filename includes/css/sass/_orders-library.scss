@@ -6,16 +6,26 @@
   background: rgba(#97A778, 0.2);
   .library-cont{
     display: inline-block;
-    width: 155px;
-    margin-top: 5px;
-    height: 130px;
+    margin: 3px;
+    width: 170px;
+    margin-top: 20px;
+    height: 136px;
     line-height: 130px;
     text-shadow: -1px -1px 5px #222;
     position: relative;
   }
+//  .library-cont{
+//    display: inline-block;
+//    width: 155px;
+//    margin-top: 5px;
+//    height: 130px;
+//    line-height: 130px;
+//    text-shadow: -1px -1px 5px #222;
+//    position: relative;
+//  }
   .name-cont{
     height: 35px;
-    width: 87%;
+    width: 88%;
     margin: 0 auto;
     background: rgba(51, 51, 51, 0.2);
     position: absolute;
@@ -36,11 +46,11 @@
     line-height: 120px;
   }
   .options-cont{
-    width: 131px;
-    height: 43px;
+    width: 85%;
+    height: 45px;
     position: absolute;
     top: 35px;
-    right: 12px;
+    right: 13px;
     display: table;
   }
   .creation-date{
@@ -48,8 +58,8 @@
     height: 18px;
     line-height: 18px;
     position: absolute;
-    top: 13px;
-    right: 12px;
+    top: 8px;
+    right: 15px;
     p{
       font-size: 11px;
       vertical-align: middle;
@@ -72,5 +82,6 @@
   }
   #add-library{
     display: none;
+    color: rgba(#333, 0.2);
   }
 }

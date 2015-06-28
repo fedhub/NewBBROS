@@ -1,15 +1,28 @@
+.blur{
+  display: none;
+  @include size(100%, 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(#000, 0.4);
+  transition: transform .40s ease-in-out;
+  -webkit-transition: -webkit-transform .40s ease-in-out;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  z-index: 10498;
+}
 .mobile-menu-container {
   display: block;
-  @include position(fixed, 7.5%, -75%);
+  @include position(fixed, 7%, -75%);
   width: 75%;
-  height: 92.5%;
+  height: 93%;
   background: rgba($bg-color, 1);
   box-shadow: inset -2px 0 2px rgba($txt-color, .35);
   transition: transform .40s ease-in-out;
   -webkit-transition: -webkit-transform .40s ease-in-out;
   -webkit-backface-visibility: hidden;
   -webkit-perspective: 1000;
-  z-index: 1000;
+  z-index: 10500;
 
   .connected{
     @include size(100%, 8%);

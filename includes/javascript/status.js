@@ -95,9 +95,9 @@ function get_options(){
         //Number - Amount of animation steps
         animationSteps: 100,
         //String - Animation easing effect.
-        animationEasing: "easeOutBounce",
+        animationEasing: "",
         //Boolean - Whether to animate the rotation of the chart
-        animateRotate: true,
+        animateRotate: false,
         //Boolean - Whether to animate scaling the chart from the centre
         animateScale: false,
         //String - A legend template

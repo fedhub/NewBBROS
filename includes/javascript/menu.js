@@ -5,6 +5,7 @@ var app = angular.module('myapp.menu', [
 
 app.controller('menu-types', ['$scope', 'message', function($scope, message){
 
+    $('.spinner').toggle();
     var url = base_url + '/menu-types';
     $.ajax({
         type: 'POST',
@@ -23,16 +24,17 @@ app.controller('menu-types', ['$scope', 'message', function($scope, message){
             })
         }
         else message.showMessage('אירעה תקלה בהבאת התפריט, אנא נסה שוב מאוחר יותר');
+        $('.spinner').toggle();
     });
 
 }]);
 
 app.controller('menu-items', ['$scope', '$routeParams', 'message', 'cart', function($scope, $routeParams, message, cart){
 
+    $('.spinner').toggle();
     var id = $routeParams.menu_type_id;
     id = id.split('=');
     id = id[1];
-
     var url = base_url + '/menu-items&'+id;
     $.ajax({
         type: 'POST',
@@ -52,23 +54,23 @@ app.controller('menu-items', ['$scope', '$routeParams', 'message', 'cart', funct
             })
         }
         else message.showMessage('אירעה תקלה בהבאת התפריט, אנא נסה שוב מאוחר יותר');
+        $('.spinner').toggle();
     });
-
     $scope.selected = function(menu_item){
         cart.foodItem(menu_item);
-    }
+    };
 
 }]);
 
 app.controller('menu-additions', ['$scope', '$routeParams', 'message', 'cart', 'library', 'authentication', 'date', 'customer', 'application_settings', function($scope, $routeParams, message, cart, library, authentication, date, customer, application_settings){
 
+    $('.spinner').toggle();
     var type_id = $routeParams.menu_type_id;
     var item_id = $routeParams.menu_item_id;
     type_id = type_id.split('=');
     item_id = item_id.split('=');
     type_id = type_id[1];
     item_id = item_id[1];
-
     var url = base_url + '/menu-additions&'+item_id;
     $.ajax({
         type: 'POST',
@@ -94,6 +96,7 @@ app.controller('menu-additions', ['$scope', '$routeParams', 'message', 'cart', '
             cart.setAdditions(additions);
         }
         else message.showMessage('אירעה תקלה בהבאת התפריט, אנא נסה שוב מאוחר יותר');
+        $('.spinner').toggle();
     });
 
     $scope.selected = function(type_id, item_id){

@@ -9,23 +9,22 @@
     padding-bottom: 5px;
   }
   .container{
-    @include size(99%, 100px);
+    @include size(100%, 110px);
     display: table;
     overflow: hidden;
-    margin: 2px auto;
+    margin: 1px auto;
     box-shadow: 0px 0px 5px -2px green;
-    border: solid 1px green;
     &:nth-of-type(1){
       margin-top: 0;
     }
   }
   .right-cont{
     display: table-cell;
-    @include size(30%, 100%);
+    @include size(40%, 100%);
   }
   .center-cont{
     display: table-cell;
-    @include size(55%, 100%);
+    @include size(45%, 100%);
 
   }
   .left-cont{
@@ -41,9 +40,11 @@
   .title{
     @include size(100%, 25%);
     display: table;
+    opacity: 0.9;
    p{
      font-size: 15px;
      font-weight: bold;
+     padding-right: 7px;
    }
   }
   .description{
@@ -51,6 +52,7 @@
     display: table;
     p{
       font-size: 13px;
+      padding-right: 7px;
     }
   }
   .price{

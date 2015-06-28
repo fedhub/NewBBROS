@@ -4,15 +4,13 @@ var app = angular.module('myapp.orders-library', [
 
 app.controller('orders-library', ['$scope', 'cart', 'message', 'library', 'date', 'customer', 'authentication', function($scope, cart, message, library, date, customer, authentication){
 
+    $('.spinner').toggle();
     var $library_details_lightbox = $('#add_library');
     var $delete_lightbox = $('#delete-item');
-
     var tmp_lib_name = '';
     var tmp_lib_desc = '';
     var lib_id;
-
     get_libraries_ajax($scope, message, customer.getPhoneNumber());
-
     $scope.add_to_cart = function(lib){
         add_to_cart_ajax(lib, message, cart);
     };
@@ -100,6 +98,7 @@ function get_libraries_ajax($scope, message, phone_number){
             $('#add-library').css('display', 'inline-block');
         }
         else if(res == 'empty') $('#add-library').css('display', 'inline-block');
+        $('.spinner').toggle();
     });
 }
 

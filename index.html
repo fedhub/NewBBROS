@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="includes/css/stylesheets/flaticon.css">
     <script data-require="angular.js@1.0.x" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js" data-semver="1.0.7"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <!--<script type='application/javascript' src='includes/javascript/ftlabs-fastclick-a22efe3/lib/fastclick.js'></script>-->
+    <script type='application/javascript' src='includes/javascript/ftlabs-fastclick-a22efe3/lib/fastclick.js'></script>
     <script src="https://rawgit.com/nnnick/Chart.js/master/Chart.min.js"></script>
     <script src="includes/javascript/app.js"></script>
     <script src="includes/javascript/services.js"></script>
@@ -28,12 +28,16 @@
     <script src="includes/javascript/order-approve.js"></script>
     <script src="includes/javascript/status.js"></script>
     <script src="includes/javascript/javascript.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 </head>
 <body>
 <section class="wrapper">
+    <section class="blur"></section>
+    <section class="spinner"></section>
     <section id="screen-message" class="screen-message"><section class="container"><p></p></section></section>
     <section id="customer-type" class="lightbox" forms>
-        <section class="container">
+        <section class="container" id="customer-type-cont">
             <section class="close" id="close-type"><p class="flaticon-close32"></p></section>
             <section class="type-cont" ng-click="customer_type('private')"><p>לקוח פרטי</p></section>
             <section class="type-cont" ng-click="customer_type('business')"><p>לקוח עסקי</p></section>
@@ -72,12 +76,10 @@
     <header ng-controller="header">
         <section class="top-header">
             <section class="logo"></section>
-            <section class="hamburger">
-                <section class="container" ng-click="slideMenu()">
-                    <i class="flaticon-menu45"></i>
-                </section>
-            </section>
             <section class="title"><p>{{ title }}</p></section>
+            <section class="hamburger" ng-click="slideMenu()">
+                <p class="container flaticon-menu45"></p>
+            </section>
         </section>
         <section class="bottom-header">
             <nav>
@@ -86,12 +88,12 @@
                     <li id="menu"><a href="#/menu-types" ng-click="setTitle('תפריט')"><i class="flaticon-list19"></i></a></li>
                     <li id="cart"><a href="#/cart" ng-click="setTitle('הסל שלי')"><i class="flaticon-shoppingcart14"><section class="cart-size"><p></p></section></i></a></li>
                     <li id="status"><a href="#/status" ng-click="setTitle('סטטוס הזמנה')"><i class="flaticon-hourglass"></i></a></li>
-                    <li id="about">אודות</li>
+                    <li id="about" class="about-icon"><a href="#" ></a></li>
                 </ul>
             </nav>
         </section>
     </header>
-    <div ng-view style="width: 100%; height: 85%;" forms></div>
+    <div ng-view style="width: 100%; height: 85%; position: absolute; top: 15%" forms></div>
 </section>
 </body>
 </html>
