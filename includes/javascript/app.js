@@ -9,7 +9,8 @@ var app = angular.module('myapp', [
     'myapp.services',
     'myapp.cart',
     'myapp.order-approve',
-    'myapp.status'
+    'myapp.status',
+    'myapp.success'
 ]);
 
 var base_url = 'http://www.best-biss.com';
@@ -56,6 +57,11 @@ app.config(['$routeProvider', function($routeProvider){
         .when('/cart',{
             templateUrl: 'partials/cart.html',
             controller: 'cart',
+            resolve: { resolvedVal: function(){ return; }}}
+        )
+        .when('/success-page',{
+            templateUrl: 'partials/success.html',
+            controller: 'success',
             resolve: { resolvedVal: function(){ return; }}}
         )
         .when('/status',{

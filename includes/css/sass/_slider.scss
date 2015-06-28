@@ -13,9 +13,9 @@
 }
 .mobile-menu-container {
   display: block;
-  @include position(fixed, 7%, -75%);
+  @include position(fixed, 7.5%, -75%);
   width: 75%;
-  height: 93%;
+  height: 92.5%;
   background: rgba($bg-color, 1);
   box-shadow: inset -2px 0 2px rgba($txt-color, .35);
   transition: transform .40s ease-in-out;

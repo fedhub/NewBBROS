@@ -1,13 +1,14 @@
 .home-wrapper{
   @include size(100%, 100%);
   min-height: 100%;
+  //background: rgba(#97A778, 0.1);
   .suggested-container{
     @include size(97%, 60%);
     margin: 0 auto;
     text-align: center;
   }
   .suggested-box{
-    @include size(40%, 90%);
+    @include size(45%, 90%);
     display: inline-block;
     vertical-align: middle;
     margin: 5px;
@@ -20,13 +21,40 @@
     text-align: center;
   }
   .option-box{
-    @include size(27%, 70%);
+    @include size(30%, 70%);
     display: inline-block;
     vertical-align: middle;
     margin: 1px;
     margin-top: 25px;
     box-shadow: 0px 0px 1px 0px #000;
+    p{
+      font-family: Guttman Yad-Brush;
+      font-size: 18px;
+      color: #FFF;
+      line-height: 18px;
+    }
   }
+  #orders-library{
+    background: #22313F url('../../images/Empty_Bookshelf_128.png') no-repeat center 70%;
+    background-size: 80%;
+  }
+  #last-orders{
+    background: #795548 url('../../images/Sketched_arrows_couple_pointing_down_128.png') no-repeat center 70%;
+    background-size: 80%;
+  }
+  #new-order{
+    background: #5D4360 url('../../images/Open_Menu_128.png') no-repeat center 70%;
+    background-size: 80%;
+  }
+  #suggested1{
+    background: url('../../images/suggested1.png') no-repeat center center;
+    background-size: auto 100%;
+  }
+  #suggested2{
+    background: url('../../images/suggested2.png') no-repeat center center;
+    background-size: auto 100%;
+  }
+
 }
 
 

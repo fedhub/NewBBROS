@@ -5,6 +5,7 @@ var app = angular.module('myapp.menu', [
 
 app.controller('menu-types', ['$scope', 'message', function($scope, message){
 
+    $('.spinner').css('display', 'none');
     $('.spinner').css('display', 'block');
     var url = base_url + '/menu-types';
     $.ajax({

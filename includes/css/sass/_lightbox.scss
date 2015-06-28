@@ -4,13 +4,17 @@
   @include size(100%, 100%);
   background-color: rgba(#fff, 0.8);
   z-index: 12000;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   .container{
-    @include size(270px, 340px);
+    @include size(85%, 70%);
     background-color: #FFF;
     margin: 0 auto;
     box-shadow: 0px 0px 8px -2px #000;
     border: 1px solid #B6B6B6;
-    margin-top: 30%;
+    margin-top: 20%;
     position: relative;
   }
   #customer-type-cont{
@@ -38,7 +42,7 @@
       color: $txt-color;
       font-weight: bold;
       font-style: italic;
-      font-size: 18px;
+      font-size: 25px;
     }
   }
   .content{
@@ -46,10 +50,10 @@
     float: right;
   }
   .form{
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
     .form-item{
-      @include size(100%, 28px);
+      @include size(100%, 35px);
       section{
         float: right;
         display: table;
@@ -64,7 +68,7 @@
     .detail-label{
       @include size(32%, 100%);
       p{
-        font-size: 14px;
+        font-size: 16px;
         display: table-cell;
         vertical-align: middle;
       }
@@ -75,13 +79,17 @@
         @include size(97%, 90%);
         border: 1px solid rgba(#333, 0.3);
         margin-top: 2px;
+        padding-right: 5px;
+        font-size: 16px;
       }
     }
     .validation{
       @include size(8%, 100%);
       p{
-        font-size: 14px;
-        @include cell-settings();
+        display: table-cell;
+        font-size: 18px;
+        text-align: left;
+        vertical-align: middle;
       }
     }
   }

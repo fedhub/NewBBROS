@@ -4,6 +4,7 @@ var app = angular.module('myapp.order-approve', [
 
 app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', 'date', 'customer', 'authentication', 'application_settings', function($scope, message, order_details, cart, date, customer, authentication, application_settings){
 
+    $('.spinner').css('display', 'none');
     var order_details_message;
     var order_type = '';
     var payment_method = '';
@@ -13,16 +14,21 @@ app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', '
     var order_hour, order_minutes;
 
     $scope.cart_approved = function(){
+        $('.spinner').css('display', 'block');
         var url = base_url + '/get-working-hours';
         $.ajax({
             url: url,
             type: 'POST'
         }).done(function(res){
-            if(!res.status) message.showMessage(res.msg);
+            if(!res.status){
+                $('.spinner').css('display', 'none');
+                message.showMessage(res.msg);
+            }
             else{
                 var msg = '';
                 if(application_settings.store_closed(res.working_time)){
                     msg = application_settings.get_working_time_msg(res.working_time);
+                    $('.spinner').css('display', 'none');
                     message.showMessage(msg);
                 }
                 else{
@@ -33,12 +39,19 @@ app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', '
                         msg += 'יתרתך הנוכחית: ';
                         msg += customer.getBudget() + 'ש"ח' + ' ';
                         msg += 'נמוכה ממחיר ההזמנה, אנא פנה למנהל החברה שלך או למנהל המסעדה על מנת להפקיד לחשבונך, תודה.';
+                        $('.spinner').css('display', 'none');
                         message.showMessage(msg);
                     }
                     else{
                         order_details_message = check_order_details();
-                        if(cart.getSize() == 0) message.showMessage('עליך להוסיף פריט לסל על מנת להמשיך');
-                        else if(order_details_message.length != 0) message.showMessage(order_details_message);
+                        if(cart.getSize() == 0){
+                            $('.spinner').css('display', 'none');
+                            message.showMessage('עליך להוסיף פריט לסל על מנת להמשיך');
+                        }
+                        else if(order_details_message.length != 0){
+                            $('.spinner').css('display', 'none');
+                            message.showMessage(order_details_message);
+                        }
                         else{
                             init_params();
                             send_ajax(JSON.stringify(get_order_info()));
@@ -57,10 +70,18 @@ app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', '
             data: {data: order_info}
         }).done(function(res){
             if(res){
-                if(authentication.getCustomerType() == 'business') update_business_budget();
-                else console.log('true');
+                if(authentication.getCustomerType() == 'business'){
+                    update_business_budget();
+                }
+                else{
+                    $('.spinner').css('display', 'none');
+                    window.location = '#/success-page';
+                }
             }
-            else console.log('false');
+            else{
+                $('.spinner').css('display', 'none');
+                message.shoeMessage('הייתה בעיה בתהליך ביצוע ההזמנה, אנא נסה שוב מאוחר יותר');
+            }
         });
     }
 
@@ -75,8 +96,15 @@ app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', '
             type: 'POST',
             data: {data: JSON.stringify(info)}
         }).done(function(res){
-            if(res) console.log('true-business');
-            else console.log('false');
+            if(res){
+                $('.spinner').css('display', 'none');
+                window.location = '#/success-page';
+            }
+            else{
+                $('.spinner').css('display', 'none');
+                message.showMessage('ההזמנה בוצעה בהצלחה, אך הייתה בעיה בעדכון יתרתך, אנא פנה אל מנהל החנות');
+                window.location = '#/success-page';
+            }
         });
     }
 

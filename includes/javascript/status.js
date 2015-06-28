@@ -6,14 +6,13 @@ var myNewChart = null;
 
 app.controller('status', ['$scope', 'authentication', 'message', 'customer', function($scope, authentication, message, customer){
 
+    $('.spinner').css('display', 'none');
     var connected = false;
-
     if(!authentication.isConnected()) $scope.form_request('log-in');
     else {
         socket_connect();
         apply_status(customer.getPhoneNumber(), $scope);
     }
-
     $scope.$on('got-connected', function(event) {
         connected = true;
     });
@@ -23,7 +22,6 @@ app.controller('status', ['$scope', 'authentication', 'message', 'customer', fun
             apply_status(customer.getPhoneNumber(), $scope);
         }
     });
-
     function socket_connect(){
         var socket = io.connect(base_url,{
             'reconnect': true,

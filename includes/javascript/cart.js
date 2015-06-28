@@ -3,6 +3,7 @@ var app = angular.module('myapp.cart', [
 ]);
 
 app.controller('cart', ['$scope', 'message', 'cart', 'order_details', 'date', 'time_widget', 'authentication', function($scope, message, cart, order_details, date, time_widget, authentication){
+    $('.cart-size').css('display','none');
     set_size();
     var $info_lightbox = $('#cart-item-info');
     var $delete_lightbox = $('#delete-item');

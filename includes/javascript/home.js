@@ -4,6 +4,7 @@ var app = angular.module('myapp.home', [
 
 app.controller('home', ['$scope', 'authentication', function($scope, authentication){
 
+    $('.spinner').css('display', 'none');
     $scope.last_orders = function(){
         if(!authentication.isConnected()) $scope.form_request('log-in');
         else window.location = '#/last-orders';

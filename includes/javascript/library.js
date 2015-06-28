@@ -4,6 +4,7 @@ var app = angular.module('myapp.library', [
 
 app.controller('library', ['$scope', '$routeParams', 'library', 'cart', 'message', 'date', 'customer', function($scope, $routeParams, library, cart, message, date, customer){
 
+    $('.spinner').css('display', 'none');
     var $info_lightbox = $('#cart-item-info');
     var $delete_lightbox = $('#delete-item');
 

@@ -1,0 +1,13 @@
+.success-cont{
+  @include size(100%, 100%);
+  background-color: #D8DDCD;
+  .ok-mark{
+    @include size(100%, 20%);
+    background: url('../../images/Ok_mark_64.png') no-repeat center center;
+  }
+  h1, h2, h3{
+    margin-top: 20px;
+    text-align: center;
+    color: $txt-color;
+  }
+}
