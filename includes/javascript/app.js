@@ -12,8 +12,8 @@ var app = angular.module('myapp', [
     'myapp.status'
 ]);
 
-//var base_url = 'http://www.best-biss.com';
-var base_url = 'http://localhost:3000';
+var base_url = 'http://www.best-biss.com';
+//var base_url = 'http://localhost:3000';
 
 app.config(['$routeProvider', function($routeProvider){
 

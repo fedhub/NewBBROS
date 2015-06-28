@@ -12,7 +12,7 @@ header{
   .logo{
     float: right;
     @include size(150px, 100%);
-    @include background-image('http://localhost:3000/images/mobile_logo.png');
+    @include background-image('http://www.best-biss.com/images/mobile_logo.png');
   }
   .title{
     float: left;
