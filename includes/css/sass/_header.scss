@@ -96,12 +96,6 @@ header{
   }
 }
 
-@include small_landscape(){
-   header{
-     background-color: green;
-   }
-}
-
 @include medium_portrait(){
   header{
     background-color: blue;
@@ -127,4 +121,22 @@ header{
     color: #002E02;
   }
 
+}
+
+@include small_landscape(){
+  header{
+    @include size(100%, 90px);
+    .logo{
+      @include size(22%, 100%);
+    }
+    .top-header .title{
+      @include size(68%, 100%);
+      p{
+        font-size: 28px;
+      }
+    }
+    .hamburger{
+      @include size(10%, 100%);
+    }
+  }
 }

@@ -58,7 +58,7 @@
     }
   }
   .order-date{
-    @include size(100px,42px);
+    @include size(120px,42px);
     border: solid 3px #333;
     border-radius: 20px;
     display: inline-block;
@@ -82,5 +82,11 @@
       text-align: center;
       color: #333;
     }
+  }
+}
+
+@include small_landscape() {
+  .last-orders-wrapper {
+    margin-top: 45px;
   }
 }

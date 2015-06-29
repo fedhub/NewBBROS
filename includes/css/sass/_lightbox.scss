@@ -9,7 +9,7 @@
     display: none;
   }
   .container{
-    @include size(85%, 70%);
+    @include size(85%, 80%);
     background-color: #FFF;
     margin: 0 auto;
     box-shadow: 0px 0px 8px -2px #000;
@@ -33,8 +33,12 @@
     }
   }
   .title{
+    background-color: #FFF;
     float: right;
     display: table;
+//    -moz-box-shadow: 0px 2px 13px #000;
+//    -webkit-box-shadow: 0px 2px 13px #000;
+//    box-shadow: 0px 2px 13px #000;
     @include size(100%, 33px);
     p{
       @include cell-settings();
@@ -46,7 +50,9 @@
     }
   }
   .content{
+    background-color: #FFF;
     @include size(100%, 307px);
+    overflow: auto;
     float: right;
   }
   .form{
@@ -141,6 +147,20 @@
     position: absolute;
     top: -25px;
     right: -20px;
+  }
+}
+
+@include small_landscape(){
+  #customer-type .container{
+    margin-top: 15% !important;
+  }
+  .lightbox{
+    .container{
+      @include size(50%, 420px);
+      margin-top: 5%;
+      margin-bottom: 20px;
+      position: relative;
+    }
   }
 }
 

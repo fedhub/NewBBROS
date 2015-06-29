@@ -48,3 +48,16 @@
   background-color: #D8DDCD;
   opacity: 1;
 }
+
+@include small_landscape() {
+  .status-wrapper {
+    height: auto;
+  }
+  .status-bg{
+    background: url('../../images/plate.jpeg') no-repeat;
+    background-size: 60% 60%;
+    background-position: center center;
+    background-color: #D8DDCD;
+    opacity: 1;
+  }
+}

@@ -57,4 +57,11 @@
 
 }
 
+@include small_landscape(){
+  .home-wrapper{
+    @include size(100%, 250%);
+    margin-top: 35px;
+  }
+}
+
 

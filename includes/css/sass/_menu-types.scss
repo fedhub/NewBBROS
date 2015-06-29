@@ -1,7 +1,6 @@
 .menu-types-wrapper{
   width: 100%;
   min-height: 100%;
-
   .food-types-container{
     width: 100%;
     margin: 5px auto;
@@ -24,6 +23,18 @@
       font-size: 16px;
       background-color: rgba(green, 0.1);
       box-shadow: 2px 25px 100px 0px rgba(green, 0.5);
+    }
+  }
+}
+
+@include small_landscape(){
+  .menu-types-wrapper{
+    margin-top: 45px;
+    .container{
+      @include size(48%, 300px);
+      p{
+        font-size: 18px;
+      }
     }
   }
 }

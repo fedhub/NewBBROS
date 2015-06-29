@@ -69,7 +69,7 @@ app.directive('forms', ['authentication', 'message', 'customer', function(authen
         if(form_type == 'update-details' && authentication.getCustomerType() == 'business'){
             $scope.title = 'עדכון פרטים אישיים';
             $('.approve').css('margin-top', '5px');
-            $('.approve').css('height', '20px');
+            $('.approve').css('height', '35px');
         }
         $scope.form_items = form_items(form_type);
         if(form_type == 'log-in' && authentication.getCustomerType() == 'private'){

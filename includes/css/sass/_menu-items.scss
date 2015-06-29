@@ -1,7 +1,6 @@
 .menu-items-wrapper{
   width: 100%;
   min-height: 100%;
-
   .food-items-container{
     width: 100%;
     margin: 0 auto;
@@ -63,6 +62,30 @@
       font-weight: bold;
       font-size: 12px;
       color: brown;
+    }
+  }
+}
+
+@include small_landscape(){
+  .menu-items-wrapper{
+    margin-top: 45px;
+    .container{
+      @include size(100%, 175px);
+    }
+    .title{
+      p{
+        font-size: 18px;
+      }
+    }
+    .description{
+      p{
+        font-size: 16px;
+      }
+    }
+    .price{
+      p{
+        font-size: 16px;
+      }
     }
   }
 }

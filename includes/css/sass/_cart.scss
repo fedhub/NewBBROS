@@ -201,3 +201,19 @@
   height: 270px;
   overflow: auto;
 }
+
+#cart-item-info{
+  .container{
+    height: 345px;
+  }
+}
+
+#item-info{
+  height: 270px;
+}
+
+@include small_landscape() {
+  .cart-wrapper{
+    margin-top: 45px;
+  }
+}

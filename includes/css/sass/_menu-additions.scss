@@ -97,3 +97,32 @@
     }
   }
 }
+
+@include small_landscape() {
+  .menu-additions-wrapper {
+    margin-top: 45px;
+    .container {
+      @include size(32%, 270px);
+    }
+    .title{
+      p{
+        font-size: 25px;
+      }
+    }
+    .item-title{
+      p{
+        font-size: 16px;
+      }
+    }
+    .description{
+      p{
+        font-size: 16px;
+      }
+    }
+    .price{
+      p{
+        font-size: 16px;
+      }
+    }
+  }
+}

@@ -133,3 +133,24 @@
     font-size: 22px;
   }
 }
+
+@include small_landscape() {
+  .library-wrapper{
+    margin-top: 45px;
+    margin-bottom: 20px;
+    .folder-wrapper{
+      height: auto;
+      padding-bottom: 20px;
+    }
+    .folder-header{
+      height: 45px;
+      margin-right: 11px;
+    }
+    .add-to-library{
+      width: 60%;
+    }
+    .library-item{
+      width: 60%;
+    }
+  }
+}
