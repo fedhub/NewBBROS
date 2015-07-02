@@ -138,8 +138,14 @@ app.controller('menu-additions', ['$scope', '$routeParams', 'message', 'cart', '
                     if(msg.length != 0)
                         message.showMessage(msg);
                     else{
-                        if(!authentication.isConnected()) $scope.form_request('log-in');
-                        else updateCart(cart, additions, library, date, customer, message);
+                        if(!authentication.isConnected()){
+                            $('.spinner').css('display', 'none');
+                            $scope.form_request('log-in');
+                        }
+                        else{
+                            $('.spinner').css('display', 'none');
+                            updateCart(cart, additions, library, date, customer, message);
+                        }
                     }
                 }
                 $('.spinner').css('display', 'none');
