@@ -2,17 +2,31 @@ var app = angular.module('myapp.status', [
     'myapp.services'
 ]);
 
-var myNewChart = null;
+//var myNewChart = null;
+var myNewChart;
+app.controller('status', ['$scope', '$location', 'authentication', 'message', 'customer', 'swiper', function($scope, $location, authentication, message, customer, swiper){
 
-app.controller('status', ['$scope', 'authentication', 'message', 'customer', function($scope, authentication, message, customer){
-
+    myNewChart = null;
     $('.spinner').css('display', 'none');
+    $('#header-title p').html('סטטוס הזמנה');
+    //swiper.set_position(4);
+    //swiper.set_background(4);
+    //if(swiper.get_direction() == 'right') $('.status-wrapper').addClass('slide-right');
+    //if(swiper.get_direction() == 'left') $('.status-wrapper').addClass('slide-left');
+    //$('.status-wrapper').bind('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
+    //    if(!authentication.isConnected()) $scope.form_request('log-in');
+    //    else {
+    //        socket_connect();
+    //        apply_status(customer.getPhoneNumber(), $scope);
+    //    }
+    //});
+    //$scope.swipeLeft = function(page){
+    //    swiper.set_direction('left');
+    //    $location.url(page);
+    //};
+    socket_connect();
+    apply_status(customer.getPhoneNumber(), $scope);
     var connected = false;
-    if(!authentication.isConnected()) $scope.form_request('log-in');
-    else {
-        socket_connect();
-        apply_status(customer.getPhoneNumber(), $scope);
-    }
     $scope.$on('got-connected', function(event) {
         connected = true;
     });

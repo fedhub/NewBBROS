@@ -1,4 +1,7 @@
 var app = angular.module('myapp', [
+    //'ngRoute',
+    //'ngAnimate', //this!
+    //'ngTouch', // and this!
     'myapp.header',
     'myapp.home',
     'myapp.last-orders',
@@ -13,7 +16,7 @@ var app = angular.module('myapp', [
     'myapp.success'
 ]);
 
-var base_url = 'http://www.best-biss.com';
+var base_url = 'https://www.best-biss.com';
 //var base_url = 'http://localhost:3000';
 
 app.config(['$routeProvider', function($routeProvider){
@@ -44,12 +47,12 @@ app.config(['$routeProvider', function($routeProvider){
             controller: 'menu-types',
             resolve: { resolvedVal: function(){ return; }}}
         )
-        .when('/menu-items/:menu_type_id',{
+        .when('/menu-items/:menu_type_id/:menu_type_name',{
             templateUrl: 'partials/menu/menu-items.html',
             controller: 'menu-items',
             resolve: { resolvedVal: function(){ return; }}}
         )
-        .when('/menu-additions/:menu_type_id/:menu_item_id',{
+        .when('/menu-additions/:menu_type_id/:menu_item_id/:menu_item_name',{
             templateUrl: 'partials/menu/menu-additions.html',
             controller: 'menu-additions',
             resolve: { resolvedVal: function(){ return; }}}

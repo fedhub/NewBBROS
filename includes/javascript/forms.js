@@ -3,7 +3,7 @@ var app = angular.module('myapp.forms', [
     'myapp.menu'
 ]);
 
-app.directive('forms', ['authentication', 'message', 'customer', function(authentication, message, customer){
+app.directive('forms', ['authentication', 'message', 'customer', 'cart', 'user_session', function(authentication, message, customer, cart, user_session){
 
     // GLOBALS
     var $lightbox = $('#lightbox'), $customer_type = $('#customer-type'), $first_name='', $last_name='', $phone_number='', $email='',
@@ -12,12 +12,25 @@ app.directive('forms', ['authentication', 'message', 'customer', function(authen
     return {
         controller: function($scope) {
             $scope.signed_up = 'לא מחובר';
+            $scope.update_comments = function(){
+                cart.set_comments($('.comments-lightbox textarea').val());
+                $('.comments-lightbox textarea').val('');
+                $('.comments-lightbox').fadeOut(function(){
+                    cart.set_comments_flag(true);
+                });
+            };
             $scope.form_request = function(form_type){
+                authentication.set_form_type(form_type);
                 if(form_type == 'log-out'){
                     if(authentication.isConnected()){
                         message.greetings('לא מחובר');
                         message.showMessage('ההתנתקות הושלמה');
-                        setTimeout(function(){ location.reload(); window.location = "#/home";}, (message.getDelay()+1000));
+                        setTimeout(function(){
+                            localStorage.clear();
+                            user_session.setConnected(0);
+                            user_session.setSessionCounter(0);
+                            location.reload(); window.location = "#/home";
+                        }, (message.getDelay()+1000));
                     }
                     else message.showMessage('אינך מחובר');
                 }
@@ -28,34 +41,44 @@ app.directive('forms', ['authentication', 'message', 'customer', function(authen
                         if(form_type == 'log-in') msg = 'הינך מחובר למערכת, אם ברצונך להתחבר כמשתמש אחר עליך להתנתק ראשית';
                         message.showMessage(msg);
                     }
-                    if(form_type == 'update-details'){
-                        form_req($scope, form_type);
-                    }
+                    if(form_type == 'update-details') form_req($scope, form_type);
                 }
                 else{
-                    if(form_type == 'log-in'){
-                        $customer_type.fadeIn();
-                    }
+                    if(form_type == 'log-in') $customer_type.fadeIn();
                     else if(form_type == 'update-details'){
                         msg = 'עלייך להתחבר למערכת על מנת לערוך פרטים אישיים';
                         message.showMessage(msg);
                     }
                     else{
                         form_req($scope, form_type);
-                        $scope.form_approved = function(){
-                            form_approved(form_type);
-                        };
+                        //$scope.form_approved = function(){
+                        //    form_approved(form_type);
+                        //};
                     }
                 }
-                $scope.customer_type = function(cust_type){
-                    if(cust_type == 'private') authentication.setCustomerType('private');
-                    if(cust_type == 'business') authentication.setCustomerType('business');
-                    $('#customer-type').fadeOut();
-                    form_req($scope, 'log-in');
-                };
-                $scope.form_approved = function(){
-                    form_approved(form_type);
-                };
+                //$scope.customer_type = function(cust_type){
+                //    console.log('here');
+                //    authentication.setCustomerType(cust_type);
+                //    user_session.setCustomerType(cust_type);
+                //    //if(cust_type == 'private') authentication.setCustomerType('private');
+                //    //if(cust_type == 'business') authentication.setCustomerType('business');
+                //    $('#customer-type').fadeOut();
+                //    form_req($scope, 'log-in');
+                //};
+                //$scope.form_approved = function(){
+                //    form_approved(form_type);
+                //};
+            };
+            $scope.customer_type = function(cust_type){
+                authentication.setCustomerType(cust_type);
+                user_session.setCustomerType(cust_type);
+                //if(cust_type == 'private') authentication.setCustomerType('private');
+                //if(cust_type == 'business') authentication.setCustomerType('business');
+                $('#customer-type').fadeOut();
+                form_req($scope, 'log-in');
+            };
+            $scope.form_approved = function(){
+                form_approved(authentication.get_form_type());
             };
         }
     };
@@ -79,7 +102,6 @@ app.directive('forms', ['authentication', 'message', 'customer', function(authen
 
     function form_approved(form_type){
         $('.spinner').css('display', 'block');
-        //alert(form_type + ' ' + authentication.getCustomerType());
         var error = '';
         var compare_error = '';
         set_globals(form_type);
@@ -116,11 +138,17 @@ app.directive('forms', ['authentication', 'message', 'customer', function(authen
     }
 
     function ajax_response(res, form_type){
+        var globals;
         if(form_type == 'sign-up') {
             if (res) {
-                customer.setDetails(get_globals(form_type));
-                authentication.setConnected(true);
+                globals = get_globals(form_type);
+                user_session.setDetails(globals, 'private');
+                user_session.setCustomerType('private');
                 authentication.setCustomerType('private');
+                customer.setDetails(globals);
+                user_session.setConnected(1);
+                user_session.setSessionCounter(1);
+                authentication.setConnected(true);
                 message.msgCloseLightbox('ההרשמה בוצעה בהצלחה');
                 message.greetings('שלום ' + $first_name);
             }
@@ -131,7 +159,9 @@ app.directive('forms', ['authentication', 'message', 'customer', function(authen
         }
         if(form_type == 'update-details'){
             if(res.status){
-                customer.setDetails(get_globals(form_type));
+                globals = get_globals(form_type);
+                user_session.setDetails(globals);
+                customer.setDetails(globals);
                 message.msgCloseLightbox('עדכון הפרטים האישיים הושלם בהצלחה');
                 if(authentication.getCustomerType() == 'private') message.greetings('שלום ' + $first_name);
                 if(authentication.getCustomerType() == 'business') {
@@ -161,7 +191,10 @@ app.directive('forms', ['authentication', 'message', 'customer', function(authen
                 message.showMessage('סיסמה שגויה, אנא נסה שוב');
             }
             else{
+                user_session.setDetails(res, authentication.getCustomerType());
                 customer.setDetails(res);
+                user_session.setConnected(1);
+                user_session.setSessionCounter(1);
                 authentication.setConnected(true);
                 message.msgCloseLightbox('ההתחברות הושלמה');
                 if(authentication.getCustomerType() == 'private') message.greetings('שלום ' + $first_name);

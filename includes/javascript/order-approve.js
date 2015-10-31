@@ -2,7 +2,7 @@ var app = angular.module('myapp.order-approve', [
     'myapp.services'
 ]);
 
-app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', 'date', 'customer', 'authentication', 'application_settings', function($scope, message, order_details, cart, date, customer, authentication, application_settings){
+app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', 'date', 'customer', 'authentication', 'application_settings', 'payment', function($scope, message, order_details, cart, date, customer, authentication, application_settings, payment){
 
     $('.spinner').css('display', 'none');
     var order_details_message;
@@ -54,7 +54,10 @@ app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', '
                         }
                         else{
                             init_params();
-                            send_ajax(JSON.stringify(get_order_info()));
+                            if(authentication.getCustomerType() == 'private' && payment_method == 'credit'){
+                                pay_with_credit();
+                            }
+                            else send_ajax(JSON.stringify(get_order_info()));
                         }
                     }
                 }
@@ -150,6 +153,29 @@ app.controller('order-approve', ['$scope', 'message', 'order_details', 'cart', '
         if(authentication.getCustomerType() == 'private' && order_details.getPaymentMethod() == '')
             msg += 'אנא בחר אמצעי תשלום. ';
         return msg;
+    }
+
+    function pay_with_credit(){
+        var url = 'https://secure.cardcom.co.il/Interface/PerformSimpleCharge.aspx';
+        var data = {
+            'terminalnumber': encodeURIComponent('1000'),
+            'codepage': encodeURIComponent('65001'),
+            'username': encodeURIComponent('card9611'),
+            'ChargeInfo.SumToBill': encodeURIComponent(cart.getTotalPrice()),
+            'ChargeInfo.CoinID': encodeURIComponent('1'),
+            'ChargeInfo.Language': encodeURIComponent('he'),
+            'ChargeInfo.ProductName': encodeURIComponent("בסט ביס"),
+            'ChargeInfo.APILevel': encodeURIComponent('9'),
+            'ChargeInfo.SuccessRedirectUrl': "https://www.best-biss.com/payment-success"
+        };
+
+        $.post(url, data, function(res){
+            var arr = res.split("&");
+            var low_profile_code = arr[2].split("=")[1];
+            var terminalnumber = "1000";
+            window.location = "https://www.best-biss.com/credit-payment&terminalnumber="+encodeURIComponent(terminalnumber)+"&lowprofilecode="+encodeURIComponent(low_profile_code);
+        });
+
     }
 
 }]);

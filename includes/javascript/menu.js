@@ -3,111 +3,159 @@ var app = angular.module('myapp.menu', [
     'myapp.forms'
 ]);
 
-app.controller('menu-types', ['$scope', 'message', function($scope, message){
+app.controller('menu-types', ['$scope', '$location', 'message', 'swiper', function($scope, $location, message, swiper){
 
+    //swiper.set_position(2);
+    //swiper.set_background(2);
+    //if(swiper.get_direction() == 'right') $('.food-types-container').addClass('slide-right');
+    //if(swiper.get_direction() == 'left') $('.food-types-container').addClass('slide-left');
+    //$('.food-types-container').bind('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {$('.menu-types-wrapper').css('position','static');});
+    //$scope.swipeLeft = function(page){
+    //    swiper.set_direction('left');
+    //    $location.url(page);
+    //};
+    //$scope.swipeRight = function(page){
+    //    swiper.set_direction('right');
+    //    $location.url(page);
+    //};
+    $('#header-title p').html('תפריט');
     $('.spinner').css('display', 'none');
     $('.spinner').css('display', 'block');
     var url = base_url + '/menu-types';
-    $.ajax({
-        type: 'POST',
-        url: url
-    }).done(function(menu_types){
-        // Query arguments - id, name, image_name
-        if(menu_types != false){
+    if(typeof(Storage) !== "undefined") {
+        var menu_types = JSON.parse(localStorage.getItem('menu_types'));
+        if(menu_types != null && prev_stamp == curr_stamp){
             $scope.menu_types = menu_types;
-            $scope.$apply();
-            $.each( $('.food-types-container').find('.container'), function(i) {
-                $(this).css({
-                    "background": "url('"+base_url+'/images/'+menu_types[i].image_name+"') no-repeat",
-                    "background-size": "contain",
-                    "background-position": "center center"
-                });
-            })
-        }
-        else{
             $('.spinner').css('display', 'none');
-            message.showMessage('אירעה תקלה בהבאת התפריט, אנא נסה שוב מאוחר יותר');
         }
+        else {
+            if(prev_stamp != curr_stamp) reset_local_storage();
+            menu_types_ajax();
+        }
+    }
+    else menu_types_ajax();
+
+    function menu_types_ajax(){
+        $.ajax({
+            type: 'POST',
+            url: url
+        }).done(function(menu_types){
+            // Query arguments - id, name, image_name
+            if(menu_types != false) render_menu_types(menu_types);
+            else{
+                $('.spinner').css('display', 'none');
+                message.showMessage('אירעה תקלה בהבאת התפריט, אנא נסה שוב מאוחר יותר');
+            }
+        });
+    }
+   // $scope.setSwiper = function(){swiper.set_direction('right');};
+    function render_menu_types(menu_types){
+        for(var i = 0 in menu_types) menu_types[i].image_name = base_url+'/images/'+menu_types[i].image_name;
+        localStorage.setItem('menu_types', JSON.stringify(menu_types));
+        $scope.menu_types = menu_types;
+        $scope.$apply();
         $('.spinner').css('display', 'none');
-    });
+    }
 
 }]);
 
-app.controller('menu-items', ['$scope', '$routeParams', 'message', 'cart', function($scope, $routeParams, message, cart){
+app.controller('menu-items', ['$scope', '$location', '$routeParams', 'message', 'cart', 'swiper', function($scope, $location, $routeParams, message, cart, swiper){
 
+    //if(swiper.get_direction() == 'right') $('.menu-items-wrapper').addClass('slide-right');
+    //if(swiper.get_direction() == 'left') $('.menu-items-wrapper').addClass('slide-left');
+    //$('.menu-items-wrapper').bind('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {$('.menu-items-wrapper').css('position','static');});
+    //$scope.swipeLeft = function(page){
+    //    swiper.set_direction('left');
+    //    $location.url(page);
+    //};
+    //$scope.swipeRight = function(page){
+    //    swiper.set_direction('right');
+    //    $location.url(page);
+    //};
     $('.spinner').css('display', 'block');
     var id = $routeParams.menu_type_id;
+    var name = $routeParams.menu_type_name;
     id = id.split('=');
     id = id[1];
-    var url = base_url + '/menu-items&'+id;
-    $.ajax({
-        type: 'POST',
-        url: url
-    }).done(function(menu_items){
-        if(menu_items != false){
+    name = name.split('=');
+    name = name[1];
+    $('#header-title p').html(name);
+    var url = base_url + '/menu-items&' + id;
+    var menu_items_name = 'menu_type_' + id;
+    if(typeof(Storage) !== "undefined") {
+        var menu_items = JSON.parse(localStorage.getItem(menu_items_name));
+        if(menu_items != null && prev_stamp == curr_stamp){
             $scope.menu_items = menu_items;
-            $scope.$apply();
-            $.each( $('.food-items-container').find('.right-cont'), function(i) {
-                //alert(menu_items[i].image_name);
-                $(this).css({
-                    "background": "url('"+base_url+'/images/'+menu_items[i].image_name+"') no-repeat",
-                    "background-size": "contain",
-                    "background-position": "center center"
-                });
-                $scope.menu_item_id = menu_items[i].menu_item_id;
-            })
-        }
-        else{
             $('.spinner').css('display', 'none');
-            message.showMessage('אירעה תקלה בהבאת התפריט, אנא נסה שוב מאוחר יותר');
         }
-        $('.spinner').css('display', 'none');
-    });
+        else menu_items_ajax();
+    }
+    else menu_items_ajax();
+
     $scope.selected = function(menu_item){
+        //swiper.set_direction('right');
+        //swiper.set_menu_type_name(name);
         cart.foodItem(menu_item);
     };
 
+    function menu_items_ajax(){
+        $.ajax({
+            type: 'POST',
+            url: url
+        }).done(function(menu_items){
+            if(menu_items != false) render_menu_items(menu_items);
+            else{
+                $('.spinner').css('display', 'none');
+                message.showMessage('אירעה תקלה בהבאת התפריט, אנא נסה שוב מאוחר יותר');
+            }
+        });
+    }
+
+    function render_menu_items(menu_items){
+        for(var i = 0 in menu_items) menu_items[i].image_name = base_url+'/images/'+menu_items[i].image_name;
+        localStorage.setItem(menu_items_name, JSON.stringify(menu_items));
+        $scope.menu_items = menu_items;
+        $scope.$apply();
+        $('.spinner').css('display', 'none');
+    }
+
 }]);
 
-app.controller('menu-additions', ['$scope', '$routeParams', 'message', 'cart', 'library', 'authentication', 'date', 'customer', 'application_settings', function($scope, $routeParams, message, cart, library, authentication, date, customer, application_settings){
+app.controller('menu-additions', ['$scope', '$location', '$routeParams', 'message', 'cart', 'library', 'authentication', 'date', 'customer', 'application_settings', 'swiper', function($scope, $location, $routeParams, message, cart, library, authentication, date, customer, application_settings, swiper){
 
+    //if(swiper.get_direction() == 'right') $('.menu-additions-wrapper').addClass('slide-right');
+    //if(swiper.get_direction() == 'left') $('.menu-additions-wrapper').addClass('slide-left');
+    //$('.menu-additions-wrapper').bind('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {$('.menu-additions-wrapper').css('position','static');});
     $('.spinner').css('display', 'block');
     var type_id = $routeParams.menu_type_id;
-    var item_id = $routeParams.menu_item_id;
     type_id = type_id.split('=');
-    item_id = item_id.split('=');
     type_id = type_id[1];
+    var item_id = $routeParams.menu_item_id;
+    item_id = item_id.split('=');
     item_id = item_id[1];
-    var url = base_url + '/menu-additions&'+item_id;
-    $.ajax({
-        type: 'POST',
-        url: url
-    }).done(function(menu_additions){
-        // Query arguments -
-        // ADDITION_TYPE: addition_type_id, addition_type_name, addition_type_description, selection_type, selections_amount
-        // ADDITION_ITEM: addition_item_id, addition_item_name, addition_item_description, image, price
-        // For each addition item we have the above information plus we have the food_item_id and the food_type_id
-        if(menu_additions != false){
-            var additions = getAdditions(menu_additions);
+    var name = $routeParams.menu_item_name;
+    name = name.split('=');
+    name = name[1];
+    var addition_items_name = 'menu_item_' + item_id;
+    $('#header-title p').html(name);
+    //$scope.swipeLeft = function(){
+    //    var url = 'menu-items/:menu_type_id='+type_id+'/:menu_type_name='+swiper.get_menu_type_name();
+    //    swiper.set_direction('left');
+    //    $location.url(url);
+    //};
+    if(typeof(Storage) !== "undefined") {
+        var addition_items = localStorage.getItem(addition_items_name);
+        if(addition_items != null && prev_stamp == curr_stamp){
+            addition_items = JSON.parse(addition_items);
+            var additions = getAdditions(addition_items);
             $scope.additions = additions;
-            $scope.$apply();
             $('#approve-menu').css('display', 'table');
-            $.each( $('.menu-additions-wrapper').find('.image'), function(i) {
-                $(this).css({
-                    "background": "url('"+base_url+'/images/'+menu_additions[i].image+"') no-repeat",
-                    "background-size": "contain",
-                    "background-position": "center center"
-                });
-                //$scope.addition_item_id = menu_additions[i].addition_item_id;
-            });
             cart.setAdditions(additions);
-        }
-        else{
             $('.spinner').css('display', 'none');
-            message.showMessage('אירעה תקלה בהבאת התפריט, אנא נסה שוב מאוחר יותר');
         }
-        $('.spinner').css('display', 'none');
-    });
+        else addition_items_ajax();
+    }
+    else addition_items_ajax();
 
     $scope.selected = function(type_id, item_id){
         var additions = cart.getAdditions();
@@ -144,13 +192,48 @@ app.controller('menu-additions', ['$scope', '$routeParams', 'message', 'cart', '
                         }
                         else{
                             $('.spinner').css('display', 'none');
-                            updateCart(cart, additions, library, date, customer, message);
+                            if(!cart.get_comments_flag()) $('.comments-lightbox').fadeIn();
+                            else{
+                                cart.set_comments_flag(false);
+                                updateCart(cart, additions, library, date, customer, message);
+                            }
                         }
                     }
                 }
                 $('.spinner').css('display', 'none');
             }
         });
+    };
+
+    function addition_items_ajax(){
+        var url = base_url + '/menu-additions&'+item_id;
+        $.ajax({
+            type: 'POST',
+            url: url
+        }).done(function(menu_additions){
+            // Query arguments -
+            // ADDITION_TYPE: addition_type_id, addition_type_name, addition_type_description, selection_type, selections_amount
+            // ADDITION_ITEM: addition_item_id, addition_item_name, addition_item_description, image, price
+            // For each addition item we have the above information plus we have the food_item_id and the food_type_id
+            if(menu_additions != false) render_menu_additions(menu_additions);
+            else{
+                $('.spinner').css('display', 'none');
+                message.showMessage('אירעה תקלה בהבאת התפריט, אנא נסה שוב מאוחר יותר');
+            }
+        });
+    }
+
+    function render_menu_additions(menu_additions){
+        for(var i = 0 in menu_additions) menu_additions[i].image = base_url+'/images/'+menu_additions[i].image;
+        localStorage.setItem(addition_items_name, JSON.stringify(menu_additions));
+        localStorage.setItem('menu_stamp', curr_stamp);
+        prev_stamp = curr_stamp;
+        var additions = getAdditions(menu_additions);
+        $scope.additions = additions;
+        $scope.$apply();
+        $('#approve-menu').css('display', 'table');
+        cart.setAdditions(additions);
+        $('.spinner').css('display', 'none');
     }
 
 }]);
@@ -403,4 +486,16 @@ function checkSelections(additions){
         }
     });
     return msg;
+}
+
+function reset_local_storage(){
+    var tmp_customer_type = localStorage.getItem('customer_type');
+    var tmp_user_connected = localStorage.getItem('user_connected');
+    var tmp_user_details = localStorage.getItem('user_details');
+    var tmp_menu_stamp = localStorage.getItem('menu_stamp');
+    localStorage.clear();
+    localStorage.setItem('customer_type', tmp_customer_type);
+    localStorage.setItem('user_connected', tmp_user_connected);
+    localStorage.setItem('user_details', tmp_user_details);
+    localStorage.setItem('menu_stamp', tmp_menu_stamp);
 }

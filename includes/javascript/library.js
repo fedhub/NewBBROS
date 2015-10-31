@@ -2,23 +2,30 @@ var app = angular.module('myapp.library', [
     'myapp.services'
 ]);
 
-app.controller('library', ['$scope', '$routeParams', 'library', 'cart', 'message', 'date', 'customer', function($scope, $routeParams, library, cart, message, date, customer){
+app.controller('library', ['$scope', '$location', 'swiper', '$routeParams', 'library', 'cart', 'message', 'date', 'customer', function($scope, $location, swiper, $routeParams, library, cart, message, date, customer){
 
+    //swiper.set_direction('right');
+    //$scope.swipeRight = function(page){
+    //    swiper.set_direction('right');
+    //    $location.url(page);
+    //};
+    //$scope.swipeLeft = function(page){
+    //    swiper.set_direction('left');
+    //    $location.url(page);
+    //};
     $('.spinner').css('display', 'none');
     var $info_lightbox = $('#cart-item-info');
     var $delete_lightbox = $('#delete-item');
-
     library.setIsLibrary(false);
     var lib = library.getLibrary();
-
-    library_items_ajax($scope, message, lib);
-
+    library_items_ajax($scope, message, lib, $location, swiper);
     $scope.add_to_library = function(){
         library.setIsLibrary(true);
         window.location = '#/menu-types';
     };
     $scope.info = function(item){
         $info_lightbox.fadeIn();
+        $scope.comments = item.comments;
         $scope.item = item;
     };
     $scope.close_info = function(){
@@ -46,7 +53,7 @@ app.controller('library', ['$scope', '$routeParams', 'library', 'cart', 'message
 
 }]);
 
-function library_items_ajax($scope, message, lib){
+function library_items_ajax($scope, message, lib, $location, swiper){
     $('.library-wrapper').css('display', 'none');
     $('.spinner').css('display', 'block');
     var url = base_url + '/library-items&library_id='+lib.id;
@@ -82,7 +89,10 @@ function library_items_ajax($scope, message, lib){
             $scope.$apply();
         }
         $('.spinner').css('display', 'none');
-        $('.library-wrapper').css('display', 'block');
+        //if(swiper.get_direction() == 'right') $('.library-wrapper').addClass('slide-right');
+        //if(swiper.get_direction() == 'left') $('.library-wrapper').addClass('slide-left');
+        //$('.library-wrapper').bind('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {$('.library-wrapper').css('position','static'); swiper.set_direction('left')});
+        //$('.library-wrapper').css('display', 'block');
     });
 }
 

@@ -5,6 +5,7 @@ app.service('authentication', function($rootScope){
 
     var connected = false;
     var customer_type = '';
+    var form_type;
 
     this.setConnected = function(state){
         connected = state;
@@ -21,7 +22,112 @@ app.service('authentication', function($rootScope){
 
     this.getCustomerType = function(){
         return customer_type;
-    }
+    };
+
+    this.set_form_type = function(type){
+        form_type = type;
+    };
+
+    this.get_form_type = function(){
+        return form_type;
+    };
+
+});
+
+app.service('user_session', ['authentication', 'customer', 'message', function(authentication, customer, message){
+
+    var details = {};
+    var session_counter = 0;
+
+    this.setSessionCounter = function(val){
+        session_counter = val;
+    };
+
+    this.getSessionCounter = function(){
+        return session_counter;
+    };
+
+    this.isConnected = function(){
+        if(typeof(Storage) !== "undefined")
+            return parseInt(localStorage.getItem("user_connected"));
+        else console.log('Local storage is not available');
+    };
+
+    this.setCustomerType = function(type){
+        if(typeof(Storage) !== "undefined")
+            localStorage.setItem("customer_type", type);
+        else console.log('Local storage is not available');
+    };
+
+    this.getCustomerType = function(){
+        if(typeof(Storage) !== "undefined")
+            return localStorage.getItem("customer_type");
+        else console.log('Local storage is not available');
+    };
+
+    this.setConnected = function(bool){
+        if(typeof(Storage) !== "undefined")
+            localStorage.setItem("user_connected", bool);
+        else console.log('Local storage is not available');
+    };
+
+    this.setDetails = function(det, customer_type){
+        details.first_name = det.first_name;
+        details.last_name = det.last_name;
+        details.phone_number = det.phone_number;
+        details.email = det.email;
+        details.street = det.street;
+        details.house_number = det.house_number;
+        details.floor = det.floor;
+        details.enter = det.enter;
+        if(customer_type == 'business'){
+            details.password = det.password;
+            details.company_code = det.company_code;
+            details.company_name = det.company_name;
+            details.budget = det.budget;
+        }
+        if(typeof(Storage) !== "undefined")
+            localStorage.setItem("user_details", JSON.stringify(details));
+        else console.log('Local storage is not available');
+    };
+
+    //this.getDetails = function(){
+    //    if(typeof (Storage) !== "undefined")
+    //        return JSON.parse(localStorage.getItem("user_details"));
+    //    else console.log('Local storage is not available');
+    //};
+
+    this.setUser = function(){
+        if(typeof(Storage) !== "undefined") {
+            authentication.setConnected(true);
+            session_counter = 1;
+            authentication.setCustomerType(localStorage.getItem("customer_type"));
+            customer.setDetails(JSON.parse(localStorage.getItem("user_details")));
+            if(authentication.getCustomerType() == 'private') message.greetings('שלום ' + customer.getCustomerName());
+            if(authentication.getCustomerType() == 'business'){
+                var greeting_msg = 'שלום ';
+                greeting_msg += customer.getCustomerName() + ', ';
+                greeting_msg += 'יתרה: ';
+                greeting_msg += customer.getBudget() + ' &#8362;';
+                message.greetings(greeting_msg);
+            }
+        }
+        else console.log('Local storage is not available');
+    };
+
+}]);
+
+app.service('payment', function(){
+
+    var cardcom_url = '';
+
+    this.set_url = function(url){
+        cardcom_url = url;
+    };
+
+    this.get_url = function(){
+        return cardcom_url;
+    };
 
 });
 
@@ -132,6 +238,24 @@ app.service('cart', ['library', function(library){
     var library_item;
     var total_price = 0;
     var lock = true;
+    var comments = '';
+    var comments_flag = false;
+
+    this.set_comments_flag = function(bool){
+        comments_flag = bool;
+    };
+
+    this.get_comments_flag = function(){
+        return comments_flag;
+    };
+
+    this.set_comments = function(com){
+        comments = com;
+    };
+
+    this.get_comments = function(){
+        return comments;
+    };
 
     this.resetCart = function(){
         my_cart = [];
@@ -174,6 +298,8 @@ app.service('cart', ['library', function(library){
 
     this.addToCart = function(adds){
         food_item.addition_types = adds;
+        food_item.comments = comments;
+        comments = '';
         my_cart.push(food_item);
     };
 
@@ -470,6 +596,56 @@ app.service('application_settings', function(){
             if(date.getMinutes()  > working_time.close_minutes) return true;
         }
         return false;
+    };
+
+});
+
+app.service('swiper', function(){
+
+    var direction = 'left';
+    var position = 1;
+    var arrived_from_cart = false;
+    var menu_type_name = ''; // for use when swiping right from menu_additions to menu_items
+    this.set_direction = function(state){
+        direction = state;
+    };
+
+    this.get_direction = function(){
+        return direction;
+    };
+
+    this.set_position = function(pos){
+        position = pos;
+    };
+
+    this.get_position = function(){
+        return position;
+    };
+
+    this.set_arrived_from_cart = function(state){
+        arrived_from_cart = state;
+    };
+
+    this.get_arrived_from_cart = function(){
+        return arrived_from_cart;
+    };
+
+    this.set_menu_type_name = function(name){
+        menu_type_name = name;
+    };
+
+    this.get_menu_type_name = function(){
+        return menu_type_name;
+    };
+
+    this.set_background = function(pos){
+        var id;
+        if(pos == 1) id = 'main';
+        if(pos == 2) id = 'menu';
+        if(pos == 3) id = 'cart';
+        if(pos == 4) id = 'status';
+        $('li').removeClass('li_background_slide');
+        $('#'+id).addClass('li_background_slide');
     };
 
 });

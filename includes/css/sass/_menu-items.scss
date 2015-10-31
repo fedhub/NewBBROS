@@ -1,6 +1,10 @@
 .menu-items-wrapper{
+  a{
+    text-decoration: none;
+  }
   width: 100%;
   min-height: 100%;
+  //position: fixed;
   .food-items-container{
     width: 100%;
     margin: 0 auto;

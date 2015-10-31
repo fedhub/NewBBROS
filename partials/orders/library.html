@@ -1,4 +1,4 @@
-<section class="library-wrapper">
+<section class="library-wrapper" ng-swipe-right="swipeRight('menu-types')" ng-swipe-left="swipeLeft('home')">
 
     <section id="cart-item-info" class="lightbox" data="item">
         <section class="container">
@@ -12,6 +12,10 @@
                 <section class="component" ng-repeat="type in item.addition_types">
                     <section class="comp-title"><p>{{ type.name  }}</p></section>
                     <section class="comp-info" ng-repeat="addition_item in type.addition_items">{{ addition_item.name }} - <span style="color: brown;">{{ addition_item.price }} &#8362;</span></section>
+                </section>
+                <section class="component">
+                    <section class="comp-title"><p>הערות</p></section>
+                    <section class="comp-info">{{ comments }}</section>
                 </section>
             </section>
             <footer class="item-info-footer"><p>סה"כ: {{ item.total_price }}  &#8362;</p></footer>

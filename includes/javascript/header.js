@@ -2,10 +2,14 @@ var app = angular.module('myapp.header', [
     'myapp.services'
 ]);
 
-app.controller('header', function($scope){
+app.controller('header', ['$scope', 'swiper', function($scope, swiper){
 
     $scope.title = 'ראשי';
-    $scope.setTitle = function(title){
+    $scope.setTitle = function(title, pos){
+        //if(pos < swiper.get_position()) swiper.set_direction('left');
+        //else if(pos > swiper.get_position()) swiper.set_direction('right');
+        //swiper.set_position(pos);
+        //swiper.set_background(pos);
         $scope.title = title;
     };
     var $body = $('.body');
@@ -47,4 +51,4 @@ app.controller('header', function($scope){
         $('.blur').fadeOut();
     });
 
-});
+}]);

@@ -19,8 +19,6 @@
  }
 .flaticon-box37:before {
     content: "\e001";
-    font-size: 60px;
-    color: #333;
 }
 .flaticon-building120:before {
 	content: "\e002";
@@ -37,13 +35,9 @@
 }
 .flaticon-credit31:before {
     content: "\e005";
-    font-size: 60px;
-    color: #333;
 }
 .flaticon-currency19:before {
     content: "\e006";
-    font-size: 60px;
-    color: #333;
 }
 .flaticon-cutlery6:before {
     content: "\e007";
@@ -72,8 +66,6 @@
 }
 .flaticon-free6:before {
     content: "\e00c";
-    font-size: 60px;
-    color: #333;
 }
 .flaticon-good1:before {
     content: "\e00d";
@@ -139,6 +131,4 @@
 }
 .flaticon-two200:before {
     content: "\e01c";
-    font-size: 60px;
-    color: #333;
 }

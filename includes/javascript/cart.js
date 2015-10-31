@@ -2,7 +2,25 @@ var app = angular.module('myapp.cart', [
     'myapp.services'
 ]);
 
-app.controller('cart', ['$scope', 'message', 'cart', 'order_details', 'date', 'time_widget', 'authentication', function($scope, message, cart, order_details, date, time_widget, authentication){
+app.controller('cart', ['$scope', '$location', 'message', 'cart', 'order_details', 'date', 'time_widget', 'authentication', 'swiper', function($scope, $location, message, cart, order_details, date, time_widget, authentication, swiper){
+
+    $('#header-title p').html('הסל שלי');
+    //if(swiper.get_arrived_from_cart() == true){
+    //    swiper.set_direction('right');
+    //    swiper.set_arrived_from_cart(false);
+    //}
+    //swiper.set_position(3);
+    //swiper.set_background(3);
+    //if(swiper.get_direction() == 'right') $('.cart-wrapper').addClass('slide-right');
+    //if(swiper.get_direction() == 'left') $('.cart-wrapper').addClass('slide-left');
+    //$scope.swipeLeft = function(page){
+    //    swiper.set_direction('left');
+    //    $location.url(page);
+    //};
+    //$scope.swipeRight = function(page){
+    //    swiper.set_direction('right');
+    //    $location.url(page);
+    //};
     $('.cart-size').css('display','none');
     set_size();
     var $info_lightbox = $('#cart-item-info');
@@ -20,13 +38,12 @@ app.controller('cart', ['$scope', 'message', 'cart', 'order_details', 'date', 't
         $scope.total_price = cart.getTotalPrice();
         cart.setLock(true);
     }
-    else{
-        $('.cart-size').css('display','none');
-    }
+    else $('.cart-size').css('display','none');
     if(authentication.getCustomerType() == 'business') $('.payment-method-btn').css('display', 'none');
     $scope.info = function(item){
         $info_lightbox.fadeIn();
         $scope.item = item;
+        $scope.comments = item.comments;
     };
     $scope.close_info = function(){
         $info_lightbox.fadeOut();
@@ -74,6 +91,15 @@ app.controller('cart', ['$scope', 'message', 'cart', 'order_details', 'date', 't
         order_type_validation(order_type, order_details, $order_type_lightbox, message);
     };
     $scope.payment_method_selected = function(payment_method){
+        if(payment_method == 'cash'){
+            $('.cart-wrapper .payment-method-btn p:first-child').removeClass().addClass('flaticon-currency19');
+            $('.cart-wrapper .payment-method-btn p:last-child').html('מזומן');
+        }
+        if(payment_method == 'credit'){
+            //$('.cart-wrapper .payment-method-btn p:first-child').removeClass().addClass('flaticon-credit31');
+            //$('.cart-wrapper .payment-method-btn p:last-child').html('אשראי');
+            message.showMessage('לקוח יקר, כרגע לא ניתן לבצע תשלום באמצעות כרטיס אשראי, אך האפשרות תיפתח בהקדם');
+        }
         order_details.setPaymentMethod(payment_method);
         $payment_method_lightbox.fadeOut();
     };
@@ -110,6 +136,12 @@ app.controller('cart', ['$scope', 'message', 'cart', 'order_details', 'date', 't
             else $scope.minutes = time_widget.get_rest_hours_mins();
         }
     };
+
+    $scope.link_from_cart = function(link_to){
+        //swiper.set_direction('left');
+        //swiper.set_arrived_from_cart(true);
+        window.location = link_to;
+    };
 }]);
 
 function reset_time_widget($scope){
@@ -121,12 +153,19 @@ function reset_time_widget($scope){
 
 function order_type_validation(order_type, order_details, $order_type_lightbox, message){
     var url = base_url + '/get-order-type-settings';
+    $('.spinner').css('display', 'block');
     $.ajax({
         url: url,
         type: 'POST'
     }).done(function(res){
-        if(!res.status) message.showMessage(res.msg);
-        else is_order_type_allowed(res.result, order_type, order_details, $order_type_lightbox, message);
+        if(!res.status){
+            $('.spinner').css('display', 'none');
+            message.showMessage(res.msg);
+        }
+        else{
+            $('.spinner').css('display', 'none');
+            is_order_type_allowed(res.result, order_type, order_details, $order_type_lightbox, message);
+        }
     });
 }
 
@@ -136,6 +175,8 @@ function is_order_type_allowed(res, order_type, order_details, $order_type_light
         if(res.delivery_allowed){
             order_details.setOrderType(order_type);
             $order_type_lightbox.fadeOut();
+            $('.cart-wrapper .order-type-btn p:first-child').removeClass().addClass('flaticon-free6');
+            $('.cart-wrapper .order-type-btn p:last-child').html('משלוח');
         }
         else {
             msg = 'לקוחות יקרים, זמנית לא ניתן לבצע משלוחים, עמכם הסליחה';
@@ -146,6 +187,8 @@ function is_order_type_allowed(res, order_type, order_details, $order_type_light
         if(res.sit_allowed){
             order_details.setOrderType(order_type);
             $order_type_lightbox.fadeOut();
+            $('.cart-wrapper .order-type-btn p:first-child').removeClass().addClass('flaticon-two200');
+            $('.cart-wrapper .order-type-btn p:last-child').html('לשבת');
         }
         else {
             msg = 'לקוחות יקרים, זמנית לא ניתן לבצע הזמנות לשבת, עמכם הסליחה';
@@ -156,6 +199,8 @@ function is_order_type_allowed(res, order_type, order_details, $order_type_light
         if(res.take_away_allowed){
             order_details.setOrderType(order_type);
             $order_type_lightbox.fadeOut();
+            $('.cart-wrapper .order-type-btn p:first-child').removeClass().addClass('flaticon-box37');
+            $('.cart-wrapper .order-type-btn p:last-child').html('לקחת');
         }
         else{
             msg = 'לקוחות יקרים, זמנית לא ניתן לבצע הזמנות לקחת, עמכם הסליחה';

@@ -1,5 +1,6 @@
 .library-wrapper{
   display: none;
+  //position: fixed;
   @include size(100%, 100%);
   min-height: 100%;
   overflow: hidden;

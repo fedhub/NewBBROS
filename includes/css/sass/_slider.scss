@@ -83,6 +83,13 @@
   transform: translate3d( 100%, 0, 0 ); /* X, Y, Z */
   -webkit-transform: translate3d( 100%, 0, 0 );
 }
+.store-details{
+  text-align: center;
+  a{
+    color: #333;
+    font-weight: bold;
+  }
+}
 
 @include small_landscape(){
   .mobile-menu-container {

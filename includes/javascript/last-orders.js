@@ -2,8 +2,21 @@ var app = angular.module('myapp.last-orders', [
     'myapp.services'
 ]);
 
-app.controller('last-orders', ['$scope', 'customer', 'cart', function($scope, customer, cart){
+app.controller('last-orders', ['$scope', '$location', 'customer', 'cart', 'swiper', function($scope, $location, customer, cart, swiper){
+
+    //swiper.set_direction('right');
+    $('#header-title p').html('הזמנות אחרונות');
     $('.spinner').css('display', 'block');
+
+    //$scope.swipeRight = function(page){
+    //    swiper.set_direction('right');
+    //    $location.url(page);
+    //};
+    //$scope.swipeLeft = function(page){
+    //    swiper.set_direction('left');
+    //    $location.url(page);
+    //};
+
     var url = base_url + '/last-orders&phone_number='+customer.getPhoneNumber();
     var $info_lightbox = $('#cart-item-info');
     $.ajax({
@@ -16,10 +29,15 @@ app.controller('last-orders', ['$scope', 'customer', 'cart', function($scope, cu
         }
         else resHandler($scope, res);
         $('.spinner').css('display', 'none');
+        //if(swiper.get_direction() == 'right') $('.order-container').addClass('slide-right');
+        //if(swiper.get_direction() == 'left') $('.order-container').addClass('slide-left');
+        //$('.order-container').bind('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {$('.order-container').css('position','static');});
+        //$('.order-container').css('display', 'block');
     });
 
     $scope.info = function(item){
         $info_lightbox.fadeIn();
+        $scope.comments = item.comments;
         $scope.item = item;
     };
 

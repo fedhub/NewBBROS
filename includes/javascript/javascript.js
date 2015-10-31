@@ -1,8 +1,30 @@
+var prev_stamp = 0;
+var curr_stamp = 0;
 $(document).ready(function(){
-
     window.addEventListener("load", function(){
         FastClick.attach(document.body);
     }, false);
+
+    if(typeof(Storage) !== "undefined"){
+        var menu_stamp = localStorage.getItem('menu_stamp');
+        if(menu_stamp != null){
+            prev_stamp = menu_stamp;
+        }
+    }
+    else{
+        console.log('storage is not available');
+    }
+    if(typeof(Worker) !== "undefined") {
+        var url = base_url + '/menu-stamp';
+        $.ajax({
+            url: url,
+            method: 'POST'
+        }).done(function(res){
+            curr_stamp = res.status;
+        });
+    } else {
+        console.log('worker not available');
+    }
 
     $('.social-cont').click(function(){
        window.location = 'http://www.facebook.com';

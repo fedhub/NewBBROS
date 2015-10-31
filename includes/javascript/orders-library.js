@@ -2,8 +2,19 @@ var app = angular.module('myapp.orders-library', [
     'myapp.services'
 ]);
 
-app.controller('orders-library', ['$scope', 'cart', 'message', 'library', 'date', 'customer', 'authentication', function($scope, cart, message, library, date, customer, authentication){
+app.controller('orders-library', ['$scope', '$location', 'cart', 'message', 'library', 'date', 'customer', 'authentication', 'swiper', function($scope, $location, cart, message, library, date, customer, authentication, swiper){
 
+    swiper.set_direction('left');
+    $scope.swipeLeft = function(page){
+        swiper.set_direction('left');
+        $location.url(page);
+    };
+    $scope.swipeRight = function(page){
+        swiper.set_direction('right');
+        $location.url(page);
+    };
+
+    $('#header-title p').html('ספריית הזמנות');
     $('.spinner').css('display', 'none');
     $('.spinner').css('display', 'block');
     var $library_details_lightbox = $('#add_library');
@@ -72,10 +83,6 @@ app.controller('orders-library', ['$scope', 'cart', 'message', 'library', 'date'
         if(form_action == 'library-details'){
             var new_lib_name = $('.orders-library-wrapper input').val();
             var new_lib_desc = $('.orders-library-wrapper textarea').val();
-
-            console.log(new_lib_name);
-            console.log(new_lib_desc);
-
             if(new_lib_desc == tmp_lib_desc && new_lib_name == tmp_lib_name) message.showMessage('לא התבצעו שינויים');
             else{
                 edit_library_ajax(lib_id, customer.getPhoneNumber(), new_lib_name, new_lib_desc, message, $scope);
@@ -84,31 +91,35 @@ app.controller('orders-library', ['$scope', 'cart', 'message', 'library', 'date'
         }
     };
 
-}]);
+    function get_libraries_ajax($scope, message, phone_number){
+        var url = base_url + '/get-libraries&phone_number='+phone_number;
+        $.ajax({
+            url: url,
+            type: 'POST'
+        }).done(function(res){
+            if(res == false){
+                $('.spinner').css('display', 'none');
+                message.showMessage('הייתה בעיה בהבאת הספריות שלך, אנא נסה שוב מאוחר יותר');
+            }
+            else if(res != 'empty'){
+                $('.spinner').css('display', 'none');
+                $scope.libraries = res;
+                $scope.$apply();
+                $('#add-library').css('display', 'inline-block');
+            }
+            else if(res == 'empty'){
+                $('.spinner').css('display', 'none');
+                $('#add-library').css('display', 'inline-block');
+            }
+            if(swiper.get_direction() == 'right') $('.orders-library-wrapper').addClass('slide-right');
+            if(swiper.get_direction() == 'left') $('.orders-library-wrapper').addClass('slide-left');
+            $('.orders-library-wrapper').bind('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {$('.orders-library-wrapper').css('position','static');});
+            $('.orders-library-wrapper').css('display', 'block');
+            $('.spinner').css('display', 'none');
+        });
+    }
 
-function get_libraries_ajax($scope, message, phone_number){
-    var url = base_url + '/get-libraries&phone_number='+phone_number;
-    $.ajax({
-        url: url,
-        type: 'POST'
-    }).done(function(res){
-        if(res == false){
-            $('.spinner').css('display', 'none');
-            message.showMessage('הייתה בעיה בהבאת הספריות שלך, אנא נסה שוב מאוחר יותר');
-        }
-        else if(res != 'empty'){
-            $('.spinner').css('display', 'none');
-            $scope.libraries = res;
-            $scope.$apply();
-            $('#add-library').css('display', 'inline-block');
-        }
-        else if(res == 'empty'){
-            $('.spinner').css('display', 'none');
-            $('#add-library').css('display', 'inline-block');
-        }
-        $('.spinner').css('display', 'none');
-    });
-}
+}]);
 
 function new_lib_ajax($scope, lib_details, message){
     $('.spinner').css('display', 'block');
